@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+
+    defaultConfig {
+        applicationId "sasd97.java_blog.xyz.vk_stories"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.code
+        versionName versions.name
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-DEBUG'
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    //support library
+    compile libraries.supportDesign
+    compile libraries.supportAppCompat
+    compile libraries.supportConstraint
+    compile libraries.supportCardView
+
+    //build in
+    compile project(":background-picker")
+
+    //http
+    compile libraries.retrofit
+    compile libraries.retrofitGson
+
+    //butterknife
+    compile libraries.butterKnife
+    annotationProcessor libraries.butterKnifeCompiler
+
+    //dagger
+    compile libraries.dagger
+    annotationProcessor libraries.daggerCompiler
+
+    //rx
+    compile libraries.rxjava
+    compile libraries.rxandroid
+    compile libraries.rxadapter
+}
