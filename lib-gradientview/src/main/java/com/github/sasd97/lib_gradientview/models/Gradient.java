@@ -15,6 +15,12 @@ public class Gradient {
     private int startColor = Color.WHITE;
     private int finishColor = Color.BLACK;
 
+    public Gradient(@ColorInt int startColor,
+                    @ColorInt int finishColor) {
+        this.startColor = startColor;
+        this.finishColor = finishColor;
+    }
+
     public void setColors(@ColorInt int startColor,
                           @ColorInt int finishColor) {
         this.startColor = startColor;

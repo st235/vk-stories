@@ -12,9 +12,9 @@ public class GradientItem implements BackgroundItem {
 
     private Gradient gradient;
 
-    public GradientItem(@ColorInt int startColor, @ColorInt int finishColor) {
-        this.gradient = new Gradient();
-        this.gradient.setColors(startColor, finishColor);
+    public GradientItem(@ColorInt int startColor,
+                        @ColorInt int finishColor) {
+        this.gradient = new Gradient(startColor, finishColor);
     }
 
     public Gradient getGradient() {

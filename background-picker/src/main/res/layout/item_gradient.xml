@@ -2,14 +2,14 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rootView"
-    android:layout_width="56dp"
-    android:layout_height="56dp">
+    android:layout_width="52dp"
+    android:layout_height="52dp">
 
     <com.github.sasd97.lib_gradientview.GradientView
         android:id="@+id/gradientView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="2dp"
+        android:layout_margin="1dp"
         />
 
     <sasd97.java_blog.xyz.libs_selectionview.SelectionView
