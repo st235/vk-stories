@@ -13,4 +13,18 @@
         <item name="android:layout_margin">12dp</item>
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
     </style>
+
+    <style name="ToolbarTabs" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/colorCornflowerBlue</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabTextAppearance">@style/AppTabTextAppearance</item>
+        <item name="tabSelectedTextColor">@color/colorCornflowerBlue</item>
+    </style>
+
+    <!-- for text -->
+    <style name="AppTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorCornflowerBlue</item>
+        <item name="textAllCaps">true</item>
+    </style>
 </resources>
