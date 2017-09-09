@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Vk Stories</string>
     <string name="stickers">Stickers</string>
+    <string name="send">Send</string>
 </resources>
