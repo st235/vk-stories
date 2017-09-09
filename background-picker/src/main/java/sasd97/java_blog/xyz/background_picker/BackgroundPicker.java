@@ -2,7 +2,6 @@ package sasd97.java_blog.xyz.background_picker;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
@@ -26,7 +25,7 @@ import sasd97.java_blog.xyz.background_picker.models.GradientItem;
 import sasd97.java_blog.xyz.background_picker.models.ImageItem;
 import sasd97.java_blog.xyz.background_picker.models.PlusItem;
 import sasd97.java_blog.xyz.background_picker.providers.GradientProvider;
-import sasd97.java_blog.xyz.background_picker.providers.Provider;
+import sasd97.java_blog.xyz.libs_common.utils.providers.Provider;
 import sasd97.java_blog.xyz.background_picker.providers.ThumbnailProvider;
 
 /**

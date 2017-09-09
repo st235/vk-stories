@@ -41,6 +41,7 @@ dependencies {
 
     //build in
     compile project(":background-picker")
+    compile project(":gallery-picker")
 
     //http
     compile libraries.retrofit

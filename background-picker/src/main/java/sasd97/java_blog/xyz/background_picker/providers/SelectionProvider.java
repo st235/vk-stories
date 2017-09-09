@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sasd97.java_blog.xyz.background_picker.R;
+import sasd97.java_blog.xyz.libs_common.utils.providers.Provider;
 import sasd97.java_blog.xyz.libs_selectionview.models.Selection;
 
 /**

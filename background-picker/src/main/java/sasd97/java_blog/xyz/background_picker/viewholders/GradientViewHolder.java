@@ -1,6 +1,5 @@
 package sasd97.java_blog.xyz.background_picker.viewholders;
 
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.view.View;
 
@@ -11,7 +10,7 @@ import java.util.List;
 import sasd97.java_blog.xyz.background_picker.R;
 import sasd97.java_blog.xyz.background_picker.models.BackgroundItem;
 import sasd97.java_blog.xyz.background_picker.models.GradientItem;
-import sasd97.java_blog.xyz.background_picker.providers.Provider;
+import sasd97.java_blog.xyz.libs_common.utils.providers.Provider;
 import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
 import sasd97.java_blog.xyz.libs_selectionview.models.Selection;
 

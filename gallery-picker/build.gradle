@@ -9,7 +9,6 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-
     }
 
     buildTypes {
@@ -21,7 +20,10 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:26.+'
+    compile project(':libs-common')
+
+    compile libraries.supportAppCompat
+    compile libraries.supportRecyclerView
 
     compile libraries.glide
     annotationProcessor compilers.glide

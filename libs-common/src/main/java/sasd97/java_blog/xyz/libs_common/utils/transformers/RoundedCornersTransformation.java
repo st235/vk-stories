@@ -1,4 +1,4 @@
-package sasd97.java_blog.xyz.background_picker.transformers;
+package sasd97.java_blog.xyz.libs_common.utils.transformers;
 
 import android.content.Context;
 import android.graphics.Bitmap;

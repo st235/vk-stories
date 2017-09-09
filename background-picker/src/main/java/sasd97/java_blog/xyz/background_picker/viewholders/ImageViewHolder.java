@@ -11,20 +11,17 @@ import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.resource.bitmap.CenterInside;
 import com.bumptech.glide.request.RequestOptions;
-import com.github.sasd97.lib_gradientview.GradientView;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import sasd97.java_blog.xyz.background_picker.R;
 import sasd97.java_blog.xyz.background_picker.models.BackgroundItem;
-import sasd97.java_blog.xyz.background_picker.models.GradientItem;
 import sasd97.java_blog.xyz.background_picker.models.ImageItem;
-import sasd97.java_blog.xyz.background_picker.providers.Provider;
-import sasd97.java_blog.xyz.background_picker.transformers.RoundedCornersTransformation;
+import sasd97.java_blog.xyz.libs_common.utils.providers.Provider;
+import sasd97.java_blog.xyz.libs_common.utils.transformers.RoundedCornersTransformation;
 import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
-import sasd97.java_blog.xyz.libs_selectionview.SelectionView;
 import sasd97.java_blog.xyz.libs_selectionview.models.Selection;
 
 /**
