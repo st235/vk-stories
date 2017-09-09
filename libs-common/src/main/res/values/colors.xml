@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorCyan">#30E5D4</color>
     <color name="colorCornflowerLight">#D6E3F3</color>
+    <color name="colorGreyLight">#EBEBEB</color>
+
     <color name="colorBlack">#2c2d2e</color>
     <color name="colorGrey">#909499</color>
     <color name="colorSunYellow">#ffcc33</color>
@@ -15,5 +18,4 @@
     <color name="colorSicklyYellow">#cbe645</color>
     <color name="colorCoolBlue">#4680c2</color>
     <color name="colorWhite">#ffffff</color>
-    <color name="colorGreyLight">#EBEBEB</color>
 </resources>
