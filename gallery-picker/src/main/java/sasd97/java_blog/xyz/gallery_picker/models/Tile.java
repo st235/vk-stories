@@ -42,4 +42,13 @@ public class Tile {
     public int getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Tile{");
+        sb.append("uri=").append(uri);
+        sb.append(", type=").append(type);
+        sb.append('}');
+        return sb.toString();
+    }
 }

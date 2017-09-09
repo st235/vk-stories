@@ -11,17 +11,21 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import sasd97.java_blog.xyz.gallery_picker.adapters.GalleryAdapter;
+import sasd97.java_blog.xyz.gallery_picker.models.Tile;
 import sasd97.java_blog.xyz.gallery_picker.providers.ImageProvider;
+import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
 
 /**
  * Created by alexander on 09/09/2017.
  */
 
-public class GalleryPicker extends FrameLayout {
+public class GalleryPicker extends FrameLayout
+    implements OnItemClickListener<Tile> {
 
     private RecyclerView recyclerView;
     private ImageProvider imageProvider;
@@ -62,5 +66,10 @@ public class GalleryPicker extends FrameLayout {
         addView(recyclerView, params);
 
         galleryAdapter.addAll(imageProvider.provide());
+        galleryAdapter.setListener(this);
+    }
+
+    @Override
+    public void onClick(Tile tile, int position) {
     }
 }
