@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="bottom"
-    tools:context="com.github.sasd97.vk_stories.presentation.MainActivity">
+    tools:context="com.github.sasd97.vk_stories.presentation.StoryActivity">
+
+    <include layout="@layout/content_toolbar" />
 
     <sasd97.java_blog.xyz.background_picker.BackgroundPicker
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/gradient_picker_background"/>
 
     <sasd97.java_blog.xyz.gallery_picker.GalleryPicker
         android:layout_width="match_parent"
         android:layout_height="256dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"/>
-</LinearLayout>
+        android:layout_marginBottom="4dp"
+        android:visibility="invisible"/>
+</RelativeLayout>

@@ -12,14 +12,14 @@ import javax.inject.Inject;
 import sasd97.java_blog.xyz.sticker_picker.models.StickerPack;
 import sasd97.java_blog.xyz.sticker_picker.providers.StickerProvider;
 
-public class MainActivity extends AppCompatActivity {
+public class StoryActivity extends AppCompatActivity {
 
     @Inject StickerProvider stickerProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_story);
 
         VkStoriesApp
                 .get(this)

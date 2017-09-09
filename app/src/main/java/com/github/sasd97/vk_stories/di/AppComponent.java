@@ -2,7 +2,7 @@ package com.github.sasd97.vk_stories.di;
 
 import com.github.sasd97.vk_stories.di.modules.AppModule;
 import com.github.sasd97.vk_stories.di.modules.ProviderModule;
-import com.github.sasd97.vk_stories.presentation.MainActivity;
+import com.github.sasd97.vk_stories.presentation.StoryActivity;
 
 import javax.inject.Singleton;
 
@@ -15,5 +15,5 @@ import dagger.Component;
 @Singleton
 @Component(modules = {AppModule.class, ProviderModule.class})
 public interface AppComponent {
-    void inject(MainActivity activity);
+    void inject(StoryActivity activity);
 }
