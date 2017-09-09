@@ -16,6 +16,8 @@ ext.versions = [
 
         retrofit                     : '2.3.0',
 
+        glide                        : '4.0.0',
+
         rxjava                       : '2.0.6',
         rxandroid                    : '2.0.1',
 
@@ -49,9 +51,7 @@ ext.libraries = [
         dagger                  : "com.google.dagger:dagger:$versions.dagger",
         daggerCompiler          : "com.google.dagger:dagger-compiler:$versions.dagger",
 
-        moxy                    : "com.arello-mobile:moxy:$versions.moxy",
-        moxyAppCompat           : "com.arello-mobile:moxy-app-compat:$versions.moxy",
-        moxyCompiler            : "com.arello-mobile:moxy-compiler:$versions.moxy",
+        glide                   : "com.github.bumptech.glide:glide:$versions.glide",
 
         butterKnife             : "com.jakewharton:butterknife:$versions.butterKnife",
         butterKnifeCompiler     : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
@@ -66,4 +66,8 @@ ext.libraries = [
         // Test dependencies
         junit                   : "junit:junit:$versions.junit",
         espressoCore            : "com.android.support.test.espresso:espresso-core:$versions.espresso",
+]
+
+ext.compilers = [
+        glide      : "com.github.bumptech.glide:compiler:$versions.glide",
 ]

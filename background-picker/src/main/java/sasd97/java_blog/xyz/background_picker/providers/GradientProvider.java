@@ -2,7 +2,6 @@ package sasd97.java_blog.xyz.background_picker.providers;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 
 import com.github.sasd97.lib_gradientview.models.Gradient;
 

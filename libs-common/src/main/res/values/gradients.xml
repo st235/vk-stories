@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer-array name="gradients">
+        <item>@color/colorWhite</item>
+        <item>@color/colorWhite</item>
+
         <item>@color/colorCornflowerBlueTwo</item>
         <item>@color/colorCoolBlue</item>
 

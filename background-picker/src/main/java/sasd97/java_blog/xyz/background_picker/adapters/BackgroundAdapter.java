@@ -17,6 +17,7 @@ import sasd97.java_blog.xyz.background_picker.providers.Provider;
 import sasd97.java_blog.xyz.background_picker.providers.SelectionProvider;
 import sasd97.java_blog.xyz.background_picker.viewholders.BackgroundViewHolder;
 import sasd97.java_blog.xyz.background_picker.viewholders.GradientViewHolder;
+import sasd97.java_blog.xyz.background_picker.viewholders.ImageViewHolder;
 import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
 import sasd97.java_blog.xyz.libs_selectionview.models.Selection;
 
@@ -28,8 +29,9 @@ public class BackgroundAdapter extends RecyclerView.Adapter<BackgroundViewHolder
     implements OnItemClickListener<View> {
 
     private static final int UNSELECTED = -1;
+    private static final int FIRST_ITEM = 0;
 
-    private int selectedItem = UNSELECTED;
+    private int selectedItem = FIRST_ITEM;
 
     private Provider<List<Selection>> selectionProvider;
     private List<BackgroundItem> backgroundItems = new ArrayList<>();
@@ -66,6 +68,11 @@ public class BackgroundAdapter extends RecyclerView.Adapter<BackgroundViewHolder
     public BackgroundViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         selectionProvider = new SelectionProvider(context);
+
+        if (viewType == BackgroundItem.IMAGE) {
+            View v = LayoutInflater.from(context).inflate(R.layout.item_image, parent, false);
+            return new ImageViewHolder(v, this, selectionProvider);
+        }
 
         View v = LayoutInflater.from(context).inflate(R.layout.item_gradient, parent, false);
         return new GradientViewHolder(v, this, selectionProvider);

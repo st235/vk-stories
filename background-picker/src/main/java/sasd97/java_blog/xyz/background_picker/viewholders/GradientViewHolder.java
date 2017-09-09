@@ -12,7 +12,6 @@ import sasd97.java_blog.xyz.background_picker.R;
 import sasd97.java_blog.xyz.background_picker.models.BackgroundItem;
 import sasd97.java_blog.xyz.background_picker.models.GradientItem;
 import sasd97.java_blog.xyz.background_picker.providers.Provider;
-import sasd97.java_blog.xyz.background_picker.providers.SelectionProvider;
 import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
 import sasd97.java_blog.xyz.libs_selectionview.SelectionView;
 import sasd97.java_blog.xyz.libs_selectionview.models.Selection;

@@ -26,4 +26,7 @@ dependencies {
 
     compile libraries.supportAppCompat
     compile libraries.supportRecyclerView
+
+    compile libraries.glide
+    annotationProcessor compilers.glide
 }
