@@ -40,8 +40,9 @@ dependencies {
     compile libraries.supportCardView
 
     //build in
-    compile project(":background-picker")
-    compile project(":gallery-picker")
+    compile project(':background-picker')
+    compile project(':gallery-picker')
+    compile project(':sticker-picker')
 
     //http
     compile libraries.retrofit

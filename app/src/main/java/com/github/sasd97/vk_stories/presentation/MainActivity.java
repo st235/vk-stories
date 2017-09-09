@@ -1,23 +1,31 @@
 package com.github.sasd97.vk_stories.presentation;
 
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
-import com.github.sasd97.lib_gradientview.GradientView;
-import com.github.sasd97.lib_gradientview.models.Gradient;
 import com.github.sasd97.vk_stories.R;
+import com.github.sasd97.vk_stories.VkStoriesApp;
 
-import sasd97.java_blog.xyz.libs_selectionview.SelectionView;
-import sasd97.java_blog.xyz.libs_selectionview.models.Selection;
+import javax.inject.Inject;
+
+import sasd97.java_blog.xyz.sticker_picker.models.StickerPack;
+import sasd97.java_blog.xyz.sticker_picker.providers.StickerProvider;
 
 public class MainActivity extends AppCompatActivity {
+
+    @Inject StickerProvider stickerProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        VkStoriesApp
+                .get(this)
+                .getComponent()
+                .inject(this);
 
+        for (StickerPack pack: stickerProvider.provide()) Log.d("TWITTER", pack.toString());
     }
 }

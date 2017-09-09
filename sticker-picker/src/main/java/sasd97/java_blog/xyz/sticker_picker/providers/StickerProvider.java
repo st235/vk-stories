@@ -25,7 +25,7 @@ public class StickerProvider implements Provider<List<StickerPack>> {
         this.assetManager = assetManager;
     }
 
-    public void load() {
+    private void load() {
         if (stickers.size() > 0) return;
 
         try {

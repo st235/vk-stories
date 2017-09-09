@@ -18,4 +18,12 @@ public class Sticker {
     public Uri getUri() {
         return uri;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Sticker{");
+        sb.append("uri=").append(uri);
+        sb.append('}');
+        return sb.toString();
+    }
 }
