@@ -34,6 +34,10 @@ public class StickerPack {
         return Uri.parse(path);
     }
 
+    public List<Sticker> getStickers() {
+        return stickers;
+    }
+
     public int size() {
         return stickers.size();
     }

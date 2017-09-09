@@ -25,6 +25,7 @@ dependencies {
     compile project(':libs-common')
 
     compile libraries.supportAppCompat
+    compile libraries.supportDesign
     compile libraries.supportRecyclerView
 
     compile libraries.glide
