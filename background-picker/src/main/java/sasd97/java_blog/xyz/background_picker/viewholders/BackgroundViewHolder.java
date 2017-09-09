@@ -34,6 +34,7 @@ public abstract class BackgroundViewHolder extends RecyclerView.ViewHolder
         this.listener = listener;
 
         this.selectionProvider = selectionProvider;
+        itemView.setOnClickListener(this);
     }
 
     public void select() {

@@ -21,6 +21,7 @@ android {
 
 dependencies {
     compile project(':libs-common')
+    compile project(':lib-selectionview')
 
     compile libraries.supportAppCompat
     compile libraries.supportRecyclerView

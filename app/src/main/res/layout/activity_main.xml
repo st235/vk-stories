@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="bottom"
     tools:context="com.github.sasd97.vk_stories.presentation.MainActivity">
 
     <sasd97.java_blog.xyz.background_picker.BackgroundPicker

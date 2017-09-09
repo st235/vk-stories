@@ -32,7 +32,6 @@ public class ImageViewHolder extends BackgroundViewHolder {
 
     private Context context;
 
-    private View rootView;
     private ImageView imageView;
 
     public ImageViewHolder(@NonNull View itemView,
@@ -43,10 +42,7 @@ public class ImageViewHolder extends BackgroundViewHolder {
 
         this.context = itemView.getContext();
 
-        rootView = itemView.findViewById(R.id.rootView);
         imageView = itemView.findViewById(R.id.imageView);
-
-        rootView.setOnClickListener(this);
     }
 
     @Override

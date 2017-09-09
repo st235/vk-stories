@@ -20,7 +20,6 @@ import sasd97.java_blog.xyz.libs_selectionview.models.Selection;
 
 public class GradientViewHolder extends BackgroundViewHolder {
 
-    private View rootView;
     private GradientView gradientView;
 
     private Provider<List<Selection>> selections;
@@ -32,10 +31,7 @@ public class GradientViewHolder extends BackgroundViewHolder {
         this.selections = selections;
         setSelectionView(R.id.selectionView);
 
-        rootView = itemView.findViewById(R.id.rootView);
         gradientView = itemView.findViewById(R.id.gradientView);
-
-        rootView.setOnClickListener(this);
     }
 
     @Override

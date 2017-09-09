@@ -17,16 +17,11 @@ import sasd97.java_blog.xyz.libs_selectionview.models.Selection;
 
 public class PlusViewHolder extends BackgroundViewHolder {
 
-    private View rootView;
-
     public PlusViewHolder(@NonNull View itemView,
                           @NonNull OnItemClickListener<View> listener,
                           @NonNull Provider<List<Selection>> selectionProvider) {
         super(itemView, listener, selectionProvider);
         setSelectionView(R.id.selectionView);
-
-        rootView = itemView.findViewById(R.id.rootView);
-        rootView.setOnClickListener(this);
     }
 
     @Override
