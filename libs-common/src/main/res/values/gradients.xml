@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="gradients">
+        <item>@color/colorCornflowerBlueTwo</item>
+        <item>@color/colorCoolBlue</item>
+
+        <item>@color/colorSicklyYellow</item>
+        <item>@color/colorMidGreen</item>
+
+        <item>@color/colorSunYellow</item>
+        <item>@color/colorOrangish</item>
+
+        <item>@color/colorReddishPink</item>
+        <item>@color/colorBerry</item>
+
+        <item>@color/colorLightLavender</item>
+        <item>@color/colorDarkPeriwinkle</item>
+    </integer-array>
+</resources>

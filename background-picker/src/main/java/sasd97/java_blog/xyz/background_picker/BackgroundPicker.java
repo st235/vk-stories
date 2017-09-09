@@ -14,12 +14,17 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+
+import com.github.sasd97.lib_gradientview.models.Gradient;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import sasd97.java_blog.xyz.background_picker.adapters.BackgroundAdapter;
 import sasd97.java_blog.xyz.background_picker.models.BackgroundItem;
 import sasd97.java_blog.xyz.background_picker.models.GradientItem;
+import sasd97.java_blog.xyz.background_picker.providers.GradientProvider;
+import sasd97.java_blog.xyz.background_picker.providers.Provider;
 
 /**
  * Created by alexander on 08/09/2017.
@@ -30,6 +35,8 @@ public class BackgroundPicker extends FrameLayout {
     private RecyclerView recyclerView;
     private BackgroundAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
+
+    private Provider<List<Gradient>> gradientsProvider;
 
     public BackgroundPicker(@NonNull Context context) {
         super(context);
@@ -56,6 +63,7 @@ public class BackgroundPicker extends FrameLayout {
         adapter = new BackgroundAdapter();
         recyclerView = new RecyclerView(getContext());
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        gradientsProvider = new GradientProvider(getContext());
 
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
@@ -63,11 +71,21 @@ public class BackgroundPicker extends FrameLayout {
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
         );
-        addView(recyclerView, params);
 
+        addView(recyclerView, params);
+        initContent();
+    }
+
+    private void initContent() {
+        addGradients();
+    }
+
+    private void addGradients() {
         List<BackgroundItem> items = new ArrayList<>();
-        items.add(new GradientItem(Color.parseColor("#f8a6ff"), Color.parseColor("#6c6cd9")));
-        items.add(new GradientItem(Color.parseColor("#ff3355"), Color.parseColor("#990f6b")));
+
+        for (Gradient gradient: gradientsProvider.provide()) {
+            items.add(new GradientItem(gradient));
+        }
 
         adapter.addAll(items);
     }
