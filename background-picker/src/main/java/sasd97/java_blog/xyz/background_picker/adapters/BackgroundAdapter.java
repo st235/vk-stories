@@ -18,6 +18,7 @@ import sasd97.java_blog.xyz.background_picker.providers.SelectionProvider;
 import sasd97.java_blog.xyz.background_picker.viewholders.BackgroundViewHolder;
 import sasd97.java_blog.xyz.background_picker.viewholders.GradientViewHolder;
 import sasd97.java_blog.xyz.background_picker.viewholders.ImageViewHolder;
+import sasd97.java_blog.xyz.background_picker.viewholders.PlusViewHolder;
 import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
 import sasd97.java_blog.xyz.libs_selectionview.models.Selection;
 
@@ -77,6 +78,11 @@ public class BackgroundAdapter extends RecyclerView.Adapter<BackgroundViewHolder
         if (viewType == BackgroundItem.IMAGE) {
             View v = LayoutInflater.from(context).inflate(R.layout.item_image, parent, false);
             return new ImageViewHolder(v, this, selectionProvider);
+        }
+
+        if (viewType == BackgroundItem.PLUS) {
+            View v = LayoutInflater.from(context).inflate(R.layout.item_plus, parent, false);
+            return new PlusViewHolder(v, this, selectionProvider);
         }
 
         View v = LayoutInflater.from(context).inflate(R.layout.item_gradient, parent, false);

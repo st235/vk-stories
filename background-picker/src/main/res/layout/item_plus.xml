@@ -12,8 +12,8 @@
         android:layout_height="match_parent"
         android:layout_margin="1dp"
         android:scaleType="centerInside"
-        android:background="@color/colorCornflowerLight"
-        app:srcCompat="@drawable/ic_fab_trash"
+        app:srcCompat="@drawable/ic_toolbar_new"
+        android:background="@drawable/plus_background"
         />
 
     <sasd97.java_blog.xyz.libs_selectionview.SelectionView

@@ -15,4 +15,5 @@
     <color name="colorSicklyYellow">#cbe645</color>
     <color name="colorCoolBlue">#4680c2</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorGreyLight">#EBEBEB</color>
 </resources>
