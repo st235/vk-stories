@@ -17,8 +17,11 @@ import java.util.List;
 
 import sasd97.java_blog.xyz.gallery_picker.R;
 import sasd97.java_blog.xyz.gallery_picker.models.Tile;
+import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
+import sasd97.java_blog.xyz.libs_common.utils.providers.Provider;
 import sasd97.java_blog.xyz.libs_common.utils.transformers.RoundedCornersTransformation;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
+import sasd97.java_blog.xyz.libs_selectionview.models.Selection;
 
 /**
  * Created by alexander on 09/09/2017.
@@ -29,8 +32,12 @@ public class ImageViewHolder extends GalleryViewHolder {
     private Context context;
     private ImageView imageView;
 
-    public ImageViewHolder(@NonNull View itemView) {
-        super(itemView);
+    public ImageViewHolder(@NonNull View itemView,
+                           @NonNull Provider<List<Selection>> selectionProvider,
+                           @NonNull OnItemClickListener<View> listener) {
+        super(itemView, selectionProvider, listener);
+        setSelectionView(R.id.selectionView);
+
         context = itemView.getContext();
         imageView = itemView.findViewById(R.id.imageView);
     }

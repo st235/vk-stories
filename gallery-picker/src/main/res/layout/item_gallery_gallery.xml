@@ -12,4 +12,11 @@
         android:layout_height="match_parent"
         android:scaleType="centerInside"
         app:srcCompat="@drawable/ic_photopicker_albums" />
+
+    <sasd97.java_blog.xyz.libs_selectionview.SelectionView
+        android:id="@+id/selectionView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        />
 </FrameLayout>

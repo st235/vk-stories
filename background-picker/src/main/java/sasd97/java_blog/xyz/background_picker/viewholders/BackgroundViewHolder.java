@@ -5,11 +5,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+
 import java.util.List;
 
 import sasd97.java_blog.xyz.background_picker.models.BackgroundItem;
-import sasd97.java_blog.xyz.libs_common.utils.providers.Provider;
 import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
+import sasd97.java_blog.xyz.libs_common.utils.providers.Provider;
 import sasd97.java_blog.xyz.libs_selectionview.SelectionView;
 import sasd97.java_blog.xyz.libs_selectionview.models.Selection;
 
@@ -37,6 +38,8 @@ public abstract class BackgroundViewHolder extends RecyclerView.ViewHolder
         itemView.setOnClickListener(this);
     }
 
+    public abstract void setBackgroundItem(@NonNull BackgroundItem item);
+
     public void select() {
         selectionView.setVisibility(View.VISIBLE);
     }
@@ -44,8 +47,6 @@ public abstract class BackgroundViewHolder extends RecyclerView.ViewHolder
     public void deselect() {
         selectionView.setVisibility(View.INVISIBLE);
     }
-
-    public abstract void setBackgroundItem(@NonNull BackgroundItem item);
 
     public void setSelectionView(@IdRes int id) {
         this.selectionView = rootView.findViewById(id);

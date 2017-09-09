@@ -21,7 +21,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:26.+'
+    compile libraries.supportAppCompat
 
     compile libraries.glide
     annotationProcessor compilers.glide

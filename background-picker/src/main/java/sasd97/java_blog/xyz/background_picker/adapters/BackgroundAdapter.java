@@ -14,7 +14,7 @@ import java.util.List;
 import sasd97.java_blog.xyz.background_picker.R;
 import sasd97.java_blog.xyz.background_picker.models.BackgroundItem;
 import sasd97.java_blog.xyz.libs_common.utils.providers.Provider;
-import sasd97.java_blog.xyz.background_picker.providers.SelectionProvider;
+import sasd97.java_blog.xyz.libs_selectionview.providers.SelectionProvider;
 import sasd97.java_blog.xyz.background_picker.viewholders.BackgroundViewHolder;
 import sasd97.java_blog.xyz.background_picker.viewholders.GradientViewHolder;
 import sasd97.java_blog.xyz.background_picker.viewholders.ImageViewHolder;
