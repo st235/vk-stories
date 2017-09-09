@@ -24,6 +24,7 @@ import sasd97.java_blog.xyz.background_picker.adapters.BackgroundAdapter;
 import sasd97.java_blog.xyz.background_picker.models.BackgroundItem;
 import sasd97.java_blog.xyz.background_picker.models.GradientItem;
 import sasd97.java_blog.xyz.background_picker.models.ImageItem;
+import sasd97.java_blog.xyz.background_picker.models.PlusItem;
 import sasd97.java_blog.xyz.background_picker.providers.GradientProvider;
 import sasd97.java_blog.xyz.background_picker.providers.Provider;
 import sasd97.java_blog.xyz.background_picker.providers.ThumbnailProvider;
@@ -83,6 +84,7 @@ public class BackgroundPicker extends FrameLayout {
     private void initContent() {
         addGradients();
         addImages();
+        addSpecial();
     }
 
     private void addGradients() {
@@ -103,5 +105,9 @@ public class BackgroundPicker extends FrameLayout {
         }
 
         adapter.addAll(items);
+    }
+
+    private void addSpecial() {
+        adapter.add(new PlusItem());
     }
 }

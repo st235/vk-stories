@@ -42,6 +42,11 @@ public class BackgroundAdapter extends RecyclerView.Adapter<BackgroundViewHolder
         this.listener = listener;
     }
 
+    public void add(@NonNull BackgroundItem item) {
+        backgroundItems.add(item);
+        notifyItemInserted(getItemCount());
+    }
+
     public void addAll(@NonNull Collection<BackgroundItem> items) {
         int oldPosition = getItemCount();
         backgroundItems.addAll(items);

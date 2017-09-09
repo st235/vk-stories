@@ -37,34 +37,19 @@ public class ImageViewHolder extends BackgroundViewHolder {
 
     private View rootView;
     private ImageView imageView;
-    private SelectionView selectionView;
-
-    private Provider<List<Selection>> selections;
 
     public ImageViewHolder(@NonNull View itemView,
                               @NonNull OnItemClickListener<View> listener,
                               @NonNull Provider<List<Selection>> selections) {
-        super(itemView, listener);
-        this.selections = selections;
+        super(itemView, listener, selections);
+        setSelectionView(R.id.selectionView);
+
         this.context = itemView.getContext();
 
         rootView = itemView.findViewById(R.id.rootView);
         imageView = itemView.findViewById(R.id.imageView);
-        selectionView = itemView.findViewById(R.id.selectionView);
 
         rootView.setOnClickListener(this);
-
-        selectionView.addAll(selections.provide());
-    }
-
-    @Override
-    public void select() {
-        selectionView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void deselect() {
-        selectionView.setVisibility(View.INVISIBLE);
     }
 
     @Override

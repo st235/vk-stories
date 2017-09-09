@@ -13,7 +13,6 @@ import sasd97.java_blog.xyz.background_picker.models.BackgroundItem;
 import sasd97.java_blog.xyz.background_picker.models.GradientItem;
 import sasd97.java_blog.xyz.background_picker.providers.Provider;
 import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
-import sasd97.java_blog.xyz.libs_selectionview.SelectionView;
 import sasd97.java_blog.xyz.libs_selectionview.models.Selection;
 
 /**
@@ -24,33 +23,20 @@ public class GradientViewHolder extends BackgroundViewHolder {
 
     private View rootView;
     private GradientView gradientView;
-    private SelectionView selectionView;
 
     private Provider<List<Selection>> selections;
 
     public GradientViewHolder(@NonNull View itemView,
                               @NonNull OnItemClickListener<View> listener,
                               @NonNull Provider<List<Selection>> selections) {
-        super(itemView, listener);
+        super(itemView, listener, selections);
         this.selections = selections;
+        setSelectionView(R.id.selectionView);
 
         rootView = itemView.findViewById(R.id.rootView);
         gradientView = itemView.findViewById(R.id.gradientView);
-        selectionView = itemView.findViewById(R.id.selectionView);
 
         rootView.setOnClickListener(this);
-
-        selectionView.addAll(selections.provide());
-    }
-
-    @Override
-    public void select() {
-        selectionView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void deselect() {
-        selectionView.setVisibility(View.INVISIBLE);
     }
 
     @Override

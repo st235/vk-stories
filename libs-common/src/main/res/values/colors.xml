@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorCornflowerLight">#D6E3F3</color>
     <color name="colorBlack">#2c2d2e</color>
     <color name="colorGrey">#909499</color>
     <color name="colorSunYellow">#ffcc33</color>
