@@ -3,7 +3,6 @@ package sasd97.java_blog.xyz.gallery_picker.components;
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.util.Log;
 
 /**
  * Created by alexander on 09/09/2017.

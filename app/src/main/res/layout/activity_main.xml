@@ -12,5 +12,5 @@
 
     <sasd97.java_blog.xyz.gallery_picker.GalleryPicker
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="256dp" />
 </LinearLayout>
