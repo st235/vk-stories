@@ -11,6 +11,7 @@ import android.annotation.TargetApi;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
@@ -52,6 +53,11 @@ public class SelectionView extends View {
 
     public void add(@NonNull Selection selection) {
         selections.add(selection);
+        invalidate();
+    }
+
+    public void addAll(@NonNull Collection<Selection> selections) {
+        this.selections.addAll(selections);
         invalidate();
     }
 

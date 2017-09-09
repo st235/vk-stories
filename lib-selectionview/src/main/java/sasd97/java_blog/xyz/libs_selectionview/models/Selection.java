@@ -17,7 +17,7 @@ public class Selection {
     private RectF viewport = new RectF();
 
     public Selection(int width, @ColorInt int color) {
-        this.width = width;
+        this.width = Dimens.dpToPx(width);
         this.color = color;
     }
 

@@ -13,9 +13,12 @@ import java.util.List;
 
 import sasd97.java_blog.xyz.background_picker.R;
 import sasd97.java_blog.xyz.background_picker.models.BackgroundItem;
+import sasd97.java_blog.xyz.background_picker.providers.Provider;
+import sasd97.java_blog.xyz.background_picker.providers.SelectionProvider;
 import sasd97.java_blog.xyz.background_picker.viewholders.BackgroundViewHolder;
 import sasd97.java_blog.xyz.background_picker.viewholders.GradientViewHolder;
 import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
+import sasd97.java_blog.xyz.libs_selectionview.models.Selection;
 
 /**
  * Created by alexander on 08/09/2017.
@@ -27,6 +30,8 @@ public class BackgroundAdapter extends RecyclerView.Adapter<BackgroundViewHolder
     private static final int UNSELECTED = -1;
 
     private int selectedItem = UNSELECTED;
+
+    private Provider<List<Selection>> selectionProvider;
     private List<BackgroundItem> backgroundItems = new ArrayList<>();
 
     private OnItemClickListener<BackgroundItem> listener;
@@ -60,9 +65,10 @@ public class BackgroundAdapter extends RecyclerView.Adapter<BackgroundViewHolder
     @Override
     public BackgroundViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
+        selectionProvider = new SelectionProvider(context);
 
         View v = LayoutInflater.from(context).inflate(R.layout.item_gradient, parent, false);
-        return new GradientViewHolder(v, this);
+        return new GradientViewHolder(v, this, selectionProvider);
     }
 
     @Override
