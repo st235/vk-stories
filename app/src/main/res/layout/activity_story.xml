@@ -13,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:background="@drawable/gradient_picker_background"/>
 
     <sasd97.java_blog.xyz.gallery_picker.GalleryPicker
