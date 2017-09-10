@@ -37,10 +37,15 @@ public class BackgroundAdapter extends RecyclerView.Adapter<BackgroundViewHolder
     private Provider<List<Selection>> selectionProvider;
     private List<BackgroundItem> backgroundItems = new ArrayList<>();
 
-    private OnItemClickListener<BackgroundItem> listener;
+    private View.OnClickListener addListener;
+    private OnItemClickListener<BackgroundItem> clickListener;
 
-    public void setListener(@NonNull OnItemClickListener<BackgroundItem> listener) {
-        this.listener = listener;
+    public void setAddListener(@NonNull View.OnClickListener addListener) {
+        this.addListener = addListener;
+    }
+
+    public void setClickListener(@NonNull OnItemClickListener<BackgroundItem> clickListener) {
+        this.clickListener = clickListener;
     }
 
     public void add(@NonNull BackgroundItem item) {
@@ -62,7 +67,12 @@ public class BackgroundAdapter extends RecyclerView.Adapter<BackgroundViewHolder
         if (lastItem != UNSELECTED) notifyItemChanged(lastItem);
         notifyItemChanged(selectedItem);
 
-        if (listener != null) listener.onClick(backgroundItems.get(position), position);
+        if (backgroundItems.get(position).getType() == BackgroundItem.PLUS) {
+            if (addListener != null) addListener.onClick(view);
+            return;
+        }
+
+        if (clickListener != null) clickListener.onClick(backgroundItems.get(position), position);
     }
 
     @Override

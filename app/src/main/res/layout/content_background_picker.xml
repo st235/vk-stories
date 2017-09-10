@@ -4,10 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_alignParentBottom="true"
     android:layout_width="match_parent"
     android:layout_height="56dp"
-    android:background="@drawable/gradient_picker_background"
+    android:background="@drawable/top_highlighted_background"
     tools:layout_editor_absoluteY="25dp"
     tools:layout_editor_absoluteX="0dp">
 
@@ -37,7 +36,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/send_button_background"
+        android:background="@drawable/left_highlighted_background"
         android:text="@string/send"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -11,6 +11,8 @@ import com.github.sasd97.vk_stories.VkStoriesApp;
 
 import javax.inject.Inject;
 
+import sasd97.java_blog.xyz.background_picker.BackgroundPicker;
+import sasd97.java_blog.xyz.gallery_picker.GalleryPicker;
 import sasd97.java_blog.xyz.sticker_picker.StickerSheet;
 import sasd97.java_blog.xyz.sticker_picker.models.StickerPack;
 import sasd97.java_blog.xyz.sticker_picker.providers.StickerProvider;
@@ -21,6 +23,8 @@ public class StoryActivity extends AppCompatActivity {
 
     private View smileButton;
     private TabLayout tabLayout;
+    private GalleryPicker galleryPicker;
+    private BackgroundPicker backgroundPicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,9 @@ public class StoryActivity extends AppCompatActivity {
                 .get(this)
                 .getComponent()
                 .inject(this);
+
+        backgroundPicker = findViewById(R.id.backgroundPicker);
+        galleryPicker = findViewById(R.id.galleryPicker);
 
         smileButton = findViewById(R.id.smileButton);
         tabLayout = findViewById(R.id.tabLayout);
@@ -45,5 +52,13 @@ public class StoryActivity extends AppCompatActivity {
         for (String tabTitle: tabTitles) {
             tabLayout.addTab(tabLayout.newTab().setText(tabTitle));
         }
+
+        backgroundPicker.setOnAddListener(v -> {
+            galleryPicker.setVisibility(View.VISIBLE);
+        });
+
+        backgroundPicker.setOnItemClickListener((b, p) -> {
+            galleryPicker.setVisibility(View.GONE);
+        });
     }
 }

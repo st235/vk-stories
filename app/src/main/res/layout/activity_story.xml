@@ -8,12 +8,22 @@
     tools:context="com.github.sasd97.vk_stories.presentation.StoryActivity">
 
     <include layout="@layout/content_toolbar" />
-    <include layout="@layout/content_background_picker" />
 
-    <sasd97.java_blog.xyz.gallery_picker.GalleryPicker
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="256dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:visibility="invisible"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <include layout="@layout/content_background_picker" />
+
+        <sasd97.java_blog.xyz.gallery_picker.GalleryPicker
+            android:id="@+id/galleryPicker"
+            android:layout_width="match_parent"
+            android:layout_height="256dp"
+            android:background="@drawable/top_highlighted_background"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:visibility="gone"/>
+    </LinearLayout>
 </RelativeLayout>

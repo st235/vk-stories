@@ -10,6 +10,7 @@ import android.support.annotation.StyleRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
@@ -25,6 +26,7 @@ import sasd97.java_blog.xyz.background_picker.models.GradientItem;
 import sasd97.java_blog.xyz.background_picker.models.ImageItem;
 import sasd97.java_blog.xyz.background_picker.models.PlusItem;
 import sasd97.java_blog.xyz.background_picker.providers.GradientProvider;
+import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
 import sasd97.java_blog.xyz.libs_common.utils.providers.Provider;
 import sasd97.java_blog.xyz.background_picker.providers.ThumbnailProvider;
 
@@ -62,9 +64,18 @@ public class BackgroundPicker extends FrameLayout {
         onInit();
     }
 
-    public void onInit() {
+    public void setOnAddListener(@NonNull View.OnClickListener addListener) {
+        adapter.setAddListener(addListener);
+    }
+
+    public void setOnItemClickListener(@NonNull OnItemClickListener<BackgroundItem> onItemClickListener) {
+        adapter.setClickListener(onItemClickListener);
+    }
+
+    private void onInit() {
         adapter = new BackgroundAdapter();
         recyclerView = new RecyclerView(getContext());
+        recyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         gradientsProvider = new GradientProvider(getContext());
         imagesProvider = new ThumbnailProvider();

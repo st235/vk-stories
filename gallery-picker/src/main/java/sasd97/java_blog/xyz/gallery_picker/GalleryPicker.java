@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
@@ -53,6 +54,7 @@ public class GalleryPicker extends FrameLayout
 
     private void onInit() {
         recyclerView = new RecyclerView(getContext());
+        recyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         layoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.HORIZONTAL, false);
         galleryAdapter = new GalleryAdapter();
         imageProvider = new ImageProvider(getContext());
