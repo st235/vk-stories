@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.github.sasd97.vk_stories.R;
 import com.github.sasd97.vk_stories.VkStoriesApp;
+import com.github.sasd97.vk_stories.presentation.base.BaseActivity;
 
 import javax.inject.Inject;
 
@@ -17,30 +20,47 @@ import sasd97.java_blog.xyz.sticker_picker.StickerSheet;
 import sasd97.java_blog.xyz.sticker_picker.models.StickerPack;
 import sasd97.java_blog.xyz.sticker_picker.providers.StickerProvider;
 
-public class StoryActivity extends AppCompatActivity {
-
-    @Inject StickerProvider stickerProvider;
+public class StoryActivity extends BaseActivity implements StoryView {
 
     private View smileButton;
     private TabLayout tabLayout;
     private GalleryPicker galleryPicker;
     private BackgroundPicker backgroundPicker;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_story);
+    @Inject StickerProvider stickerProvider;
+    @Inject @InjectPresenter StoryPresenter presenter;
 
+    @ProvidePresenter
+    public StoryPresenter providePresenter() {
+        return presenter;
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.activity_story;
+    }
+
+    @Override
+    protected void onDaggerInit() {
         VkStoriesApp
                 .get(this)
                 .getComponent()
                 .inject(this);
+    }
 
-        backgroundPicker = findViewById(R.id.backgroundPicker);
-        galleryPicker = findViewById(R.id.galleryPicker);
+    @Override
+    protected void onInitViews() {
+        super.onInitViews();
 
-        smileButton = findViewById(R.id.smileButton);
         tabLayout = findViewById(R.id.tabLayout);
+        smileButton = findViewById(R.id.smileButton);
+        galleryPicker = findViewById(R.id.galleryPicker);
+        backgroundPicker = findViewById(R.id.backgroundPicker);
+    }
+
+    @Override
+    protected void onViewsInitialized(Bundle savedInstanceState) {
+        super.onViewsInitialized(savedInstanceState);
 
         smileButton.setOnClickListener(view -> {
             StickerSheet stickerSheet = new StickerSheet();

@@ -48,13 +48,18 @@ dependencies {
     compile libraries.retrofit
     compile libraries.retrofitGson
 
+    //moxy
+    compile libraries.moxy
+    compile libraries.moxyAppCompat
+    annotationProcessor compilers.moxy
+
     //butterknife
     compile libraries.butterKnife
-    annotationProcessor libraries.butterKnifeCompiler
+    annotationProcessor compilers.butterKnife
 
     //dagger
     compile libraries.dagger
-    annotationProcessor libraries.daggerCompiler
+    annotationProcessor compilers.dagger
 
     //rx
     compile libraries.rxjava

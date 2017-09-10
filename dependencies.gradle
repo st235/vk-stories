@@ -48,13 +48,11 @@ ext.libraries = [
 
         androidRouter           : "com.github.sasd97:android-router:$versions.router",
 
-        dagger                  : "com.google.dagger:dagger:$versions.dagger",
-        daggerCompiler          : "com.google.dagger:dagger-compiler:$versions.dagger",
-
+        moxy                    : "com.arello-mobile:moxy:$versions.moxy",
+        moxyAppCompat           : "com.arello-mobile:moxy-app-compat:$versions.moxy",
         glide                   : "com.github.bumptech.glide:glide:$versions.glide",
-
+        dagger                  : "com.google.dagger:dagger:$versions.dagger",
         butterKnife             : "com.jakewharton:butterknife:$versions.butterKnife",
-        butterKnifeCompiler     : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
 
         retrofit                : "com.squareup.retrofit2:retrofit:$versions.retrofit",
         retrofitGson            : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
@@ -70,4 +68,7 @@ ext.libraries = [
 
 ext.compilers = [
         glide      : "com.github.bumptech.glide:compiler:$versions.glide",
+        dagger     : "com.google.dagger:dagger-compiler:$versions.dagger",
+        butterKnife: "com.jakewharton:butterknife-compiler:$versions.butterKnife",
+        moxy       : "com.arello-mobile:moxy-compiler:$versions.moxy",
 ]

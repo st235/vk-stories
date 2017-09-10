@@ -22,8 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="256dp"
             android:background="@drawable/top_highlighted_background"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:visibility="gone"/>
     </LinearLayout>
 </RelativeLayout>
