@@ -3,6 +3,9 @@ package com.github.sasd97.vk_stories.di.modules;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.github.sasd97.lib_router.BaseRouter;
+import com.github.sasd97.lib_router.Router;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -25,5 +28,11 @@ public class AppModule {
     @Singleton
     Context provideContext() {
         return context;
+    }
+
+    @Provides
+    @Singleton
+    Router provideRouter() {
+        return new BaseRouter();
     }
 }

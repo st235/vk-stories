@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import com.github.sasd97.vk_stories.di.AppComponent;
 import com.github.sasd97.vk_stories.di.DaggerAppComponent;
 import com.github.sasd97.vk_stories.di.modules.AppModule;
+import com.vk.sdk.VKSdk;
 
 /**
  * Created by alexander on 08/09/2017.
@@ -25,6 +26,7 @@ public class VkStoriesApp extends Application {
         super.onCreate();
 
         component = buildDi();
+        VKSdk.initialize(this);
     }
 
     public AppComponent getComponent() {

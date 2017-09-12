@@ -14,15 +14,24 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        onDaggerInit();
+        onBeforeInit();
+
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
-        onDaggerInit();
 
         onInitViews();
         onViewsInitialized(savedInstanceState);
     }
 
     @LayoutRes protected abstract int getLayout();
+
+    /***
+     * Calls before all checks
+     * Note: use it as important checks ares (splash screen, for example)
+     */
+    protected void onBeforeInit() {
+    }
 
     /***
      * Calls when dagger need to inject its own element from graph to <b>field</b>

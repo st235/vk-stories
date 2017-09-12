@@ -24,11 +24,13 @@
         tools:layout_constraintTop_creator="1" />
 
     <Button
+        android:id="@+id/login_button"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_margin="16dp"
         android:background="@drawable/login_button_background"
         android:elevation="0dp"
+        android:stateListAnimator="@null"
         android:text="@string/login"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"

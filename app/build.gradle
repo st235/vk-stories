@@ -44,6 +44,8 @@ dependencies {
     compile project(':gallery-picker')
     compile project(':sticker-picker')
     compile project(':lib-editorview')
+    compile libraries.vksdk
+    compile libraries.androidRouter
 
     //http
     compile libraries.retrofit

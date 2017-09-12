@@ -3,6 +3,7 @@
     <string name="stickers">Stickers</string>
     <string name="send">Send</string>
     <string name="login">Login through VK</string>
+    <string name="error">There was an error, while log in procedure</string>
 
     <string-array name="tabs_titles">
         <item>Post</item>
