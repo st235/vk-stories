@@ -22,4 +22,6 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:26.0.1'
     compile project(':libs-common')
+    compile project(':background-picker')
+    compile project(':gallery-picker')
 }

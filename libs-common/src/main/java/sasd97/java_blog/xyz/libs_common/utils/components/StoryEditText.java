@@ -12,7 +12,6 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 
 import sasd97.java_blog.xyz.libs_common.utils.components.RoundedBackgroundSpan;

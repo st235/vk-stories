@@ -25,8 +25,7 @@ import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
  * Created by alexander on 09/09/2017.
  */
 
-public class GalleryPicker extends FrameLayout
-    implements OnItemClickListener<Tile> {
+public class GalleryPicker extends FrameLayout {
 
     private RecyclerView recyclerView;
     private ImageProvider imageProvider;
@@ -52,6 +51,10 @@ public class GalleryPicker extends FrameLayout
         onInit();
     }
 
+    public void setOnItemClickListener(@NonNull OnItemClickListener<Tile> listener) {
+        galleryAdapter.setListener(listener);
+    }
+
     private void onInit() {
         recyclerView = new RecyclerView(getContext());
         recyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
@@ -68,10 +71,5 @@ public class GalleryPicker extends FrameLayout
         addView(recyclerView, params);
 
         galleryAdapter.addAll(imageProvider.provide());
-        galleryAdapter.setListener(this);
-    }
-
-    @Override
-    public void onClick(Tile tile, int position) {
     }
 }

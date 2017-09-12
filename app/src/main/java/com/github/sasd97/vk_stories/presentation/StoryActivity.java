@@ -106,6 +106,12 @@ public class StoryActivity extends BaseActivity
 
         backgroundPicker.setOnItemClickListener((b, p) -> {
             galleryPicker.setVisibility(View.GONE);
+            editorView.setBackground(b);
+        });
+
+        galleryPicker.setOnItemClickListener((t, p) -> {
+            Log.d("SET", t.getUri().toString());
+            editorView.setBackground(t);
         });
     }
 

@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.github.sasd97.lib_gradientview.models.Gradient;
 
@@ -24,7 +25,7 @@ import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
  * Created by alexander on 08/09/2017.
  */
 
-public class GradientView extends View {
+public class GradientView extends ImageView {
 
     private Paint paint;
     private Gradient gradient;
@@ -57,13 +58,17 @@ public class GradientView extends View {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     }
 
+    public void setRadius(float radius) {
+        this.radius = radius;
+    }
+
     public void setPercentile(@FloatRange(from = 0.0f, to = 1.0f) float percentile) {
         if (gradient == null) return;
         this.gradient.setPercentile(percentile);
         invalidate();
     }
 
-    public void setGradient(@NonNull Gradient gradient) {
+    public void setGradient(@Nullable Gradient gradient) {
         this.gradient = gradient;
         invalidate();
     }
@@ -71,6 +76,7 @@ public class GradientView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if (this.gradient == null) return;
 
         paint.setStyle(Paint.Style.FILL);
         LinearGradient linearGradient = new LinearGradient(0, 0, gradientFinish.x, gradientFinish.y,
@@ -82,6 +88,7 @@ public class GradientView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        if (this.gradient == null) return;
 
         float width = getMeasuredWidth();
         float height = getMeasuredHeight();
