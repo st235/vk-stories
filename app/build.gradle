@@ -43,7 +43,7 @@ dependencies {
     compile project(':background-picker')
     compile project(':gallery-picker')
     compile project(':sticker-picker')
-    compile project(':libs-editorview')
+    compile project(':lib-editorview')
 
     //http
     compile libraries.retrofit

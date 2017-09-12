@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -16,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.LinkedList;
 import java.util.List;
 
+import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
 import sasd97.java_blog.xyz.libs_common.utils.transformers.RoundedCornersTransformation;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 import sasd97.java_blog.xyz.sticker_picker.R;
@@ -25,16 +27,22 @@ import sasd97.java_blog.xyz.sticker_picker.models.Sticker;
  * Created by alexander on 09/09/2017.
  */
 
-public class StickersViewHolder extends RecyclerView.ViewHolder {
+public class StickersViewHolder extends RecyclerView.ViewHolder
+    implements View.OnClickListener {
 
     private Context context;
     private ImageView imageView;
+    private OnItemClickListener<View> listener;
 
-    public StickersViewHolder(View itemView) {
+    public StickersViewHolder(@NonNull View itemView,
+                              @NonNull OnItemClickListener<View> listener) {
         super(itemView);
+        this.listener = listener;
 
         context = itemView.getContext();
         imageView = itemView.findViewById(R.id.imageView);
+
+        itemView.setOnClickListener(this);
     }
 
     public void setSticker(@NonNull Sticker sticker) {
@@ -50,5 +58,10 @@ public class StickersViewHolder extends RecyclerView.ViewHolder {
                 .load(sticker.getUri())
                 .apply(options)
                 .into(imageView);
+    }
+
+    @Override
+    public void onClick(View view) {
+        listener.onClick(view, getAdapterPosition());
     }
 }

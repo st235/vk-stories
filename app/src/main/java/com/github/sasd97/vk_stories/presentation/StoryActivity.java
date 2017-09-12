@@ -95,6 +95,7 @@ public class StoryActivity extends BaseActivity
         smileButton.setOnClickListener(view -> {
             StickerSheet stickerSheet = new StickerSheet();
             stickerSheet.setProvider(stickerProvider);
+            stickerSheet.setOnItemClickListener((s, p) -> editorView.addSticker(s));
             stickerSheet.show(getSupportFragmentManager(), null);
         });
 

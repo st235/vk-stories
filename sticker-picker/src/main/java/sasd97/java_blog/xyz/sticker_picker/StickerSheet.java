@@ -15,8 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
+import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 import sasd97.java_blog.xyz.sticker_picker.adapters.StickersAdapter;
+import sasd97.java_blog.xyz.sticker_picker.models.Sticker;
 import sasd97.java_blog.xyz.sticker_picker.models.StickerPack;
 import sasd97.java_blog.xyz.sticker_picker.providers.StickerProvider;
 
@@ -30,6 +32,7 @@ public class StickerSheet extends BottomSheetDialogFragment {
     private RecyclerView recyclerView;
     private StickersAdapter stickersAdapter;
     private GridLayoutManager gridLayoutManager;
+    private OnItemClickListener<Sticker> listener;
 
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
         @Override
@@ -72,6 +75,17 @@ public class StickerSheet extends BottomSheetDialogFragment {
 
         StickerPack pack = getFirstStickerPack();
         stickersAdapter.addAll(pack.getStickers());
+        stickersAdapter.setListener(new OnItemClickListener<Sticker>() {
+            @Override
+            public void onClick(Sticker sticker, int position) {
+                if (listener != null) listener.onClick(sticker, position);
+                dismiss();
+            }
+        });
+    }
+
+    public void setOnItemClickListener(@NonNull OnItemClickListener<Sticker> listener) {
+        this.listener = listener;
     }
 
     private StickerPack getFirstStickerPack() {

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
 import sasd97.java_blog.xyz.sticker_picker.R;
 import sasd97.java_blog.xyz.sticker_picker.models.Sticker;
 import sasd97.java_blog.xyz.sticker_picker.viewholders.StickersViewHolder;
@@ -19,9 +20,11 @@ import sasd97.java_blog.xyz.sticker_picker.viewholders.StickersViewHolder;
  * Created by alexander on 09/09/2017.
  */
 
-public class StickersAdapter extends RecyclerView.Adapter<StickersViewHolder> {
+public class StickersAdapter extends RecyclerView.Adapter<StickersViewHolder>
+    implements OnItemClickListener<View> {
 
     private List<Sticker> stickers = new ArrayList<>();
+    private OnItemClickListener<Sticker> listener;
 
     public void addAll(@NonNull Collection<Sticker> stickers) {
         int oldSize = getItemCount();
@@ -29,11 +32,15 @@ public class StickersAdapter extends RecyclerView.Adapter<StickersViewHolder> {
         notifyItemRangeInserted(oldSize, getItemCount());
     }
 
+    public void setListener(OnItemClickListener<Sticker> listener) {
+        this.listener = listener;
+    }
+
     @Override
     public StickersViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         View v = LayoutInflater.from(context).inflate(R.layout.item_sticker, parent, false);
-        return new StickersViewHolder(v);
+        return new StickersViewHolder(v, this);
     }
 
     @Override
@@ -45,5 +52,10 @@ public class StickersAdapter extends RecyclerView.Adapter<StickersViewHolder> {
     @Override
     public int getItemCount() {
         return stickers.size();
+    }
+
+    @Override
+    public void onClick(View view, int position) {
+        if (listener != null) listener.onClick(stickers.get(position), position);
     }
 }

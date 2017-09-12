@@ -1,1 +1,1 @@
-include ':app', ':lib-gradientview', ':libs-common', ':lib-selectionview', ':background-picker', ':gallery-picker', ':sticker-picker', ':libs-editorview'
+include ':app', ':lib-gradientview', ':libs-common', ':lib-selectionview', ':background-picker', ':gallery-picker', ':sticker-picker', ':lib-editorview', ':lib-touchlistener'
