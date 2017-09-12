@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.github.sasd97.vk_stories.presentation.StoryActivity">
 
+    <sasd97.java_blog.xyz.libs_editorview.EditorView
+        android:id="@+id/editorView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <include layout="@layout/content_toolbar" />
 
     <LinearLayout
+        android:id="@+id/bottomArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <include layout="@layout/content_background_picker" />
 
@@ -22,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="256dp"
             android:background="@drawable/top_highlighted_background"
-            android:paddingTop="16dp"
             android:paddingBottom="16dp"
-            android:visibility="gone"/>
+            android:paddingTop="16dp"
+            android:visibility="gone" />
     </LinearLayout>
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

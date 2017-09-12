@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name="com.github.sasd97.vk_stories.presentation.StoryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

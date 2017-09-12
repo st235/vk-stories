@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@drawable/bottom_highlighted_background">
 
-    <ImageView
+    <sasd97.java_blog.xyz.libs_common.utils.components.StoryButton
         android:id="@+id/fontTextView"
         style="@style/ToolbarButton"
         android:layout_width="wrap_content"
@@ -45,6 +46,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="0dp"
+        app:tabIndicatorHeight="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
