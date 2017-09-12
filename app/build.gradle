@@ -66,4 +66,5 @@ dependencies {
     compile libraries.rxjava
     compile libraries.rxandroid
     compile libraries.rxadapter
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }

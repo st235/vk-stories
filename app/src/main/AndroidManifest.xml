@@ -13,13 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:windowSoftInputMode="adjustPan"
-            android:name="com.github.sasd97.vk_stories.presentation.StoryActivity">
+            android:name=".presentation.authorization.AuthorizationActivity"
+            android:label="@string/title_activity_authorization"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.story.StoryActivity"
+            android:windowSoftInputMode="adjustPan"
+            />
     </application>
 
 </manifest>

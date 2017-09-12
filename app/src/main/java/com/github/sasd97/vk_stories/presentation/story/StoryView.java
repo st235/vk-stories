@@ -1,4 +1,4 @@
-package com.github.sasd97.vk_stories.presentation;
+package com.github.sasd97.vk_stories.presentation.story;
 
 import com.arellomobile.mvp.MvpView;
 

@@ -1,4 +1,4 @@
-package com.github.sasd97.vk_stories.presentation;
+package com.github.sasd97.vk_stories.presentation.story;
 
 import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
@@ -20,7 +20,7 @@ import javax.inject.Inject;
 
 import sasd97.java_blog.xyz.background_picker.BackgroundPicker;
 import sasd97.java_blog.xyz.gallery_picker.GalleryPicker;
-import sasd97.java_blog.xyz.libs_common.utils.components.RoundedBackgroundSpan;
+import sasd97.java_blog.xyz.libs_common.utils.components.AlphaView;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryButton;
 import sasd97.java_blog.xyz.libs_editorview.EditorView;
 import sasd97.java_blog.xyz.sticker_picker.StickerSheet;
@@ -40,6 +40,7 @@ public class StoryActivity extends BaseActivity
     private StoryButton storyButton;
 
     private View smileButton;
+    private AlphaView toolbarBackground;
     private TabLayout tabLayout;
     private GalleryPicker galleryPicker;
     private BackgroundPicker backgroundPicker;
@@ -77,6 +78,7 @@ public class StoryActivity extends BaseActivity
         galleryPicker = findViewById(R.id.galleryPicker);
         backgroundPicker = findViewById(R.id.backgroundPicker);
         constraintLayout = findViewById(R.id.constraintLayout);
+        toolbarBackground = findViewById(R.id.alphaView);
     }
 
     @Override
@@ -161,9 +163,11 @@ public class StoryActivity extends BaseActivity
 
                 switch(tab.getPosition()) {
                     case 0:
+                        toolbarBackground.animateTo(1.0f);
                         squareSet.applyTo(constraintLayout);
                         break;
                     case 1:
+                        toolbarBackground.animateTo(0.2f);
                         fullscreenSet.applyTo(constraintLayout);
                         break;
                 };

@@ -2,9 +2,10 @@
     <string name="app_name">Vk Stories</string>
     <string name="stickers">Stickers</string>
     <string name="send">Send</string>
+    <string name="login">Login through VK</string>
 
     <string-array name="tabs_titles">
-        <item>Record</item>
+        <item>Post</item>
         <item>Story</item>
     </string-array>
 </resources>
