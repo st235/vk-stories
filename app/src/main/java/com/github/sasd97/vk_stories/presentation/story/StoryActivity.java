@@ -9,12 +9,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.github.sasd97.vk_stories.R;
 import com.github.sasd97.vk_stories.VkStoriesApp;
 import com.github.sasd97.vk_stories.presentation.base.BaseActivity;
+import com.vk.sdk.api.VKApi;
+import com.vk.sdk.api.VKApiConst;
+import com.vk.sdk.api.VKParameters;
 
 import javax.inject.Inject;
 
@@ -22,6 +26,7 @@ import sasd97.java_blog.xyz.background_picker.BackgroundPicker;
 import sasd97.java_blog.xyz.gallery_picker.GalleryPicker;
 import sasd97.java_blog.xyz.libs_common.utils.components.AlphaView;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryButton;
+import sasd97.java_blog.xyz.libs_common.utils.utils.Renderer;
 import sasd97.java_blog.xyz.libs_editorview.EditorView;
 import sasd97.java_blog.xyz.sticker_picker.StickerSheet;
 import sasd97.java_blog.xyz.sticker_picker.providers.StickerProvider;
@@ -38,6 +43,7 @@ public class StoryActivity extends BaseActivity
 
     private EditorView editorView;
     private StoryButton storyButton;
+    private Button sendButton;
 
     private View smileButton;
     private AlphaView toolbarBackground;
@@ -73,6 +79,7 @@ public class StoryActivity extends BaseActivity
 
         tabLayout = findViewById(R.id.tabLayout);
         editorView = findViewById(R.id.editorView);
+        sendButton = findViewById(R.id.sendButton);
         smileButton = findViewById(R.id.smileButton);
         storyButton = findViewById(R.id.fontTextView);
         galleryPicker = findViewById(R.id.galleryPicker);
@@ -113,8 +120,11 @@ public class StoryActivity extends BaseActivity
         });
 
         galleryPicker.setOnItemClickListener((t, p) -> {
-            Log.d("SET", t.getUri().toString());
             editorView.setBackground(t);
+        });
+
+        sendButton.setOnClickListener(v -> {
+            presenter.onSend(Renderer.renderView(editorView));
         });
     }
 
