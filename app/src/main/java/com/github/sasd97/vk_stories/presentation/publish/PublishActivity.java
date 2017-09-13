@@ -1,11 +1,7 @@
 package com.github.sasd97.vk_stories.presentation.publish;
 
-import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 

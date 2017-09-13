@@ -11,6 +11,7 @@ import android.support.annotation.IdRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 
@@ -20,10 +21,7 @@ import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 
 public class StoryBinView extends FloatingActionButton {
 
-    private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-    private int radius;
-    private Point center = new Point();
+    private final long ANIMATION_DURATION = 350L;
 
     private int closedBinRes;
     private int openedBinRes;
@@ -51,13 +49,27 @@ public class StoryBinView extends FloatingActionButton {
         invalidate();
     }
 
+    @Override
+    public void show() {
+        super.show();
+
+        setAlpha(0.0f);
+        setTranslationY(150.0f);
+
+        animate()
+                .alpha(1.0f)
+                .translationY(0.0f)
+                .setDuration(ANIMATION_DURATION)
+                .start();
+    }
+
     public void release() {
         setImageResource(openedBinRes);
 
         animate()
-                .scaleX(1.5f)
-                .scaleY(1.5f)
-                .setDuration(350L)
+                .scaleX(1.25f)
+                .scaleY(1.25f)
+                .setDuration(ANIMATION_DURATION)
                 .start();
     }
 
@@ -67,7 +79,7 @@ public class StoryBinView extends FloatingActionButton {
         animate()
                 .scaleX(1.0f)
                 .scaleY(1.0f)
-                .setDuration(350L)
+                .setDuration(ANIMATION_DURATION)
                 .start();
     }
 
