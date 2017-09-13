@@ -8,6 +8,7 @@
     <string name="tryAgain">Create new</string>
     <string name="publishing">Publishing&#8230;</string>
     <string name="published">Published</string>
+    <string name="whatsNew">Whats new?</string>
 
     <string-array name="tabs_titles">
         <item>Post</item>

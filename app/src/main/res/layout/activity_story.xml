@@ -34,7 +34,8 @@
             android:id="@+id/galleryPicker"
             android:layout_width="match_parent"
             android:layout_height="256dp"
-            android:background="@drawable/top_highlighted_background"
+            android:background="@color/colorWhite"
+            android:foreground="@drawable/top_highlighted_background"
             android:paddingBottom="16dp"
             android:paddingTop="16dp"
             android:visibility="gone" />
