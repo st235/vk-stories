@@ -13,6 +13,8 @@ import android.widget.Button;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.github.sasd97.lib_router.Router;
+import com.github.sasd97.lib_router.satellites.ActivitySatellite;
 import com.github.sasd97.vk_stories.R;
 import com.github.sasd97.vk_stories.VkStoriesApp;
 import com.github.sasd97.vk_stories.presentation.base.BaseActivity;
@@ -52,6 +54,7 @@ public class StoryActivity extends BaseActivity
     private BackgroundPicker backgroundPicker;
     private ConstraintLayout constraintLayout;
 
+    @Inject Router router;
     @Inject StickerProvider stickerProvider;
     @Inject @InjectPresenter StoryPresenter presenter;
 
@@ -71,6 +74,8 @@ public class StoryActivity extends BaseActivity
                 .get(this)
                 .getComponent()
                 .inject(this);
+
+        router.attachSatellite(new ActivitySatellite(this));
     }
 
     @Override

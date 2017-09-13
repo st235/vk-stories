@@ -2,6 +2,7 @@ package com.github.sasd97.vk_stories.presentation.publish;
 
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -9,8 +10,10 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.github.sasd97.vk_stories.R;
 import com.github.sasd97.vk_stories.VkStoriesApp;
 import com.github.sasd97.vk_stories.presentation.base.BaseActivity;
+import com.github.sasd97.vk_stories.data.net.VkApiWrapper;
 
 import javax.inject.Inject;
+
 
 public class PublishActivity extends BaseActivity implements PublishView {
 

@@ -2,6 +2,7 @@ package com.github.sasd97.vk_stories.presentation.authorization;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -14,6 +15,7 @@ import com.github.sasd97.vk_stories.presentation.base.BaseActivity;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
+import com.vk.sdk.api.VKApiConst;
 import com.vk.sdk.api.VKError;
 
 import javax.inject.Inject;
@@ -66,7 +68,7 @@ public class AuthorizationActivity extends BaseActivity implements Authorization
     @Override
     protected void onViewsInitialized(Bundle savedInstanceState) {
         super.onViewsInitialized(savedInstanceState);
-        loginButton.setOnClickListener(v -> VKSdk.login(this));
+        loginButton.setOnClickListener(v -> VKSdk.login(this, "wall", VKApiConst.POSTS, VKApiConst.PHOTOS));
     }
 
     @Override

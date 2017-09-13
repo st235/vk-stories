@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 
 import com.github.sasd97.lib_router.BaseRouter;
 import com.github.sasd97.lib_router.Router;
+import com.github.sasd97.vk_stories.utils.RxSchedulers;
+import com.github.sasd97.vk_stories.utils.RxSchedulersImpl;
 
 import javax.inject.Singleton;
 
@@ -34,5 +36,11 @@ public class AppModule {
     @Singleton
     Router provideRouter() {
         return new BaseRouter();
+    }
+
+    @Provides
+    @Singleton
+    RxSchedulers provideScheduler() {
+        return new RxSchedulersImpl();
     }
 }
