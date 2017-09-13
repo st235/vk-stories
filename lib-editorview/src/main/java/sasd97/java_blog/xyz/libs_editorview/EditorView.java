@@ -16,6 +16,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.text.Spannable;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -30,7 +31,9 @@ import sasd97.java_blog.xyz.background_picker.models.GradientItem;
 import sasd97.java_blog.xyz.background_picker.models.ImageItem;
 import sasd97.java_blog.xyz.gallery_picker.models.Tile;
 import sasd97.java_blog.xyz.libs_common.utils.components.RoundedBackgroundSpan;
+import sasd97.java_blog.xyz.libs_common.utils.components.StoryBinView;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryEditText;
+import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 import sasd97.java_blog.xyz.libs_touchlistener.MultiTouchListener;
 import sasd97.java_blog.xyz.sticker_picker.models.Sticker;
 
@@ -88,7 +91,19 @@ public class EditorView extends FrameLayout {
 
     private void onInit() {
         addBackground();
-        addEditText();
+//        addEditText();
+        addBinView();
+    }
+
+    private void addBinView() {
+        final StoryBinView binView = new StoryBinView(getContext());
+        binView.setBins(R.drawable.ic_fab_trash, R.drawable.ic_fab_trash_released);
+
+
+        addView(binView, new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, (int) Dimens.dpToPx(48),
+                Gravity.CENTER
+        ));
     }
 
     private void addBackground() {

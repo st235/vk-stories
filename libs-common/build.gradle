@@ -22,6 +22,7 @@ android {
 
 dependencies {
     compile libraries.supportAppCompat
+    compile libraries.supportDesign
 
     compile libraries.glide
     annotationProcessor compilers.glide
