@@ -49,6 +49,8 @@
         android:elevation="0dp"
         android:stateListAnimator="@null"
         android:text="@string/send"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/view"
