@@ -10,6 +10,9 @@ import android.util.AttributeSet;
 
 public class StorySticker extends AppCompatImageView {
 
+    private float previousScaleX = 1.0f;
+    private float previousScaleY = 1.0f;
+
     public StorySticker(Context context) {
         super(context);
     }
@@ -23,18 +26,23 @@ public class StorySticker extends AppCompatImageView {
     }
 
     public void prepareToDelete() {
+        previousScaleX = getScaleX();
+        previousScaleY = getScaleY();
+
         animate()
                 .alpha(0.5f)
                 .scaleX(0.5f)
                 .scaleY(0.5f)
+                .setDuration(350L)
                 .start();
     }
 
     public void release() {
         animate()
                 .alpha(1.0f)
-                .scaleX(1.0f)
-                .scaleY(1.0f)
+                .scaleX(previousScaleX)
+                .scaleY(previousScaleY)
+                .setDuration(350L)
                 .start();
     }
 }
