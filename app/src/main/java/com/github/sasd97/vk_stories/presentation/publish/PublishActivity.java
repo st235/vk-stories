@@ -1,5 +1,6 @@
 package com.github.sasd97.vk_stories.presentation.publish;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -62,6 +63,13 @@ public class PublishActivity extends BaseActivity implements PublishView {
         successView = findViewById(R.id.successView);
         cancelButton = findViewById(R.id.cancelButton);
         followingText = findViewById(R.id.followingText);
+    }
+
+    @Override
+    protected void onViewsInitialized(Bundle savedInstanceState) {
+        super.onViewsInitialized(savedInstanceState);
+
+        tryAgainButton.setOnClickListener(v -> presenter.goToCreateNew());
     }
 
     @Override
