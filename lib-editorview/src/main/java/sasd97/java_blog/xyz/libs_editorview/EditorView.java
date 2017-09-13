@@ -171,6 +171,7 @@ public class EditorView extends RelativeLayout {
 
     private void addEditText() {
         storyEditText = new StoryEditText(getContext());
+        storyEditText.setHint(R.string.whatsNew);
 
         addView(storyEditText, generateCenterLP(ViewGroup.LayoutParams.WRAP_CONTENT));
     }
