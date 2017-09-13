@@ -10,6 +10,8 @@ import android.util.AttributeSet;
 
 public class StorySticker extends AppCompatImageView {
 
+    private final long ANIMATION_DURATION = 350L;
+
     private float previousScaleX = 1.0f;
     private float previousScaleY = 1.0f;
 
@@ -33,7 +35,7 @@ public class StorySticker extends AppCompatImageView {
                 .alpha(0.5f)
                 .scaleX(0.5f)
                 .scaleY(0.5f)
-                .setDuration(350L)
+                .setDuration(ANIMATION_DURATION)
                 .start();
     }
 
@@ -42,7 +44,7 @@ public class StorySticker extends AppCompatImageView {
                 .alpha(1.0f)
                 .scaleX(previousScaleX)
                 .scaleY(previousScaleY)
-                .setDuration(350L)
+                .setDuration(ANIMATION_DURATION)
                 .start();
     }
 }
