@@ -8,19 +8,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
-import android.text.Spannable;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -29,6 +23,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.github.sasd97.lib_gradientview.GradientView;
 import com.github.sasd97.lib_gradientview.models.Gradient;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
+
 import sasd97.java_blog.xyz.background_picker.models.BackgroundItem;
 import sasd97.java_blog.xyz.background_picker.models.GradientItem;
 import sasd97.java_blog.xyz.background_picker.models.ImageItem;
@@ -36,6 +34,7 @@ import sasd97.java_blog.xyz.gallery_picker.models.Tile;
 import sasd97.java_blog.xyz.libs_common.utils.components.RoundedBackgroundSpan;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryBinView;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryEditText;
+import sasd97.java_blog.xyz.libs_common.utils.models.ScalableImage;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 import sasd97.java_blog.xyz.libs_touchlistener.MultiTouchListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnRemoveListener;
@@ -48,8 +47,11 @@ import sasd97.java_blog.xyz.sticker_picker.models.Sticker;
 public class EditorView extends RelativeLayout {
 
     private GradientView gradientView;
-    private StoryEditText storyEditText;
     private StoryBinView storyBinView;
+    private StoryEditText storyEditText;
+
+    private List<View> stickers = new ArrayList<>();
+    private ArrayDeque<View> complexBackground = new ArrayDeque<>();
 
     //region constructors
     public EditorView(@NonNull Context context) {
@@ -79,19 +81,32 @@ public class EditorView extends RelativeLayout {
     }
 
     public void setBackground(@NonNull BackgroundItem item) {
-        if (item.getType() != BackgroundItem.GRADIENT) return;
-        gradientView.setGradient(((GradientItem) item).getGradient());
-        gradientView.setImageBitmap(null);
+        dropComplexBackgroundStack();
+
+        if (item.getType() == BackgroundItem.GRADIENT) {
+            gradientView.setGradient(((GradientItem) item).getGradient());
+            gradientView.setImageBitmap(null);
+            return;
+        }
+
+        if (item.getType() == BackgroundItem.IMAGE) {
+            ScalableImage si = ((ImageItem) item).getImage();
+            for (ScalableImage.Pair pair: si.getElements()) addBackgroundViews(pair);
+        }
+
+        bringStickersToFront();
     }
 
     public void setBackground(@NonNull Tile tile) {
+        dropComplexBackgroundStack();
+
         gradientView.setGradient(null);
         gradientView.setImageURI(tile.getUri());
     }
 
     public void addSticker(@NonNull Sticker sticker) {
-        ImageView stickerView = addImageView(sticker.getUri());
-
+        View stickerView = addImageView(sticker.getUri());
+        stickers.add(stickerView);
     }
     //endregion
 
@@ -99,6 +114,36 @@ public class EditorView extends RelativeLayout {
         addBackground();
         addEditText();
         addBinView();
+    }
+
+    private void addBackgroundViews(@NonNull ScalableImage.Pair pair) {
+        ImageView iv = new ImageView(getContext());
+        iv.setScaleType(pair.scaleType);
+
+        Glide
+                .with(getContext())
+                .load(pair.resource)
+                .into(iv);
+
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                pair.width, pair.height
+        );
+
+        params.addRule(pair.gravityRule);
+        addView(iv, params);
+        complexBackground.add(iv);
+        bringChildToFront(storyEditText);
+    }
+
+    private void dropComplexBackgroundStack() {
+        while (!complexBackground.isEmpty()) {
+            View removable = complexBackground.pop();
+            removeView(removable);
+        }
+    }
+
+    private void bringStickersToFront() {
+        for (View sticker: stickers) bringChildToFront(sticker);
     }
 
     private void addBinView() {

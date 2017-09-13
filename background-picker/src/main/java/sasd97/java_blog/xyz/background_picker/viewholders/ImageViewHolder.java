@@ -59,7 +59,7 @@ public class ImageViewHolder extends BackgroundViewHolder {
                 .transform(transformation);
 
         Glide.with(context)
-                .load(imageItem.getResource())
+                .load(imageItem.getThumb())
                 .apply(options)
                 .into(imageView);
     }

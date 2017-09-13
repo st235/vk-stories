@@ -5,20 +5,26 @@ import android.support.annotation.NonNull;
 
 import com.github.sasd97.lib_gradientview.models.Gradient;
 
+import sasd97.java_blog.xyz.libs_common.utils.models.ScalableImage;
+
 /**
  * Created by alexander on 08/09/2017.
  */
 
 public class ImageItem implements BackgroundItem {
 
-    private int res;
+    private ScalableImage image;
 
-    public ImageItem(@IdRes int res) {
-        this.res = res;
+    public ImageItem(@NonNull ScalableImage image) {
+        this.image = image;
     }
 
-    public int getResource() {
-        return res;
+    public int getThumb() {
+        return image.getThumb();
+    }
+
+    public ScalableImage getImage() {
+        return this.image;
     }
 
     @Override

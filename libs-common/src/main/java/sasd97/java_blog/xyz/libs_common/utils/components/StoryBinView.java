@@ -52,6 +52,7 @@ public class StoryBinView extends FloatingActionButton {
     @Override
     public void show() {
         super.show();
+        setImageResource(closedBinRes);
 
         setAlpha(0.0f);
         setTranslationY(150.0f);

@@ -27,6 +27,7 @@ import sasd97.java_blog.xyz.background_picker.models.ImageItem;
 import sasd97.java_blog.xyz.background_picker.models.PlusItem;
 import sasd97.java_blog.xyz.background_picker.providers.GradientProvider;
 import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
+import sasd97.java_blog.xyz.libs_common.utils.models.ScalableImage;
 import sasd97.java_blog.xyz.libs_common.utils.providers.Provider;
 import sasd97.java_blog.xyz.background_picker.providers.ThumbnailProvider;
 
@@ -41,7 +42,7 @@ public class BackgroundPicker extends FrameLayout {
     private LinearLayoutManager linearLayoutManager;
 
     private Provider<List<Gradient>> gradientsProvider;
-    private Provider<List<Integer>> imagesProvider;
+    private Provider<List<ScalableImage>> imagesProvider;
 
     public BackgroundPicker(@NonNull Context context) {
         super(context);
@@ -110,7 +111,7 @@ public class BackgroundPicker extends FrameLayout {
     private void addImages() {
         List<BackgroundItem> items = new ArrayList<>();
 
-        for (Integer image: imagesProvider.provide()) {
+        for (ScalableImage image: imagesProvider.provide()) {
             items.add(new ImageItem(image));
         }
 
