@@ -14,22 +14,22 @@ import android.view.ViewPropertyAnimator;
  * Created by alexander on 12/09/2017.
  */
 
-public class AlphaView extends View {
+public class StoryAlphaView extends View {
 
-    public AlphaView(Context context) {
+    public StoryAlphaView(Context context) {
         super(context);
     }
 
-    public AlphaView(Context context, @Nullable AttributeSet attrs) {
+    public StoryAlphaView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public AlphaView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public StoryAlphaView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public AlphaView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public StoryAlphaView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

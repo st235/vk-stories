@@ -7,7 +7,7 @@
     android:layout_height="?attr/actionBarSize"
     android:background="@drawable/bottom_highlighted_background">
 
-    <sasd97.java_blog.xyz.libs_common.utils.components.AlphaView
+    <sasd97.java_blog.xyz.libs_common.utils.components.StoryAlphaView
         android:id="@+id/alphaView"
         android:layout_width="0dp"
         android:layout_height="0dp"

@@ -53,10 +53,10 @@ public class MultiTouchListener implements OnTouchListener {
     public MultiTouchListener(@NonNull Context context) {
         transformer = new ViewTransformer();
         removeGestureDetector = new RemoveGestureDetector();
-        longPressGestureDetector.setIsLongpressEnabled(true);
         clickGestureDetector = new GestureDetectorCompat(context, new ClickGestureListener());
         longPressGestureDetector = new GestureDetectorCompat(context, longPressGestureListener);
         scaleGestureDetector = new ScaleGestureDetector(new ScaleGestureListener(this, transformer));
+        longPressGestureDetector.setIsLongpressEnabled(true);
     }
 
     @Override

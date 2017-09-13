@@ -6,7 +6,6 @@ import android.support.constraint.ConstraintSet;
 import android.support.design.widget.TabLayout;
 import android.support.transition.TransitionManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,15 +17,12 @@ import com.github.sasd97.lib_router.satellites.ActivitySatellite;
 import com.github.sasd97.vk_stories.R;
 import com.github.sasd97.vk_stories.VkStoriesApp;
 import com.github.sasd97.vk_stories.presentation.base.BaseActivity;
-import com.vk.sdk.api.VKApi;
-import com.vk.sdk.api.VKApiConst;
-import com.vk.sdk.api.VKParameters;
 
 import javax.inject.Inject;
 
 import sasd97.java_blog.xyz.background_picker.BackgroundPicker;
 import sasd97.java_blog.xyz.gallery_picker.GalleryPicker;
-import sasd97.java_blog.xyz.libs_common.utils.components.AlphaView;
+import sasd97.java_blog.xyz.libs_common.utils.components.StoryAlphaView;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryButton;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Renderer;
 import sasd97.java_blog.xyz.libs_editorview.EditorView;
@@ -48,7 +44,7 @@ public class StoryActivity extends BaseActivity
     private Button sendButton;
 
     private View smileButton;
-    private AlphaView toolbarBackground;
+    private StoryAlphaView toolbarBackground;
     private TabLayout tabLayout;
     private GalleryPicker galleryPicker;
     private BackgroundPicker backgroundPicker;
@@ -182,7 +178,7 @@ public class StoryActivity extends BaseActivity
                         squareSet.applyTo(constraintLayout);
                         break;
                     case 1:
-                        toolbarBackground.animateTo(0.2f);
+                        toolbarBackground.animateTo(0.92f);
                         fullscreenSet.applyTo(constraintLayout);
                         break;
                 };
