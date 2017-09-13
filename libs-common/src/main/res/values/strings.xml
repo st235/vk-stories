@@ -4,6 +4,10 @@
     <string name="send">Send</string>
     <string name="login">Login through VK</string>
     <string name="error">There was an error, while log in procedure</string>
+    <string name="cancel">Cancel</string>
+    <string name="tryAgain">Create new</string>
+    <string name="publishing">Publishing&#8230;</string>
+    <string name="published">Published</string>
 
     <string-array name="tabs_titles">
         <item>Post</item>

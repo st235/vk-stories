@@ -34,6 +34,6 @@ public class StoryPresenter extends MvpPresenter<StoryView> {
 
     public void onSend(@NonNull Bitmap bitmap) {
         repository.savePreview(bitmap);
-        router.pushCommand(finishThis(and(start(PublishActivity.class))));
+        router.pushCommand(start(PublishActivity.class));
     }
 }

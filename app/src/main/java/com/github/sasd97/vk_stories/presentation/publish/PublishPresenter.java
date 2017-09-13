@@ -43,8 +43,6 @@ public class PublishPresenter extends MvpPresenter<PublishView> {
                 .flatMap(id -> repository.uploadPhoto(id, preview))
                 .flatMap(ids -> repository.createPost(ids[0], ids[1]))
                 .compose(schedulers.getIoToMainTransformerSingle())
-                .subscribe(o -> {
-                    getViewState().showBitmap(preview);
-                });
+                .subscribe(o -> getViewState().showSuccess());
     }
 }

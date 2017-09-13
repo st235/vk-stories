@@ -10,5 +10,5 @@ import com.arellomobile.mvp.MvpView;
  */
 
 public interface PublishView extends MvpView {
-    void showBitmap(@NonNull Bitmap bitmap);
+    void showSuccess();
 }
