@@ -18,6 +18,9 @@ import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnTranslationListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnUpListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.ScaleGestureListener;
 
+/**
+ * Created by alexander on 09/09/2017.
+ */
 
 public class MultiTouchListener implements OnTouchListener {
 
@@ -28,7 +31,7 @@ public class MultiTouchListener implements OnTouchListener {
     private boolean isScaleEnabled = true;
 
     private float minimumScale = 0.5f;
-    private float maximumScale = 10.0f;
+    private float maximumScale = 3.0f;
 
     private int activePointerId = INVALID_POINTER_ID;
     private float previousX;
@@ -40,20 +43,20 @@ public class MultiTouchListener implements OnTouchListener {
 
     private LongPressGestureListener longPressGestureListener = new LongPressGestureListener();
 
-    private GestureDetectorCompat longPressGestureDetector;
-    private GestureDetectorCompat clickGestureDetector;
     private ScaleGestureDetector scaleGestureDetector;
+    private GestureDetectorCompat clickGestureDetector;
     private RemoveGestureDetector removeGestureDetector;
+    private GestureDetectorCompat longPressGestureDetector;
 
     private ViewTransformer transformer;
 
     public MultiTouchListener(@NonNull Context context) {
         transformer = new ViewTransformer();
+        removeGestureDetector = new RemoveGestureDetector();
+        longPressGestureDetector.setIsLongpressEnabled(true);
         clickGestureDetector = new GestureDetectorCompat(context, new ClickGestureListener());
         longPressGestureDetector = new GestureDetectorCompat(context, longPressGestureListener);
         scaleGestureDetector = new ScaleGestureDetector(new ScaleGestureListener(this, transformer));
-        removeGestureDetector = new RemoveGestureDetector();
-        longPressGestureDetector.setIsLongpressEnabled(true);
     }
 
     @Override

@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 /**
- * Created by Narek on 30.08.2017.
+ * Created by alexander on 09/09/2017.
  */
 
 public final class LongPressGestureListener extends GestureDetector.SimpleOnGestureListener {

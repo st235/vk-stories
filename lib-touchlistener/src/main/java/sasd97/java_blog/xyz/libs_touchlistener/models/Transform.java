@@ -7,10 +7,10 @@ package sasd97.java_blog.xyz.libs_touchlistener.models;
 public class Transform {
     public float deltaX;
     public float deltaY;
-    public float deltaScale;
-    public float deltaAngle;
     public float pivotX;
     public float pivotY;
+    public float deltaScale;
+    public float deltaAngle;
     public float minimumScale;
     public float maximumScale;
 }

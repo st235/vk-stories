@@ -2,6 +2,10 @@ package sasd97.java_blog.xyz.libs_touchlistener.models;
 
 import android.graphics.PointF;
 
+/**
+ * Created by alexander on 09/09/2017.
+ */
+
 public class Vector2 extends PointF {
 
     public Vector2() {

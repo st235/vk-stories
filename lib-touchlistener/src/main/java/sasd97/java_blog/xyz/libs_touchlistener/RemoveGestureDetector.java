@@ -9,22 +9,21 @@ import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnRemoveListener;
 
 /**
- * Created by Narek on 31.08.2017.
+ * Created by alexander on 09/09/2017.
  */
 
 public class RemoveGestureDetector {
 
-    private static final int REMOVE_RADIUS = (int) Dimens.dpToPx(56);
     private static final int INVALID_POINTER_ID = -1;
+    private static final int REMOVE_RADIUS = (int) Dimens.dpToPx(56);
 
     private Point removeRegion = new Point();
     private OnRemoveListener removeListener;
 
-    private int activePointerId = INVALID_POINTER_ID;
-    private boolean isRemoveEnabled = false;
     private boolean isStarted = false;
     private boolean isIntercepted = false;
-
+    private boolean isRemoveEnabled = false;
+    private int activePointerId = INVALID_POINTER_ID;
 
     public boolean onTouchEvent(View view, MotionEvent event) {
         int action = event.getAction();
