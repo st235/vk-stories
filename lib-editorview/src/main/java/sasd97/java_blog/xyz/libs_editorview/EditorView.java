@@ -34,6 +34,7 @@ import sasd97.java_blog.xyz.gallery_picker.models.Tile;
 import sasd97.java_blog.xyz.libs_common.utils.components.RoundedBackgroundSpan;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryBinView;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryEditText;
+import sasd97.java_blog.xyz.libs_common.utils.components.StorySticker;
 import sasd97.java_blog.xyz.libs_common.utils.models.ScalableImage;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 import sasd97.java_blog.xyz.libs_touchlistener.MultiTouchListener;
@@ -105,7 +106,7 @@ public class EditorView extends RelativeLayout {
     }
 
     public void addSticker(@NonNull Sticker sticker) {
-        View stickerView = addImageView(sticker.getUri());
+        View stickerView = addStickerView(sticker.getUri());
         stickers.add(stickerView);
     }
     //endregion
@@ -174,8 +175,8 @@ public class EditorView extends RelativeLayout {
         addView(storyEditText, generateCenterLP(ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
-    private ImageView addImageView(@NonNull Uri uri) {
-        final AppCompatImageView imageView = new AppCompatImageView(getContext());
+    private ImageView addStickerView(@NonNull Uri uri) {
+        final StorySticker imageView = new StorySticker(getContext());
 
         Glide
                 .with(getContext())
@@ -194,6 +195,7 @@ public class EditorView extends RelativeLayout {
             @Override
             public void onIntercept(View view) {
                 storyBinView.release();
+                imageView.prepareToDelete();
             }
 
             @Override
@@ -205,6 +207,7 @@ public class EditorView extends RelativeLayout {
             @Override
             public void onCanceled(View view) {
                 storyBinView.close();
+                imageView.release();
             }
 
             @Override
