@@ -54,23 +54,25 @@ public class RoundedBackgroundSpan extends ReplacementSpan {
     @Override
     public void draw(@NonNull Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, @NonNull Paint paint) {
         String currentText = text.subSequence(start, end).toString();
+        int currentLength = end - start;
         float width = paint.measureText(currentText);
 
         String[] split = text.toString().split("\n");
 
+        int counter = 0;
         int prevLength = 0;
         int nextLength = 0;
-        int currentLength = end - start;
         for (int i = 0; i < split.length; i++) {
-            if (!split[i].equals(currentText)) continue;
+            if (counter == start) {
+                if (i - 1 >= 0) {
+                    prevLength = split[i - 1].length();
+                }
 
-            if (i - 1 >= 0) {
-                prevLength = split[i - 1].length();
+                if (i + 1 < split.length) {
+                    nextLength = split[i + 1].length();
+                }
             }
-
-            if (i + 1 < split.length) {
-                nextLength = split[i + 1].length();
-            }
+            counter += split[i].length() + 1;
         }
 
         RectF drawingRect = new RectF(x - paddingStart + marginStart, top, x + width + paddingEnd + marginStart, bottom);
