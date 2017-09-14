@@ -21,13 +21,6 @@ public class RoundedBackgroundSpan extends ReplacementSpan {
     private static final int BOTTOM_RIGHT_CORNER = 0x4;
     private static final int BOTTOM_LEFT_CORNER = 0x8;
 
-    private static final int TOP_LEFT_OUTER = 0x1;
-    private static final int TOP_RIGHT_OUTER = 0x2;
-    private static final int BOTTOM_RIGHT_OUTER = 0x4;
-    private static final int BOTTOM_LEFT_OUTER = 0x8;
-
-    private int roundMode = TOP_RIGHT_OUTER;
-
     private final int textColor;
     private final int backgroundColor;
 
@@ -66,8 +59,8 @@ public class RoundedBackgroundSpan extends ReplacementSpan {
         String[] split = text.toString().split("\n");
 
         int prevLength = 0;
-        int currentLength = end - start;
         int nextLength = 0;
+        int currentLength = end - start;
         for (int i = 0; i < split.length; i++) {
             if (!split[i].equals(currentText)) continue;
 
@@ -101,8 +94,8 @@ public class RoundedBackgroundSpan extends ReplacementSpan {
         RectF bottomLeftArcBound = new RectF();
         RectF bottomRightArcBound = new RectF();
 
-            topRightArcBound.set(drawingRect.right - topRightRadius * 2, drawingRect.top,
-                    drawingRect.right, drawingRect.top + topRightRadius * 2);
+        topRightArcBound.set(drawingRect.right - topRightRadius * 2, drawingRect.top,
+                drawingRect.right, drawingRect.top + topRightRadius * 2);
 
         bottomRightArcBound.set(drawingRect.right - bottomRightRadius * 2, drawingRect.bottom - bottomRightRadius * 2,
                 drawingRect.right, drawingRect.bottom);
