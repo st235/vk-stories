@@ -51,7 +51,6 @@ public class EditorView extends RelativeLayout {
     public static final int FULL_BACKFIELD = 2;
 
     private int currentTextMode = 0;
-    private ComplementaryColor currentColor = ComplementaryColor.BLACK;
 
     private GradientView gradientView;
     private StoryBinView storyBinView;
@@ -59,6 +58,7 @@ public class EditorView extends RelativeLayout {
 
     private List<View> stickers = new ArrayList<>();
     private ArrayDeque<View> complexBackground = new ArrayDeque<>();
+    private ComplementaryColor currentColor = ComplementaryColor.BLACK;
 
     //region constructors
     public EditorView(@NonNull Context context) {
@@ -80,6 +80,11 @@ public class EditorView extends RelativeLayout {
         onInit();
     }
     //endregion
+
+
+    public void setOnTextListener(@NonNull OnTextChangedListener listener) {
+        this.storyEditText.addTextChangedListener(listener);
+    }
 
     //region features
     public void setTextColor(int state) {

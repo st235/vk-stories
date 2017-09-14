@@ -10,6 +10,7 @@ import android.support.design.widget.TabLayout;
 import android.support.transition.TransitionManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -34,6 +35,7 @@ import sasd97.java_blog.xyz.libs_common.utils.components.StoryButton;
 import sasd97.java_blog.xyz.libs_common.utils.utils.IntentResolver;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Renderer;
 import sasd97.java_blog.xyz.libs_editorview.EditorView;
+import sasd97.java_blog.xyz.libs_editorview.OnTextChangedListener;
 import sasd97.java_blog.xyz.sticker_picker.StickerSheet;
 import sasd97.java_blog.xyz.sticker_picker.providers.StickerProvider;
 
@@ -125,6 +127,20 @@ public class StoryActivity extends BaseActivity
         backgroundPicker.setOnItemClickListener((b, p) -> {
             galleryPicker.hide();
             editorView.setBackground(b);
+        });
+
+        editorView.setOnTextListener(new OnTextChangedListener() {
+            @Override
+            public void onEmpty() {
+                sendButton.setEnabled(false);
+                sendButton.setBackgroundResource(R.drawable.left_highlighted_background_disable);
+            }
+
+            @Override
+            public void onTextPresent() {
+                sendButton.setEnabled(true);
+                sendButton.setBackgroundResource(R.drawable.left_highlighted_background);
+            }
         });
 
         galleryPicker.setOnItemClickListener((t, p) -> {
