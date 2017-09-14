@@ -16,6 +16,8 @@ import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 
 public class RoundedBackgroundSpan extends ReplacementSpan {
 
+    private static final float EQUALITY_RADIUS = 5.0f;
+
     private static final int TOP_LEFT_CORNER = 0x1;
     private static final int TOP_RIGHT_CORNER = 0x2;
     private static final int BOTTOM_RIGHT_CORNER = 0x4;
@@ -78,8 +80,8 @@ public class RoundedBackgroundSpan extends ReplacementSpan {
         paint.setColor(backgroundColor);
 
         int selectedParts = 0;
-        if (biggerThanRadius(width, prevLength, 5.0f)) selectedParts |= TOP_LEFT_CORNER | TOP_RIGHT_CORNER;
-        if (biggerThanRadius(width, nextLength, 5.0f)) selectedParts |= BOTTOM_LEFT_CORNER | BOTTOM_RIGHT_CORNER;
+        if (biggerThanRadius(width, prevLength, EQUALITY_RADIUS)) selectedParts |= TOP_LEFT_CORNER | TOP_RIGHT_CORNER;
+        if (biggerThanRadius(width, nextLength, EQUALITY_RADIUS)) selectedParts |= BOTTOM_LEFT_CORNER | BOTTOM_RIGHT_CORNER;
 
         canvas.drawPath(obtainPath(drawingRect, selectedParts), paint);
 
