@@ -29,12 +29,12 @@ import sasd97.java_blog.xyz.libs_editorview.EditorView;
 import sasd97.java_blog.xyz.sticker_picker.StickerSheet;
 import sasd97.java_blog.xyz.sticker_picker.providers.StickerProvider;
 
+import static sasd97.java_blog.xyz.libs_editorview.EditorView.FULL_BACKFIELD;
+import static sasd97.java_blog.xyz.libs_editorview.EditorView.NO_BACKFIELD;
+import static sasd97.java_blog.xyz.libs_editorview.EditorView.TRANSPARENT_BACKFIELD;
+
 public class StoryActivity extends BaseActivity
         implements StoryView, StoryButton.OnStateChangedListener {
-
-    private static final int NO_BACKFIELD = 0;
-    private static final int TRANSPARENT_BACKFIELD = 1;
-    private static final int FULL_BACKFIELD = 2;
 
     private ConstraintSet squareSet = new ConstraintSet();
     private ConstraintSet fullscreenSet = new ConstraintSet();
@@ -131,17 +131,7 @@ public class StoryActivity extends BaseActivity
 
     @Override
     public void onStateChanged(int state) {
-        switch (state) {
-            case NO_BACKFIELD:
-                editorView.setTextColor(Color.WHITE, Color.TRANSPARENT);
-                break;
-            case TRANSPARENT_BACKFIELD:
-                editorView.setTextColor(Color.WHITE, Color.parseColor("#5cffffff"));
-                break;
-            case FULL_BACKFIELD:
-                editorView.setTextColor(Color.BLACK, Color.WHITE);
-                break;
-        }
+        editorView.setTextColor(state);
     }
 
     private void setupTab() {

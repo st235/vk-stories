@@ -1,4 +1,4 @@
-package sasd97.java_blog.xyz.libs_common.utils.components;
+package sasd97.java_blog.xyz.libs_common.utils.components.spans;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

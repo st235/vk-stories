@@ -7,11 +7,14 @@ import android.support.annotation.NonNull;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import sasd97.java_blog.xyz.libs_common.utils.models.Colorable;
+import sasd97.java_blog.xyz.libs_common.utils.models.TextColor;
+
 /**
  * Created by alexander on 09/09/2017.
  */
 
-public class Tile {
+public class Tile implements Colorable {
 
     public static final int IMAGE = 0;
     public static final int CAMERA = 1;
@@ -41,6 +44,11 @@ public class Tile {
     @Type
     public int getType() {
         return type;
+    }
+
+    @Override
+    public TextColor getColor() {
+        return TextColor.WHITE;
     }
 
     @Override

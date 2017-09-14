@@ -11,7 +11,6 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +30,12 @@ import sasd97.java_blog.xyz.background_picker.models.BackgroundItem;
 import sasd97.java_blog.xyz.background_picker.models.GradientItem;
 import sasd97.java_blog.xyz.background_picker.models.ImageItem;
 import sasd97.java_blog.xyz.gallery_picker.models.Tile;
-import sasd97.java_blog.xyz.libs_common.utils.components.RoundedBackgroundSpan;
+import sasd97.java_blog.xyz.libs_common.utils.components.spans.RoundedBackgroundSpan;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryBinView;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryEditText;
 import sasd97.java_blog.xyz.libs_common.utils.components.StorySticker;
 import sasd97.java_blog.xyz.libs_common.utils.models.ScalableImage;
+import sasd97.java_blog.xyz.libs_common.utils.models.TextColor;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 import sasd97.java_blog.xyz.libs_touchlistener.MultiTouchListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnRemoveListener;
@@ -46,6 +46,13 @@ import sasd97.java_blog.xyz.sticker_picker.models.Sticker;
  */
 
 public class EditorView extends RelativeLayout {
+
+    public static final int NO_BACKFIELD = 0;
+    public static final int TRANSPARENT_BACKFIELD = 1;
+    public static final int FULL_BACKFIELD = 2;
+
+    private int currentTextMode = 0;
+    private TextColor currentColor = TextColor.BLACK;
 
     private GradientView gradientView;
     private StoryBinView storyBinView;
@@ -76,12 +83,32 @@ public class EditorView extends RelativeLayout {
     //endregion
 
     //region features
-    public void setTextColor(@ColorInt int textColor,
-                             @ColorInt int backgroundColor) {
+    public void setTextColor(int state) {
+        int textColor;
+        int backgroundColor;
+        currentTextMode = state;
+
+        switch (state) {
+            case NO_BACKFIELD:
+                textColor = currentColor.getPrimary();
+                backgroundColor = Color.TRANSPARENT;
+                break;
+            case TRANSPARENT_BACKFIELD:
+                textColor = currentColor.getPrimary();
+                backgroundColor = currentColor.getPrimaryWithScaledAlpha(0.36f);
+                break;
+            default:
+                textColor = currentColor.getContrast();
+                backgroundColor = currentColor.getPrimary();
+                break;
+        }
+
         storyEditText.setSpan(new RoundedBackgroundSpan(backgroundColor, textColor, 4.0f));
     }
 
     public void setBackground(@NonNull BackgroundItem item) {
+        currentColor = item.getColor();
+        setTextColor(currentTextMode);
         dropComplexBackgroundStack();
 
         if (item.getType() == BackgroundItem.GRADIENT) {
@@ -99,6 +126,8 @@ public class EditorView extends RelativeLayout {
     }
 
     public void setBackground(@NonNull Tile tile) {
+        currentColor = tile.getColor();
+        setTextColor(currentTextMode);
         dropComplexBackgroundStack();
 
         gradientView.setGradient(null);
