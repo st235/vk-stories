@@ -72,4 +72,16 @@ public class GalleryPicker extends FrameLayout {
 
         galleryAdapter.addAll(imageProvider.provide());
     }
+
+    public void show() {
+        setVisibility(VISIBLE);
+    }
+
+    public void hide() {
+        setVisibility(GONE);
+    }
+
+    public boolean isOpen() {
+        return getVisibility() == VISIBLE;
+    }
 }

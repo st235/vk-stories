@@ -111,12 +111,10 @@ public class StoryActivity extends BaseActivity
 
         setupTab();
 
-        backgroundPicker.setOnAddListener(v -> {
-            galleryPicker.setVisibility(View.VISIBLE);
-        });
+        backgroundPicker.setOnAddListener(v -> galleryPicker.show());
 
         backgroundPicker.setOnItemClickListener((b, p) -> {
-            galleryPicker.setVisibility(View.GONE);
+            galleryPicker.hide();
             editorView.setBackground(b);
         });
 
@@ -174,5 +172,15 @@ public class StoryActivity extends BaseActivity
                 };
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (galleryPicker.isOpen()) {
+            galleryPicker.hide();
+            return;
+        }
+
+        super.onBackPressed();
     }
 }
