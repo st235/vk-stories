@@ -17,6 +17,7 @@ import sasd97.java_blog.xyz.libs_common.utils.models.TextColor;
 public class ImageItem implements BackgroundItem {
 
     private ScalableImage image;
+    private TextColor textColor = TextColor.WHITE;
 
     public ImageItem(@NonNull ScalableImage image) {
         this.image = image;
@@ -30,11 +31,15 @@ public class ImageItem implements BackgroundItem {
         return this.image;
     }
 
-    @Override
-    public TextColor getColor() {
-        return TextColor.WHITE;
+    public void setTextColor(@NonNull TextColor textColor) {
+        this.textColor = textColor;
     }
 
+    @Override
+    public TextColor getColor() {
+        return textColor;
+    }
+    
     @Override
     public int getType() {
         return IMAGE;

@@ -13,6 +13,7 @@ import sasd97.java_blog.xyz.libs_common.utils.models.TextColor;
 public class GradientItem implements BackgroundItem {
 
     private Gradient gradient;
+    private TextColor textColor = TextColor.WHITE;
 
     public GradientItem(@NonNull Gradient gradient) {
         this.gradient = gradient;
@@ -22,9 +23,13 @@ public class GradientItem implements BackgroundItem {
         return gradient;
     }
 
+    public void setTextColor(@NonNull TextColor textColor) {
+        this.textColor = textColor;
+    }
+
     @Override
     public TextColor getColor() {
-        return TextColor.WHITE;
+        return textColor;
     }
 
     @Override

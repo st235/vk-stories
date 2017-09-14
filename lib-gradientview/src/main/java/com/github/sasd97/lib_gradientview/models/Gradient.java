@@ -42,4 +42,8 @@ public class Gradient {
     public float getPercentile() {
         return percentile;
     }
+
+    public boolean isMonochrome() {
+        return startColor == finishColor;
+    }
 }

@@ -42,7 +42,7 @@ public class TextColor {
         return adjustAlpha(contrastColor, factor);
     }
 
-    @ColorInt public int adjustAlpha(int color, float factor) {
+    @ColorInt public static int adjustAlpha(int color, float factor) {
         int alpha = Math.round(Color.alpha(color) * factor);
         int red = Color.red(color);
         int green = Color.green(color);
@@ -50,7 +50,7 @@ public class TextColor {
         return Color.argb(alpha, red, green, blue);
     }
 
-    @ColorInt public int getContrastColor(int color) {
+    @ColorInt public static int getContrastColor(int color) {
         double y = (299 * Color.red(color) + 587 * Color.green(color) + 114 * Color.blue(color)) / 1000;
         return y >= 128 ? Color.BLACK : Color.WHITE;
     }
