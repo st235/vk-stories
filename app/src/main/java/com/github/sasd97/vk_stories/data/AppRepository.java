@@ -3,6 +3,8 @@ package com.github.sasd97.vk_stories.data;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
+import java.io.File;
+
 import io.reactivex.Single;
 
 /**

@@ -1,11 +1,15 @@
 package com.github.sasd97.vk_stories.presentation.story;
 
-import android.graphics.Color;
+import android.Manifest;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.design.widget.TabLayout;
 import android.support.transition.TransitionManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,12 +22,16 @@ import com.github.sasd97.vk_stories.R;
 import com.github.sasd97.vk_stories.VkStoriesApp;
 import com.github.sasd97.vk_stories.presentation.base.BaseActivity;
 
+import java.io.File;
+
 import javax.inject.Inject;
 
 import sasd97.java_blog.xyz.background_picker.BackgroundPicker;
 import sasd97.java_blog.xyz.gallery_picker.GalleryPicker;
+import sasd97.java_blog.xyz.gallery_picker.models.Tile;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryAlphaView;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryButton;
+import sasd97.java_blog.xyz.libs_common.utils.utils.IntentResolver;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Renderer;
 import sasd97.java_blog.xyz.libs_editorview.EditorView;
 import sasd97.java_blog.xyz.sticker_picker.StickerSheet;
@@ -34,7 +42,8 @@ import static sasd97.java_blog.xyz.libs_editorview.EditorView.NO_BACKFIELD;
 import static sasd97.java_blog.xyz.libs_editorview.EditorView.TRANSPARENT_BACKFIELD;
 
 public class StoryActivity extends BaseActivity
-        implements StoryView, StoryButton.OnStateChangedListener {
+        implements StoryView,
+        StoryButton.OnStateChangedListener {
 
     private ConstraintSet squareSet = new ConstraintSet();
     private ConstraintSet fullscreenSet = new ConstraintSet();
@@ -119,7 +128,21 @@ public class StoryActivity extends BaseActivity
         });
 
         galleryPicker.setOnItemClickListener((t, p) -> {
-            editorView.setBackground(t);
+            switch (t.getType()) {
+                case Tile.GALLERY:
+                    presenter.onOpenGallery();
+                    break;
+                case Tile.CAMERA:
+                    ActivityCompat.requestPermissions(this,
+                            new String[] {
+                                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                            }, 1);
+                    presenter.onOpenCamera();
+                    break;
+                default:
+                    editorView.setBackground(t);
+                    break;
+            }
         });
 
         sendButton.setOnClickListener(v -> {
@@ -172,6 +195,27 @@ public class StoryActivity extends BaseActivity
                 };
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) return;
+        if (requestCode == IntentResolver.GALLERY_REQUEST_CODE) handleGalleryResults(data);
+        if (requestCode == IntentResolver.CAMERA_REQUEST_CODE) handleCameraResults(data);
+    }
+
+    private void handleGalleryResults(@NonNull Intent intent) {
+        Uri uri = IntentResolver.getGalleryUri(intent);
+        Tile tile = new Tile(uri);
+        editorView.setBackground(tile);
+    }
+
+    private void handleCameraResults(@NonNull Intent intent) {
+        File file = presenter.getTempFile();
+        Uri uri = Uri.fromFile(file);
+        Tile tile = new Tile(uri);
+        editorView.setBackground(tile);
     }
 
     @Override

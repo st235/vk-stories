@@ -46,7 +46,7 @@ public class StoryEditText extends AppCompatEditText {
     private void onInit() {
         setGravity(Gravity.CENTER);
         setTypeface(null, Typeface.BOLD);
-        setTextSize(TypedValue.COMPLEX_UNIT_SP, 24.0f);
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 32.0f);
         setBackgroundColor(Color.TRANSPARENT);
 //        setInputType(InputType.TYPE_CLASS_TEXT);
 
