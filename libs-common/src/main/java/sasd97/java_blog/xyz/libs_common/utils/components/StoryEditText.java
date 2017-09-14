@@ -12,6 +12,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
@@ -45,7 +46,7 @@ public class StoryEditText extends AppCompatEditText {
     private void onInit() {
         setGravity(Gravity.CENTER);
         setTypeface(null, Typeface.BOLD);
-        setTextSize(Dimens.spToPx(20.0f));
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 24.0f);
         setBackgroundColor(Color.TRANSPARENT);
 //        setInputType(InputType.TYPE_CLASS_TEXT);
 
