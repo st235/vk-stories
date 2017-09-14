@@ -206,7 +206,16 @@ public class EditorView extends RelativeLayout {
         storyEditText = new StoryEditText(getContext());
         storyEditText.setHint(R.string.whatsNew);
 
-        addView(storyEditText, generateCenterLP(ViewGroup.LayoutParams.WRAP_CONTENT));
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+
+        int margin = (int) Dimens.dpToPx(16);
+        params.addRule(CENTER_IN_PARENT);
+        params.leftMargin = margin;
+        params.rightMargin = margin;
+
+        addView(storyEditText, params);
     }
 
     private ImageView addStickerView(@NonNull Uri uri) {
