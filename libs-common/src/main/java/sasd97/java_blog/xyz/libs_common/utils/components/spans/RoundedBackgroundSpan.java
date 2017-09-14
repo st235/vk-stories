@@ -54,22 +54,21 @@ public class RoundedBackgroundSpan extends ReplacementSpan {
     @Override
     public void draw(@NonNull Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, @NonNull Paint paint) {
         String currentText = text.subSequence(start, end).toString();
-        int currentLength = end - start;
         float width = paint.measureText(currentText);
 
         String[] split = text.toString().split("\n");
 
         int counter = 0;
-        int prevLength = 0;
-        int nextLength = 0;
+        float prevLength = 0;
+        float nextLength = 0;
         for (int i = 0; i < split.length; i++) {
             if (counter == start) {
                 if (i - 1 >= 0) {
-                    prevLength = split[i - 1].length();
+                    prevLength = paint.measureText(split[i - 1]);
                 }
 
                 if (i + 1 < split.length) {
-                    nextLength = split[i + 1].length();
+                    nextLength = paint.measureText(split[i + 1]);
                 }
             }
             counter += split[i].length() + 1;
@@ -79,8 +78,8 @@ public class RoundedBackgroundSpan extends ReplacementSpan {
         paint.setColor(backgroundColor);
 
         int selectedParts = 0;
-        if (currentLength > prevLength) selectedParts |= TOP_LEFT_CORNER | TOP_RIGHT_CORNER;
-        if (currentLength > nextLength) selectedParts |= BOTTOM_LEFT_CORNER | BOTTOM_RIGHT_CORNER;
+        if (biggerThanRadius(width, prevLength, 5.0f)) selectedParts |= TOP_LEFT_CORNER | TOP_RIGHT_CORNER;
+        if (biggerThanRadius(width, nextLength, 5.0f)) selectedParts |= BOTTOM_LEFT_CORNER | BOTTOM_RIGHT_CORNER;
 
         canvas.drawPath(obtainPath(drawingRect, selectedParts), paint);
 
@@ -151,5 +150,9 @@ public class RoundedBackgroundSpan extends ReplacementSpan {
 
         path.close();
         return path;
+    }
+
+    private boolean biggerThanRadius(float one, float another, float radius) {
+        return Math.abs(one - another) >= radius && one > another;
     }
 }
