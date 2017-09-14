@@ -2,22 +2,21 @@ package sasd97.java_blog.xyz.libs_common.utils.models;
 
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
-import android.util.Log;
 
 /**
  * Created by alexander on 14/09/2017.
  */
 
-public class TextColor {
+public class ComplementaryColor {
 
-    public static TextColor WHITE = new TextColor(Color.WHITE, Color.BLACK);
-    public static TextColor BLACK = new TextColor(Color.BLACK, Color.WHITE);
+    public static ComplementaryColor WHITE = new ComplementaryColor(Color.WHITE, Color.BLACK);
+    public static ComplementaryColor BLACK = new ComplementaryColor(Color.BLACK, Color.WHITE);
 
     private int primaryColor;
     private int contrastColor;
 
-    public TextColor(@ColorInt int primaryColor,
-                     @ColorInt int contrastColor) {
+    public ComplementaryColor(@ColorInt int primaryColor,
+                              @ColorInt int contrastColor) {
         this.primaryColor = primaryColor;
         this.contrastColor = contrastColor;
     }

@@ -27,8 +27,8 @@ import sasd97.java_blog.xyz.background_picker.models.ImageItem;
 import sasd97.java_blog.xyz.background_picker.models.PlusItem;
 import sasd97.java_blog.xyz.background_picker.providers.GradientProvider;
 import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
+import sasd97.java_blog.xyz.libs_common.utils.models.ComplementaryColor;
 import sasd97.java_blog.xyz.libs_common.utils.models.ScalableImage;
-import sasd97.java_blog.xyz.libs_common.utils.models.TextColor;
 import sasd97.java_blog.xyz.libs_common.utils.providers.Provider;
 import sasd97.java_blog.xyz.background_picker.providers.ThumbnailProvider;
 
@@ -106,9 +106,9 @@ public class BackgroundPicker extends FrameLayout {
             GradientItem item = new GradientItem(gradient);
 
             if (gradient.isMonochrome()) {
-                int contrast = TextColor.getContrastColor(gradient.getStartColor());
-                TextColor color = new TextColor(contrast, gradient.getStartColor());
-                item.setTextColor(color);
+                int contrast = ComplementaryColor.getContrastColor(gradient.getStartColor());
+                ComplementaryColor color = new ComplementaryColor(contrast, gradient.getStartColor());
+                item.setComplementaryColor(color);
             }
 
             items.add(item);

@@ -5,5 +5,5 @@ package sasd97.java_blog.xyz.libs_common.utils.models;
  */
 
 public interface Colorable {
-    TextColor getColor();
+    ComplementaryColor getComplementaryColor();
 }

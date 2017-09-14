@@ -2,16 +2,10 @@ package sasd97.java_blog.xyz.libs_common.utils.components;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Point;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 

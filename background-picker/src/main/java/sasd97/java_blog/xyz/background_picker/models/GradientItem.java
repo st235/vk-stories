@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.github.sasd97.lib_gradientview.models.Gradient;
 
-import sasd97.java_blog.xyz.libs_common.utils.models.TextColor;
+import sasd97.java_blog.xyz.libs_common.utils.models.ComplementaryColor;
 
 /**
  * Created by alexander on 08/09/2017.
@@ -13,7 +13,7 @@ import sasd97.java_blog.xyz.libs_common.utils.models.TextColor;
 public class GradientItem implements BackgroundItem {
 
     private Gradient gradient;
-    private TextColor textColor = TextColor.WHITE;
+    private ComplementaryColor complementaryColor = ComplementaryColor.WHITE;
 
     public GradientItem(@NonNull Gradient gradient) {
         this.gradient = gradient;
@@ -23,13 +23,12 @@ public class GradientItem implements BackgroundItem {
         return gradient;
     }
 
-    public void setTextColor(@NonNull TextColor textColor) {
-        this.textColor = textColor;
+    public void setComplementaryColor(@NonNull ComplementaryColor complementaryColor) {
+        this.complementaryColor = complementaryColor;
     }
 
-    @Override
-    public TextColor getColor() {
-        return textColor;
+    public ComplementaryColor getComplementaryColor() {
+        return complementaryColor;
     }
 
     @Override

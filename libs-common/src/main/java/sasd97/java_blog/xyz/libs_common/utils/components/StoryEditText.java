@@ -43,12 +43,11 @@ public class StoryEditText extends AppCompatEditText {
     }
 
     private void onInit() {
-        setSingleLine(false);
         setGravity(Gravity.CENTER);
         setTypeface(null, Typeface.BOLD);
         setTextSize(Dimens.spToPx(20.0f));
         setBackgroundColor(Color.TRANSPARENT);
-        setInputType(InputType.TYPE_CLASS_TEXT);
+//        setInputType(InputType.TYPE_CLASS_TEXT);
 
         InputFilter[] filterArray = new InputFilter[1];
         filterArray[0] = new InputFilter.LengthFilter(40);

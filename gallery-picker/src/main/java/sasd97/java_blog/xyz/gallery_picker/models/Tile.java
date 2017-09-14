@@ -8,7 +8,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 import sasd97.java_blog.xyz.libs_common.utils.models.Colorable;
-import sasd97.java_blog.xyz.libs_common.utils.models.TextColor;
+import sasd97.java_blog.xyz.libs_common.utils.models.ComplementaryColor;
 
 /**
  * Created by alexander on 09/09/2017.
@@ -46,9 +46,8 @@ public class Tile implements Colorable {
         return type;
     }
 
-    @Override
-    public TextColor getColor() {
-        return TextColor.WHITE;
+    public ComplementaryColor getComplementaryColor() {
+        return ComplementaryColor.WHITE;
     }
 
     @Override

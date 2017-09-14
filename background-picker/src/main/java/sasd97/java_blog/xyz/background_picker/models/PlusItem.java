@@ -1,6 +1,6 @@
 package sasd97.java_blog.xyz.background_picker.models;
 
-import sasd97.java_blog.xyz.libs_common.utils.models.TextColor;
+import sasd97.java_blog.xyz.libs_common.utils.models.ComplementaryColor;
 
 /**
  * Created by alexander on 09/09/2017.
@@ -13,8 +13,7 @@ public class PlusItem implements BackgroundItem {
         return PLUS;
     }
 
-    @Override
-    public TextColor getColor() {
-        return TextColor.WHITE;
+    public ComplementaryColor getComplementaryColor() {
+        return ComplementaryColor.WHITE;
     }
 }

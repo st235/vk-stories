@@ -7,7 +7,6 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.AttrRes;
-import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
@@ -34,8 +33,8 @@ import sasd97.java_blog.xyz.libs_common.utils.components.spans.RoundedBackground
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryBinView;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryEditText;
 import sasd97.java_blog.xyz.libs_common.utils.components.StorySticker;
+import sasd97.java_blog.xyz.libs_common.utils.models.ComplementaryColor;
 import sasd97.java_blog.xyz.libs_common.utils.models.ScalableImage;
-import sasd97.java_blog.xyz.libs_common.utils.models.TextColor;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 import sasd97.java_blog.xyz.libs_touchlistener.MultiTouchListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnRemoveListener;
@@ -52,7 +51,7 @@ public class EditorView extends RelativeLayout {
     public static final int FULL_BACKFIELD = 2;
 
     private int currentTextMode = 0;
-    private TextColor currentColor = TextColor.BLACK;
+    private ComplementaryColor currentColor = ComplementaryColor.BLACK;
 
     private GradientView gradientView;
     private StoryBinView storyBinView;
@@ -107,7 +106,7 @@ public class EditorView extends RelativeLayout {
     }
 
     public void setBackground(@NonNull BackgroundItem item) {
-        currentColor = item.getColor();
+        currentColor = item.getComplementaryColor();
         setTextColor(currentTextMode);
         dropComplexBackgroundStack();
 
@@ -126,7 +125,7 @@ public class EditorView extends RelativeLayout {
     }
 
     public void setBackground(@NonNull Tile tile) {
-        currentColor = tile.getColor();
+        currentColor = tile.getComplementaryColor();
         setTextColor(currentTextMode);
         dropComplexBackgroundStack();
 
