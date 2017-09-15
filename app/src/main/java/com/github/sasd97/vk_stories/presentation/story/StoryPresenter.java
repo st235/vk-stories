@@ -10,12 +10,11 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.github.sasd97.lib_router.Router;
 import com.github.sasd97.vk_stories.data.AppRepository;
 import com.github.sasd97.vk_stories.presentation.publish.PublishActivity;
+import com.github.sasd97.vk_stories.utils.IntentResolver;
 
 import java.io.File;
 
 import javax.inject.Inject;
-
-import com.github.sasd97.vk_stories.utils.IntentResolver;
 
 import static com.github.sasd97.lib_router.commands.activities.Start.start;
 import static com.github.sasd97.lib_router.commands.activities.StartForResult.startForResult;

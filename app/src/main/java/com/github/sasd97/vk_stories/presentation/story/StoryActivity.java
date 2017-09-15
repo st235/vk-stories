@@ -20,6 +20,7 @@ import com.github.sasd97.vk_stories.R;
 import com.github.sasd97.vk_stories.VkStoriesApp;
 import com.github.sasd97.vk_stories.events.OnTabSelectedListener;
 import com.github.sasd97.vk_stories.presentation.base.BaseActivity;
+import com.github.sasd97.vk_stories.utils.IntentResolver;
 import com.github.sasd97.vk_stories.utils.PermissionResolver;
 
 import java.io.File;
@@ -31,7 +32,6 @@ import sasd97.java_blog.xyz.gallery_picker.GalleryPicker;
 import sasd97.java_blog.xyz.gallery_picker.models.Tile;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryAlphaView;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryButton;
-import com.github.sasd97.vk_stories.utils.IntentResolver;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Renderer;
 import sasd97.java_blog.xyz.libs_editorview.EditorView;
 import sasd97.java_blog.xyz.libs_editorview.OnTextChangedListener;
