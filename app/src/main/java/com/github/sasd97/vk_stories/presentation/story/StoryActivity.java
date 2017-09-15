@@ -47,8 +47,8 @@ public class StoryActivity extends BaseActivity
         implements StoryView,
         StoryButton.OnStateChangedListener {
 
-    private static final String SQUARE_ASPECT_RATIO = "1";
     private static final String FILL_ASPECT_RATIO = "0";
+    private static final String SQUARE_ASPECT_RATIO = "1";
 
     private static final float MIRROR_ROTATE_ANGLE = 180.0f;
 

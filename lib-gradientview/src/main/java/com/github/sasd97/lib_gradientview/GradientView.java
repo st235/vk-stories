@@ -12,6 +12,7 @@ import android.os.Build;
 import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,7 +26,7 @@ import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
  * Created by alexander on 08/09/2017.
  */
 
-public class GradientView extends ImageView {
+public class GradientView extends AppCompatImageView {
 
     private Paint paint;
     private Gradient gradient;
@@ -44,12 +45,6 @@ public class GradientView extends ImageView {
 
     public GradientView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        onInit();
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public GradientView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
         onInit();
     }
 
