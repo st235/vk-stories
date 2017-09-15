@@ -22,7 +22,8 @@ public class EndOffsetItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
-        if (parent.getChildAdapterPosition(view) < state.getItemCount() - gridItemCount + 1) {
+        int itemLimit = state.getItemCount() - state.getItemCount() % gridItemCount;
+        if (parent.getChildAdapterPosition(view) < itemLimit) {
             return;
         }
 
