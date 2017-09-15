@@ -68,4 +68,8 @@ dependencies {
     compile libraries.rxjava
     compile libraries.rxandroid
     compile libraries.rxadapter
+
+    //glide
+    compile libraries.glide
+    annotationProcessor compilers.glide
 }
