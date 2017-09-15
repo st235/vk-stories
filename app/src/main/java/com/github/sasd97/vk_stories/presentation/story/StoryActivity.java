@@ -161,7 +161,15 @@ public class StoryActivity extends BaseActivity
             }
         });
 
-        sendButton.setOnClickListener(v -> presenter.onSend(Renderer.renderView(editorView)));
+        sendButton.setOnClickListener(v -> {
+            editorView.hideCursor();
+            presenter.onSend(Renderer.renderView(editorView));
+        });
+    }
+
+    @Override
+    public void showTypeCursor() {
+        editorView.showCursor();
     }
 
     private void setupLayout() {

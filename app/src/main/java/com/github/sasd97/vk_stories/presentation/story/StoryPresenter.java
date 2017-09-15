@@ -38,6 +38,12 @@ public class StoryPresenter extends MvpPresenter<StoryView> {
         this.repository = repository;
     }
 
+    @Override
+    public void attachView(StoryView view) {
+        super.attachView(view);
+        getViewState().showTypeCursor();
+    }
+
     void onSend(@NonNull Bitmap bitmap) {
         repository.savePreview(bitmap);
         router.pushCommand(start(PublishActivity.class));

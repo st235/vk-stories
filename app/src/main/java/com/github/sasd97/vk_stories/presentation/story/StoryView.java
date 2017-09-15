@@ -7,4 +7,5 @@ import com.arellomobile.mvp.MvpView;
  */
 
 public interface StoryView extends MvpView {
+    void showTypeCursor();
 }

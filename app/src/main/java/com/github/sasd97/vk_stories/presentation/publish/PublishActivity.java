@@ -69,6 +69,7 @@ public class PublishActivity extends BaseActivity implements PublishView {
         super.onViewsInitialized(savedInstanceState);
 
         tryAgainButton.setOnClickListener(v -> presenter.goToCreateNew());
+        cancelButton.setOnClickListener(v -> presenter.cancelRequest());
     }
 
     @Override
@@ -78,5 +79,19 @@ public class PublishActivity extends BaseActivity implements PublishView {
         followingText.setText(R.string.published);
         progressBar.setVisibility(View.INVISIBLE);
         tryAgainButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showCancelled() {
+        cancelButton.setVisibility(View.GONE);
+        followingText.setText(R.string.canceled);
+        progressBar.setVisibility(View.INVISIBLE);
+        tryAgainButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showError() {
+        String message = getString(R.string.error);
+        presenter.showErrorMessage(message);
     }
 }

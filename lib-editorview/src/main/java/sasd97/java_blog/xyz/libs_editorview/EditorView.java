@@ -155,6 +155,14 @@ public class EditorView extends RelativeLayout {
         params.bottomMargin = margin + (int) Dimens.dpToPx(16.0f);
     }
 
+    public void hideCursor() {
+        storyEditText.setCursorVisible(false);
+    }
+
+    public void showCursor() {
+        storyEditText.setCursorVisible(true);
+    }
+
     private void onInit() {
         addBackground();
         addEditText();

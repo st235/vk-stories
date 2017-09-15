@@ -5,10 +5,6 @@ import android.support.annotation.NonNull;
 
 import com.github.sasd97.vk_stories.data.net.VkApiWrapper;
 
-import java.lang.ref.WeakReference;
-
-import javax.inject.Inject;
-
 import io.reactivex.Single;
 
 /**
@@ -17,8 +13,8 @@ import io.reactivex.Single;
 
 public class AppRepositoryImpl implements AppRepository {
 
+    private Bitmap preview;
     private VkApiWrapper vkApiWrapper;
-    private WeakReference<Bitmap> previewReference;
 
     public AppRepositoryImpl(@NonNull VkApiWrapper vkApiWrapper) {
         this.vkApiWrapper = vkApiWrapper;
@@ -40,12 +36,12 @@ public class AppRepositoryImpl implements AppRepository {
     }
 
     @Override
-    public void savePreview(@NonNull Bitmap bitmap) {
-        previewReference = new WeakReference<>(bitmap);
+    public void savePreview(@NonNull Bitmap preview) {
+        this.preview = preview;
     }
 
     @Override
     public Bitmap getPreview() {
-        return previewReference.get();
+        return preview;
     }
 }
