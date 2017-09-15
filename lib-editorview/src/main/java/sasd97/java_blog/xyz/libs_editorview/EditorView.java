@@ -53,8 +53,8 @@ public class EditorView extends RelativeLayout {
     private int currentTextMode = 0;
 
     private GradientView gradientView;
-    private StoryBinView storyBinView;
     private StoryEditText storyEditText;
+    private StoryBinView recyclerBinView;
 
     private List<View> stickers = new ArrayList<>();
     private ArrayDeque<View> complexBackground = new ArrayDeque<>();
@@ -62,11 +62,13 @@ public class EditorView extends RelativeLayout {
 
     //region constructors
     public EditorView(@NonNull Context context) {
-        this(context, null);
+        super(context);
+        onInit();
     }
 
     public EditorView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        onInit();
     }
 
     public EditorView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
@@ -81,10 +83,11 @@ public class EditorView extends RelativeLayout {
     }
     //endregion
 
-
+    //region setters & getters
     public void setOnTextListener(@NonNull OnTextChangedListener listener) {
         this.storyEditText.addTextChangedListener(listener);
     }
+    //endregion
 
     //region features
     public void setTextColor(int state) {
@@ -169,28 +172,17 @@ public class EditorView extends RelativeLayout {
         bringChildToFront(storyEditText);
     }
 
-    private void dropComplexBackgroundStack() {
-        while (!complexBackground.isEmpty()) {
-            View removable = complexBackground.pop();
-            removeView(removable);
-        }
-    }
-
-    private void bringStickersToFront() {
-        for (View sticker: stickers) bringChildToFront(sticker);
-    }
-
     private void addBinView() {
-        storyBinView = new StoryBinView(getContext());
-        storyBinView.setBins(R.drawable.ic_fab_trash, R.drawable.ic_fab_trash_released);
-        storyBinView.setVisibility(INVISIBLE);
+        recyclerBinView = new StoryBinView(getContext());
+        recyclerBinView.setBins(R.drawable.ic_fab_trash, R.drawable.ic_fab_trash_released);
+        recyclerBinView.setVisibility(INVISIBLE);
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 (int) Dimens.dpToPx(48), (int) Dimens.dpToPx(48));
         params.addRule(CENTER_HORIZONTAL);
         params.addRule(ALIGN_PARENT_BOTTOM);
         params.bottomMargin = (int) Dimens.dpToPx(12);
-        addView(storyBinView, params);
+        addView(recyclerBinView, params);
     }
 
     private void addBackground() {
@@ -204,7 +196,6 @@ public class EditorView extends RelativeLayout {
 
     private void addEditText() {
         storyEditText = new StoryEditText(getContext());
-        storyEditText.setHint(R.string.whatsNew);
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
@@ -232,33 +223,33 @@ public class EditorView extends RelativeLayout {
         listener.setRemoveListener(new OnRemoveListener() {
             @Override
             public void onStart() {
-                storyBinView.show();
+                recyclerBinView.show();
             }
 
             @Override
             public void onIntercept(View view) {
-                storyBinView.release();
+                recyclerBinView.release();
                 imageView.prepareToDelete();
             }
 
             @Override
             public void onRemove(View view) {
                 removeView(imageView);
-                storyBinView.hide();
+                recyclerBinView.hide();
             }
 
             @Override
             public void onCanceled(View view) {
-                storyBinView.close();
+                recyclerBinView.close();
                 imageView.release();
             }
 
             @Override
             public void onFinish(View view) {
-                storyBinView.hide();
+                recyclerBinView.hide();
             }
 
-        }, getViewCenterCoordinatesInScreen(storyBinView));
+        }, getViewCenterCoordinatesInScreen(recyclerBinView));
 
         listener.setOnLongClickListener(new OnLongClickListener() {
             @Override
@@ -292,5 +283,16 @@ public class EditorView extends RelativeLayout {
                 mode, mode);
         params.addRule(CENTER_IN_PARENT);
         return params;
+    }
+
+    private void dropComplexBackgroundStack() {
+        while (!complexBackground.isEmpty()) {
+            View removable = complexBackground.pop();
+            removeView(removable);
+        }
+    }
+
+    private void bringStickersToFront() {
+        for (View sticker: stickers) bringChildToFront(sticker);
     }
 }
