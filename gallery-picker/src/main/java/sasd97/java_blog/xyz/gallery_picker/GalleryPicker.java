@@ -11,15 +11,17 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import sasd97.java_blog.xyz.gallery_picker.adapters.GalleryAdapter;
+import sasd97.java_blog.xyz.gallery_picker.decorators.EndOffsetItemDecoration;
+import sasd97.java_blog.xyz.gallery_picker.decorators.StartOffsetItemDecoration;
 import sasd97.java_blog.xyz.gallery_picker.models.Tile;
 import sasd97.java_blog.xyz.gallery_picker.providers.ImageProvider;
 import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
+import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 
 /**
  * Created by alexander on 09/09/2017.
@@ -62,6 +64,11 @@ public class GalleryPicker extends FrameLayout {
         galleryAdapter = new GalleryAdapter();
         imageProvider = new ImageProvider(getContext());
 
+        int margins = (int) Dimens.dpToPx(16.0f);
+
+        recyclerView.addItemDecoration(new StartOffsetItemDecoration(margins, 2));
+        recyclerView.addItemDecoration(new EndOffsetItemDecoration(margins, 2));
+
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
         );
@@ -83,5 +90,9 @@ public class GalleryPicker extends FrameLayout {
 
     public boolean isOpen() {
         return getVisibility() == VISIBLE;
+    }
+
+    public void update() {
+        galleryAdapter.addAll(imageProvider.provide());
     }
 }

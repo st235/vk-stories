@@ -38,6 +38,7 @@
             android:foreground="@drawable/top_highlighted_background"
             android:paddingBottom="16dp"
             android:paddingTop="16dp"
+            android:clipToPadding="false"
             android:visibility="gone" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

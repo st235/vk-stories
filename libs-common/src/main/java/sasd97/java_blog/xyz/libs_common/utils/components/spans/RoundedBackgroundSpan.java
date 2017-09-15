@@ -60,8 +60,6 @@ public class RoundedBackgroundSpan extends ReplacementSpan {
 
         String[] split = text.toString().split("\n");
 
-        for (String t: split) Log.d("WEW", t);
-
         int counter = 0;
         float prevLength = 0;
         float nextLength = 0;

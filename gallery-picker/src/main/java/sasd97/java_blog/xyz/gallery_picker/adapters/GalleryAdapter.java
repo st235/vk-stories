@@ -2,7 +2,10 @@ package sasd97.java_blog.xyz.gallery_picker.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import java.util.List;
 
 import sasd97.java_blog.xyz.gallery_picker.R;
 import sasd97.java_blog.xyz.gallery_picker.models.Tile;
+import sasd97.java_blog.xyz.gallery_picker.utils.TileDiffCallback;
 import sasd97.java_blog.xyz.gallery_picker.viewholders.GalleryViewHolder;
 import sasd97.java_blog.xyz.gallery_picker.viewholders.ImageViewHolder;
 import sasd97.java_blog.xyz.gallery_picker.viewholders.SpecialViewHolder;
@@ -29,22 +33,20 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder>
     private final int UNSELECTED = -1;
 
     private int selectedItem = UNSELECTED;
-    private List<Tile> tiles = new ArrayList<>();
     private OnItemClickListener<Tile> listener;
-
-    public GalleryAdapter() {
-        tiles.add(new Tile(Tile.CAMERA));
-        tiles.add(new Tile(Tile.GALLERY));
-    }
+    private List<Tile> tiles = createListWithSpecialTiles(null);
 
     public void setListener(@NonNull OnItemClickListener<Tile> listener) {
         this.listener = listener;
     }
 
     public void addAll(@NonNull Collection<Tile> tiles) {
-        int oldLength = getItemCount();
-        this.tiles.addAll(tiles);
-        notifyItemRangeInserted(oldLength, getItemCount());
+        List<Tile> newTiles = createListWithSpecialTiles(tiles);
+        DiffUtil.DiffResult result = DiffUtil.calculateDiff(new TileDiffCallback(this.tiles, newTiles));
+
+        this.tiles.clear();
+        this.tiles.addAll(newTiles);
+        result.dispatchUpdatesTo(this);
     }
 
     @Override
@@ -94,5 +96,13 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder>
     @Override
     public int getItemCount() {
         return tiles.size();
+    }
+
+    private List<Tile> createListWithSpecialTiles(@Nullable Collection<Tile> collection) {
+        List<Tile> list = new ArrayList<>();
+        list.add(new Tile(Tile.CAMERA));
+        list.add(new Tile(Tile.GALLERY));
+        if (collection != null) list.addAll(collection);
+        return list;
     }
 }

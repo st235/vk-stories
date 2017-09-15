@@ -19,6 +19,7 @@ import javax.inject.Singleton;
 public class PermissionResolver {
 
     private final int WRITE_EXTERNAL_STORAGE_PERMISSION_NUMBER = 10;
+    private final int READ_EXTERNAL_STORAGE_PERMISSION_NUMBER = 11;
 
     private Context context;
 
@@ -27,19 +28,43 @@ public class PermissionResolver {
         this.context = context;
     }
 
-    public boolean isStoragePermissionGranted() {
-        return ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    public boolean isStorageWritePermissionGranted() {
+        return isPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
+    public boolean isStorageReadPermissionGranted() {
+        return isPermissionGranted(Manifest.permission.READ_EXTERNAL_STORAGE);
+    }
+
+    public void requestStorageWritePermission(@NonNull Activity activity) {
+        requestPermission(activity, WRITE_EXTERNAL_STORAGE_PERMISSION_NUMBER,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
+    public void requestStorageReadPermission(@NonNull Activity activity) {
+        requestPermission(activity, READ_EXTERNAL_STORAGE_PERMISSION_NUMBER,
+                Manifest.permission.READ_EXTERNAL_STORAGE);
+    }
+
+    public boolean checkWriteStoragePermission(int requestCode, int[] grantResults) {
+        return checkPermission(WRITE_EXTERNAL_STORAGE_PERMISSION_NUMBER, requestCode, grantResults);
+    }
+
+    public boolean checkReadStoragePermission(int requestCode, int[] grantResults) {
+        return checkPermission(READ_EXTERNAL_STORAGE_PERMISSION_NUMBER, requestCode, grantResults);
+    }
+
+    private void requestPermission(@NonNull Activity activity, int requestCode, String... permissions) {
+        ActivityCompat.requestPermissions(activity, permissions, requestCode);
+    }
+
+    private boolean isPermissionGranted(@NonNull String permission) {
+        return ContextCompat.checkSelfPermission(context, permission)
                 == PackageManager.PERMISSION_GRANTED;
     }
 
-    public void requestStoragePermission(@NonNull Activity activity) {
-        ActivityCompat.requestPermissions(activity, new String[] {
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-        }, WRITE_EXTERNAL_STORAGE_PERMISSION_NUMBER);
-    }
-
-    public boolean checkStoragePermission(int requestCode, int[] grantResults) {
-        if (requestCode != WRITE_EXTERNAL_STORAGE_PERMISSION_NUMBER) return false;
+    private boolean checkPermission(int inRequestCode, int outRequestCode, int[] grantResults) {
+        if (outRequestCode != inRequestCode) return false;
 
         boolean result = true;
         for (int grantResult: grantResults) result &= grantResult == PackageManager.PERMISSION_GRANTED;

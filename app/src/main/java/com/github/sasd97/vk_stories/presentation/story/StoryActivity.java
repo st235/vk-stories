@@ -123,7 +123,7 @@ public class StoryActivity extends BaseActivity
         fontStyleButton.setOnStateChangedListener(this);
 
         stickerButton.setOnClickListener(view -> onStickersOpen());
-        backgroundPicker.setOnAddListener(v -> galleryPicker.show());
+        backgroundPicker.setOnAddListener(v -> onGalleryPickerShow());
 
         backgroundPicker.setOnItemClickListener((b, p) -> {
             galleryPicker.hide();
@@ -150,8 +150,8 @@ public class StoryActivity extends BaseActivity
                     presenter.onOpenGallery();
                     break;
                 case Tile.CAMERA:
-                    if (!permissionResolver.isStoragePermissionGranted()) {
-                        permissionResolver.requestStoragePermission(this);
+                    if (!permissionResolver.isStorageWritePermissionGranted()) {
+                        permissionResolver.requestStorageWritePermission(this);
                         break;
                     }
                     presenter.onOpenCamera();
@@ -214,6 +214,14 @@ public class StoryActivity extends BaseActivity
         });
     }
 
+    private void onGalleryPickerShow() {
+        if (!permissionResolver.isStorageReadPermissionGranted()) {
+            permissionResolver.requestStorageReadPermission(this);
+        }
+
+        galleryPicker.show();
+    }
+
     private void onPostMode() {
         toolbarBackfield.animateTo(POST_BACKFIELD_ALPHA);
         backgroundPickerBackfield.animateTo(POST_BACKFIELD_ALPHA);
@@ -241,8 +249,13 @@ public class StoryActivity extends BaseActivity
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (permissionResolver.checkStoragePermission(requestCode, grantResults)) {
+        if (permissionResolver.checkWriteStoragePermission(requestCode, grantResults)) {
             presenter.onOpenCamera();
+            return;
+        }
+
+        if (permissionResolver.checkReadStoragePermission(requestCode, grantResults)) {
+            galleryPicker.update();
             return;
         }
 
