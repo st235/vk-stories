@@ -19,19 +19,18 @@ import javax.inject.Inject;
 
 public class PublishActivity extends BaseActivity implements PublishView {
 
+    private View successView;
+    private Button cancelButton;
+    private Button tryAgainButton;
+    private TextView followingText;
+    private ProgressBar progressBar;
+
     @Inject
     Router router;
 
     @Inject
     @InjectPresenter
     PublishPresenter presenter;
-
-    private ProgressBar progressBar;
-
-    private View successView;
-    private Button cancelButton;
-    private Button tryAgainButton;
-    private TextView followingText;
 
     @ProvidePresenter
     public PublishPresenter providePresenter() {
@@ -59,8 +58,8 @@ public class PublishActivity extends BaseActivity implements PublishView {
         super.onInitViews();
 
         progressBar = findViewById(R.id.loadingBar);
-        tryAgainButton = findViewById(R.id.tryAgain);
         successView = findViewById(R.id.successView);
+        tryAgainButton = findViewById(R.id.tryAgain);
         cancelButton = findViewById(R.id.cancelButton);
         followingText = findViewById(R.id.followingText);
     }
@@ -74,10 +73,10 @@ public class PublishActivity extends BaseActivity implements PublishView {
 
     @Override
     public void showSuccess() {
-        progressBar.setVisibility(View.INVISIBLE);
-        followingText.setText(R.string.published);
-        successView.setVisibility(View.VISIBLE);
         cancelButton.setVisibility(View.GONE);
+        successView.setVisibility(View.VISIBLE);
+        followingText.setText(R.string.published);
+        progressBar.setVisibility(View.INVISIBLE);
         tryAgainButton.setVisibility(View.VISIBLE);
     }
 }

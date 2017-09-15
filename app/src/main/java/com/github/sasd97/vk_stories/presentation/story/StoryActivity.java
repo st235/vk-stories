@@ -10,7 +10,6 @@ import android.support.design.widget.TabLayout;
 import android.support.transition.TransitionManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,6 +20,7 @@ import com.github.sasd97.lib_router.Router;
 import com.github.sasd97.lib_router.satellites.ActivitySatellite;
 import com.github.sasd97.vk_stories.R;
 import com.github.sasd97.vk_stories.VkStoriesApp;
+import com.github.sasd97.vk_stories.events.OnTabSelectedListener;
 import com.github.sasd97.vk_stories.presentation.base.BaseActivity;
 
 import java.io.File;
@@ -47,19 +47,29 @@ public class StoryActivity extends BaseActivity
         implements StoryView,
         StoryButton.OnStateChangedListener {
 
+    private static final String SQUARE_ASPECT_RATIO = "1";
+    private static final String FILL_ASPECT_RATIO = "0";
+
+    private static final float MIRROR_ROTATE_ANGLE = 180.0f;
+
+    private static final float POST_BACKFIELD_ALPHA = 1.0f;
+    private static final float STORY_BACKFIELD_ALPHA = .92f;
+
     private ConstraintSet squareSet = new ConstraintSet();
     private ConstraintSet fullscreenSet = new ConstraintSet();
 
-    private EditorView editorView;
-    private StoryButton storyButton;
     private Button sendButton;
-
-    private View smileButton;
-    private StoryAlphaView toolbarBackground;
+    private View stickerButton;
     private TabLayout tabLayout;
+    private EditorView editorView;
+    private StoryButton fontStyleButton;
     private GalleryPicker galleryPicker;
     private BackgroundPicker backgroundPicker;
     private ConstraintLayout constraintLayout;
+
+    private StoryAlphaView toolbarBackfield;
+    private StoryAlphaView backgroundPickerBackfield;
+
 
     @Inject Router router;
     @Inject StickerProvider stickerProvider;
@@ -92,36 +102,26 @@ public class StoryActivity extends BaseActivity
         tabLayout = findViewById(R.id.tabLayout);
         editorView = findViewById(R.id.editorView);
         sendButton = findViewById(R.id.sendButton);
-        smileButton = findViewById(R.id.smileButton);
-        storyButton = findViewById(R.id.fontTextView);
         galleryPicker = findViewById(R.id.galleryPicker);
+        stickerButton = findViewById(R.id.stickersButton);
+        fontStyleButton = findViewById(R.id.fontStyleButton);
         backgroundPicker = findViewById(R.id.backgroundPicker);
         constraintLayout = findViewById(R.id.constraintLayout);
-        toolbarBackground = findViewById(R.id.alphaView);
+        toolbarBackfield = findViewById(R.id.toolbarBackfieldView);
+        backgroundPickerBackfield = findViewById(R.id.backgroundPickerBackfield);
     }
 
     @Override
     protected void onViewsInitialized(Bundle savedInstanceState) {
         super.onViewsInitialized(savedInstanceState);
 
-        storyButton.setStates(new int[]{NO_BACKFIELD, FULL_BACKFIELD, TRANSPARENT_BACKFIELD});
-        storyButton.setOnStateChangedListener(this);
-
-        squareSet.clone(constraintLayout);
-        fullscreenSet.clone(constraintLayout);
-
-        squareSet.setDimensionRatio(R.id.editorView, "1");
-        fullscreenSet.setDimensionRatio(R.id.editorView, "0");
-
-        smileButton.setOnClickListener(view -> {
-            StickerSheet stickerSheet = new StickerSheet();
-            stickerSheet.setProvider(stickerProvider);
-            stickerSheet.setOnItemClickListener((s, p) -> editorView.addSticker(s));
-            stickerSheet.show(getSupportFragmentManager(), null);
-        });
-
+        setupLayout();
         setupTab();
 
+        fontStyleButton.setStates(new int[]{NO_BACKFIELD, FULL_BACKFIELD, TRANSPARENT_BACKFIELD});
+        fontStyleButton.setOnStateChangedListener(this);
+
+        stickerButton.setOnClickListener(view -> onStickersOpen());
         backgroundPicker.setOnAddListener(v -> galleryPicker.show());
 
         backgroundPicker.setOnItemClickListener((b, p) -> {
@@ -161,56 +161,70 @@ public class StoryActivity extends BaseActivity
             }
         });
 
-        sendButton.setOnClickListener(v -> {
-            presenter.onSend(Renderer.renderView(editorView));
-        });
+        sendButton.setOnClickListener(v -> presenter.onSend(Renderer.renderView(editorView)));
     }
 
-    @Override
-    public void onStateChanged(int state) {
-        editorView.setTextColor(state);
+    private void setupLayout() {
+        squareSet.clone(constraintLayout);
+        fullscreenSet.clone(constraintLayout);
+
+        squareSet.setDimensionRatio(R.id.editorView, SQUARE_ASPECT_RATIO);
+        fullscreenSet.setDimensionRatio(R.id.editorView, FILL_ASPECT_RATIO);
     }
 
     private void setupTab() {
         String[] tabTitles = getResources().getStringArray(R.array.tabs_titles);
+
         for (String tabTitle: tabTitles) {
             tabLayout.addTab(tabLayout.newTab().setText(tabTitle));
         }
 
-        tabLayout.setRotationX(180.0f);
+        tabLayout.setRotationX(MIRROR_ROTATE_ANGLE);
         ViewGroup tabListed = (ViewGroup) tabLayout.getChildAt(0);
 
         for (int i = 0; i < tabListed.getChildCount(); i++) {
-            tabListed.getChildAt(i).setRotationX(180.0f);
+            tabListed.getChildAt(i).setRotationX(MIRROR_ROTATE_ANGLE);
         }
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
+        tabLayout.addOnTabSelectedListener(new OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 TransitionManager.beginDelayedTransition(constraintLayout);
 
                 switch(tab.getPosition()) {
                     case 0:
-                        toolbarBackground.animateTo(1.0f);
                         squareSet.applyTo(constraintLayout);
+                        onPostMode();
                         break;
                     case 1:
-                        toolbarBackground.animateTo(0.92f);
                         fullscreenSet.applyTo(constraintLayout);
+                        onStoryMode();
                         break;
                 };
             }
         });
+    }
+
+    private void onPostMode() {
+        toolbarBackfield.animateTo(POST_BACKFIELD_ALPHA);
+        backgroundPickerBackfield.animateTo(POST_BACKFIELD_ALPHA);
+    }
+
+    private void onStoryMode() {
+        toolbarBackfield.animateTo(STORY_BACKFIELD_ALPHA);
+        backgroundPickerBackfield.animateTo(STORY_BACKFIELD_ALPHA);
+    }
+
+    private void onStickersOpen() {
+        StickerSheet stickerSheet = new StickerSheet();
+        stickerSheet.setProvider(stickerProvider);
+        stickerSheet.setOnItemClickListener((s, p) -> editorView.addSticker(s));
+        stickerSheet.show(getSupportFragmentManager(), null);
+    }
+
+    @Override
+    public void onStateChanged(int state) {
+        editorView.setTextColor(state);
     }
 
     @Override

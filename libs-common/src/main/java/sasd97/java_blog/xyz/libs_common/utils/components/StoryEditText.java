@@ -85,7 +85,6 @@ public class StoryEditText extends AppCompatEditText
         String[] split = source.split(breakChar);
         if (split.length == 0) return;
 
-        for (String t: split) Log.d("HAHA", t);
         TextUtils.copySpansFrom(editable, 0, editable.length(), null, editable, 0);
         if (width - getPaint().measureText(split[split.length - 1]) > 20) return;
         removeTextChangedListener(this);

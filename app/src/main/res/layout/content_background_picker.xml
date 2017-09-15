@@ -10,10 +10,11 @@
     tools:layout_editor_absoluteY="25dp">
 
     <sasd97.java_blog.xyz.libs_common.utils.components.StoryAlphaView
+        android:id="@+id/backgroundPickerBackfield"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/colorWhite"
         android:layout_marginTop="1dp"
+        android:background="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,11 +48,11 @@
         android:layout_marginTop="12dp"
         android:background="@drawable/left_highlighted_background_disable"
         android:elevation="0dp"
-        android:stateListAnimator="@null"
-        android:text="@string/send"
         android:enabled="false"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
+        android:stateListAnimator="@null"
+        android:text="@string/send"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/view"
