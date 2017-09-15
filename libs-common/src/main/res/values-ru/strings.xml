@@ -11,6 +11,7 @@
     <string name="stickers">Стикеры</string>
     <string name="tryAgain">Создать новый</string>
     <string name="whatsNew">Что нового?</string>
+    <string name="permissionDenied">Разрешение отозвано</string>
 
     <string-array name="tabs_titles">
         <item>Пост</item>

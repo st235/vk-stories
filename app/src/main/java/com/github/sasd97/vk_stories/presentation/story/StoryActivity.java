@@ -1,6 +1,5 @@
 package com.github.sasd97.vk_stories.presentation.story;
 
-import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -9,7 +8,6 @@ import android.support.constraint.ConstraintSet;
 import android.support.design.widget.TabLayout;
 import android.support.transition.TransitionManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,6 +20,7 @@ import com.github.sasd97.vk_stories.R;
 import com.github.sasd97.vk_stories.VkStoriesApp;
 import com.github.sasd97.vk_stories.events.OnTabSelectedListener;
 import com.github.sasd97.vk_stories.presentation.base.BaseActivity;
+import com.github.sasd97.vk_stories.utils.PermissionResolver;
 
 import java.io.File;
 
@@ -32,7 +31,7 @@ import sasd97.java_blog.xyz.gallery_picker.GalleryPicker;
 import sasd97.java_blog.xyz.gallery_picker.models.Tile;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryAlphaView;
 import sasd97.java_blog.xyz.libs_common.utils.components.StoryButton;
-import sasd97.java_blog.xyz.libs_common.utils.utils.IntentResolver;
+import com.github.sasd97.vk_stories.utils.IntentResolver;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Renderer;
 import sasd97.java_blog.xyz.libs_editorview.EditorView;
 import sasd97.java_blog.xyz.libs_editorview.OnTextChangedListener;
@@ -72,7 +71,9 @@ public class StoryActivity extends BaseActivity
 
 
     @Inject Router router;
+    @Inject IntentResolver intentResolver;
     @Inject StickerProvider stickerProvider;
+    @Inject PermissionResolver permissionResolver;
     @Inject @InjectPresenter StoryPresenter presenter;
 
     @ProvidePresenter
@@ -149,10 +150,10 @@ public class StoryActivity extends BaseActivity
                     presenter.onOpenGallery();
                     break;
                 case Tile.CAMERA:
-                    ActivityCompat.requestPermissions(this,
-                            new String[] {
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                            }, 1);
+                    if (!permissionResolver.isStoragePermissionGranted()) {
+                        permissionResolver.requestStoragePermission(this);
+                        break;
+                    }
                     presenter.onOpenCamera();
                     break;
                 default:
@@ -238,6 +239,18 @@ public class StoryActivity extends BaseActivity
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (permissionResolver.checkStoragePermission(requestCode, grantResults)) {
+            presenter.onOpenCamera();
+            return;
+        }
+
+        String message = getString(R.string.permissionDenied);
+        presenter.showPermissionDeniedMessage(message);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) return;
@@ -246,7 +259,7 @@ public class StoryActivity extends BaseActivity
     }
 
     private void handleGalleryResults(@NonNull Intent intent) {
-        Uri uri = IntentResolver.getGalleryUri(intent);
+        Uri uri = intentResolver.getGalleryUri(intent);
         Tile tile = new Tile(uri);
         editorView.setBackground(tile);
     }
