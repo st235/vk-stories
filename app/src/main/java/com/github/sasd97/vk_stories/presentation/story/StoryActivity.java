@@ -208,11 +208,13 @@ public class StoryActivity extends BaseActivity
     private void onPostMode() {
         toolbarBackfield.animateTo(POST_BACKFIELD_ALPHA);
         backgroundPickerBackfield.animateTo(POST_BACKFIELD_ALPHA);
+        editorView.changeRecyclerBinMargin(0);
     }
 
     private void onStoryMode() {
         toolbarBackfield.animateTo(STORY_BACKFIELD_ALPHA);
         backgroundPickerBackfield.animateTo(STORY_BACKFIELD_ALPHA);
+        editorView.changeRecyclerBinMargin(backgroundPicker.getHeight());
     }
 
     private void onStickersOpen() {

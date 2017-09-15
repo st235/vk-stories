@@ -22,7 +22,7 @@ ext.versions = [
         rxjava                       : '2.0.6',
         rxandroid                    : '2.0.1',
 
-        supportLibs                  : '26.0.2',
+        supportLibs                  : '26.1.0',
         constraint                   : '1.0.2',
         butterKnife                  : '8.6.0',
         rxbinding                    : '2.0.0',

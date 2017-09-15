@@ -17,8 +17,8 @@ public class RemoveGestureDetector {
     private static final int INVALID_POINTER_ID = -1;
     private static final int REMOVE_RADIUS = (int) Dimens.dpToPx(56);
 
-    private Point removeRegion = new Point();
     private OnRemoveListener removeListener;
+    private RemoveRegionProvider removeRegionProvider;
 
     private boolean isStarted = false;
     private boolean isIntercepted = false;
@@ -39,7 +39,8 @@ public class RemoveGestureDetector {
                 if (pointerIndex != -1) {
                     Point touchCoords = getTouchCoordsInScreen(event);
 
-                    if (removeListener != null && isRemoveEnabled) {
+                    if (removeListener != null && removeRegionProvider != null && isRemoveEnabled) {
+                        Point removeRegion = removeRegionProvider.getRemoveRegion();
                         if (Math.abs(removeRegion.x - touchCoords.x) <= REMOVE_RADIUS
                                 && Math.abs(removeRegion.y - touchCoords.y) <= REMOVE_RADIUS) {
 
@@ -67,7 +68,9 @@ public class RemoveGestureDetector {
             case MotionEvent.ACTION_UP:
                 Point touchCoords = getTouchCoordsInScreen(event);
 
-                if (removeListener != null && isRemoveEnabled) {
+                if (removeListener != null && removeRegionProvider != null && isRemoveEnabled) {
+                    Point removeRegion = removeRegionProvider.getRemoveRegion();
+
                     if (Math.abs(removeRegion.x - touchCoords.x) <= REMOVE_RADIUS
                             && Math.abs(removeRegion.y - touchCoords.y) <= REMOVE_RADIUS) {
                         removeListener.onRemove(view);
@@ -109,9 +112,9 @@ public class RemoveGestureDetector {
         return new Point(touchX, touchY);
     }
 
-    public void setRemoveListener(@NonNull OnRemoveListener removeListener, @NonNull Point removeRegion) {
+    public void setRemoveListener(@NonNull OnRemoveListener removeListener, @NonNull RemoveRegionProvider provider) {
         this.removeListener = removeListener;
-        this.removeRegion = removeRegion;
+        this.removeRegionProvider = provider;
     }
 
     public boolean isRemoveEnabled() {

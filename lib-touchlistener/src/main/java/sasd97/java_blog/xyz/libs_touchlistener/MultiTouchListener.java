@@ -147,12 +147,12 @@ public class MultiTouchListener implements OnTouchListener {
         this.downListener = downListener;
     }
 
-    public void setUpListener(OnUpListener upListener) {
+    public void setUpListener(@NonNull OnUpListener upListener) {
         this.upListener = upListener;
     }
 
-    public void setRemoveListener(OnRemoveListener removeListener, Point removeRegion) {
-        removeGestureDetector.setRemoveListener(removeListener, removeRegion);
+    public void setRemoveListener(@NonNull OnRemoveListener removeListener, @NonNull RemoveRegionProvider provider) {
+        removeGestureDetector.setRemoveListener(removeListener, provider);
     }
 
     public void setRotateListener(@NonNull OnRotateListener rotateListener) {

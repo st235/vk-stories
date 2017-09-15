@@ -10,6 +10,7 @@ import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ import sasd97.java_blog.xyz.libs_common.utils.models.ComplementaryColor;
 import sasd97.java_blog.xyz.libs_common.utils.models.ScalableImage;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 import sasd97.java_blog.xyz.libs_touchlistener.MultiTouchListener;
+import sasd97.java_blog.xyz.libs_touchlistener.RemoveRegionProvider;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnRemoveListener;
 import sasd97.java_blog.xyz.sticker_picker.models.Sticker;
 
@@ -147,6 +149,12 @@ public class EditorView extends RelativeLayout {
     }
     //endregion
 
+    public void changeRecyclerBinMargin(int margin) {
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) recyclerBinView.getLayoutParams();
+
+        params.bottomMargin = margin + (int) Dimens.dpToPx(16.0f);
+    }
+
     private void onInit() {
         addBackground();
         addEditText();
@@ -205,6 +213,7 @@ public class EditorView extends RelativeLayout {
         params.addRule(CENTER_IN_PARENT);
         params.leftMargin = margin;
         params.rightMargin = margin;
+        params.bottomMargin = margin;
 
         addView(storyEditText, params);
     }
@@ -249,7 +258,7 @@ public class EditorView extends RelativeLayout {
                 recyclerBinView.hide();
             }
 
-        }, getViewCenterCoordinatesInScreen(recyclerBinView));
+        }, new RemoveRegionProvider(recyclerBinView));
 
         listener.setOnLongClickListener(new OnLongClickListener() {
             @Override
@@ -265,17 +274,6 @@ public class EditorView extends RelativeLayout {
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
         ));
         return imageView;
-    }
-
-    @NonNull
-    private Point getViewCenterCoordinatesInScreen(@NonNull View view) {
-        int[] coordinates = new int[2];
-        view.getLocationOnScreen(coordinates);
-
-        int centerX = coordinates[0] + view.getWidth() / 2;
-        int centerY = coordinates[1] + view.getHeight() / 2;
-
-        return new Point(centerX, centerY);
     }
 
     private RelativeLayout.LayoutParams generateCenterLP(int mode) {
