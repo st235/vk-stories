@@ -240,6 +240,7 @@ public class EditorView extends RelativeLayout {
         listener.setRemoveListener(new OnRemoveListener() {
             @Override
             public void onStart() {
+                bringChildToFront(recyclerBinView);
                 recyclerBinView.show();
             }
 
