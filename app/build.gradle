@@ -37,6 +37,7 @@ dependencies {
     compile libraries.supportAppCompat
     compile libraries.supportConstraint
     compile libraries.supportCardView
+    compile libraries.supportConstraint
 
     //build in
     compile project(':background-picker')
@@ -67,5 +68,4 @@ dependencies {
     compile libraries.rxjava
     compile libraries.rxandroid
     compile libraries.rxadapter
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
