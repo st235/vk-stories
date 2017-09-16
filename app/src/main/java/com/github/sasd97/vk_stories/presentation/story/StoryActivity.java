@@ -251,6 +251,7 @@ public class StoryActivity extends BaseActivity
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (permissionResolver.checkWriteStoragePermission(requestCode, grantResults)) {
             presenter.onOpenCamera();
+            galleryPicker.update();
             return;
         }
 
