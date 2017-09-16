@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Good Stories</string>
-    <string name="title_activity_authorization">Login</string>
+    <string name="titleActivityAuthorization">Login</string>
+    <string name="contentDescriptionVkLogo">VK logo</string>
+
     <integer name="com_vk_sdk_AppId">6182613</integer>
 </resources>

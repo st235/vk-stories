@@ -11,6 +11,7 @@
     <string name="published">Published</string>
     <string name="whatsNew">Whats new?</string>
     <string name="permissionDenied">Permission denied</string>
+    <string name="imagePlaceholder">Image Placeholder</string>
 
     <string-array name="tabs_titles">
         <item>Post</item>

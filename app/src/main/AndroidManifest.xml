@@ -9,6 +9,7 @@
     <application
         android:name=".VkStoriesApp"
         android:allowBackup="true"
+        android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -28,6 +29,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".presentation.publish.PublishActivity" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -35,7 +37,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
     </application>
 </manifest>
