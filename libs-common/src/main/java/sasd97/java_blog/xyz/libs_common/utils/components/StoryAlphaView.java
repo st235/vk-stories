@@ -1,18 +1,20 @@
 package sasd97.java_blog.xyz.libs_common.utils.components;
 
-import android.annotation.TargetApi;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
-import android.os.Build;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.FloatRange;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
-import android.view.View;
 
 /**
  * Created by alexander on 12/09/2017.
  */
 
-public class StoryAlphaView extends View {
+public class StoryAlphaView extends ConstraintLayout {
 
     public StoryAlphaView(Context context) {
         super(context);
@@ -26,16 +28,21 @@ public class StoryAlphaView extends View {
         super(context, attrs, defStyleAttr);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public StoryAlphaView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
     public void animateTo(@FloatRange(from = 0.0, to = 1.0) float alpha) {
-        animate()
-                .setDuration(100L)
-                .alphaBy(getAlpha())
-                .alpha(alpha)
+        Drawable background = getBackground();
+        if (!(background instanceof ColorDrawable)) return;
+        final ColorDrawable colorDrawable = (ColorDrawable) background;
+
+        ValueAnimator valueAnimator = ObjectAnimator.ofInt(colorDrawable.getAlpha(), (int) (alpha * 255));
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                colorDrawable.setAlpha((int) valueAnimator.getAnimatedValue());
+            }
+        });
+
+        valueAnimator
+                .setDuration(350L)
                 .start();
     }
 }
