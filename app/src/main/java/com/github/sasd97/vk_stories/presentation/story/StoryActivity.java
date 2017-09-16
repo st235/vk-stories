@@ -156,6 +156,7 @@ public class StoryActivity extends BaseActivity
                     }
                     presenter.onOpenCamera();
                     break;
+                case Tile.IMAGE:
                 default:
                     editorView.setBackground(t);
                     break;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Good Stories</string>
-    <string name="title_activity_authorization">Авторизация</string>
+    <string name="titleActivityAuthorization">Авторизация</string>
+    <string name="contentDescriptionVkLogo">логотип Вконтакте</string>
 </resources>

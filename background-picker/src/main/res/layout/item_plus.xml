@@ -11,15 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="1dp"
-        android:scaleType="centerInside"
-        app:srcCompat="@drawable/ic_toolbar_new"
         android:background="@drawable/plus_background"
-        />
+        android:contentDescription="@string/imagePlaceholder"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/ic_toolbar_new" />
 
     <sasd97.java_blog.xyz.libs_selectionview.SelectionView
         android:id="@+id/selectionView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
-        />
+        android:visibility="invisible" />
 </FrameLayout>

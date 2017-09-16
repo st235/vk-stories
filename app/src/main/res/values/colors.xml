@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/colorCornflowerLight</color>
-    <color name="colorPrimaryDark">@color/colorCornflowerBlue</color>
+    <color name="colorPrimary">@color/colorCornflowerBlue</color>
+    <color name="colorPrimaryDark">@color/colorCornflowerBlueTwo</color>
     <color name="colorAccent">@color/colorReddishPink</color>
 </resources>
