@@ -5,5 +5,5 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:contentDescription="@string/imagePlaceholder"
-    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:background="?attr/selectableItemBackgroundBorderless"
     android:orientation="vertical" />
