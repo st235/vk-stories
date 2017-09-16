@@ -108,7 +108,7 @@ public class StoryActivity extends BaseActivity
         fontStyleButton = findViewById(R.id.fontStyleButton);
         backgroundPicker = findViewById(R.id.backgroundPicker);
         constraintLayout = findViewById(R.id.constraintLayout);
-        toolbarBackfield = findViewById(R.id.toolbarBackfieldView);
+        toolbarBackfield = findViewById(R.id.toolbarBackfield);
         backgroundPickerBackfield = findViewById(R.id.backgroundPickerBackfield);
     }
 
@@ -251,6 +251,7 @@ public class StoryActivity extends BaseActivity
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (permissionResolver.checkWriteStoragePermission(requestCode, grantResults)) {
             presenter.onOpenCamera();
+            galleryPicker.update();
             return;
         }
 
