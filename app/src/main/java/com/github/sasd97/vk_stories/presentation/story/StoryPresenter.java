@@ -10,6 +10,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.github.sasd97.lib_router.Router;
 import com.github.sasd97.vk_stories.data.AppRepository;
+import com.github.sasd97.vk_stories.presentation.base.BasePresenter;
 import com.github.sasd97.vk_stories.presentation.publish.PublishActivity;
 import com.github.sasd97.vk_stories.utils.IntentResolver;
 import com.github.sasd97.vk_stories.utils.RxSchedulers;
@@ -29,7 +30,7 @@ import static com.github.sasd97.lib_router.commands.messages.ShowToast.showToast
  */
 
 @InjectViewState
-public class StoryPresenter extends MvpPresenter<StoryView> {
+public class StoryPresenter extends BasePresenter<StoryView> {
 
     private File tempFile;
 
@@ -68,10 +69,10 @@ public class StoryPresenter extends MvpPresenter<StoryView> {
     }
 
     void onAddCameraImage(@NonNull Uri uri) {
-        provider
+        add(provider
                 .provide(uri)
                 .compose(schedulers.getIoToMainTransformerSingle())
-                .subscribe(getViewState()::addCameraImage);
+                .subscribe(getViewState()::addCameraImage));
     }
 
     void onOpenCamera() {

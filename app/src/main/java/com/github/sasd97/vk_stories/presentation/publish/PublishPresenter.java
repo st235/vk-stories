@@ -10,6 +10,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.github.sasd97.lib_router.Router;
 import com.github.sasd97.vk_stories.data.AppRepository;
+import com.github.sasd97.vk_stories.presentation.base.BasePresenter;
 import com.github.sasd97.vk_stories.presentation.story.StoryActivity;
 import com.github.sasd97.vk_stories.utils.RxSchedulers;
 
@@ -29,7 +30,7 @@ import static com.github.sasd97.lib_router.commands.messages.ShowToast.showToast
 
 @Singleton
 @InjectViewState
-public class PublishPresenter extends MvpPresenter<PublishView> {
+public class PublishPresenter extends BasePresenter<PublishView> {
 
     private Router router;
     private RxSchedulers schedulers;
@@ -77,5 +78,7 @@ public class PublishPresenter extends MvpPresenter<PublishView> {
                 .compose(schedulers.getIoToMainTransformerSingle())
                 .subscribe(o -> getViewState().showSuccess(),
                         o -> getViewState().showError());
+
+        add(request);
     }
 }
