@@ -25,7 +25,7 @@ public class StoryEditText extends AppCompatEditText
 
     private static final String BREAK = "\n";
 
-    private static final int DEFAULT_MAX_LENGTH = 80;
+    private static final int DEFAULT_MAX_LENGTH = 100;
     private static final float DEFAULT_TEXT_SIZE = 30.0f;
     private static final int DEFAULT_TEXT_EPS = 30;
 

@@ -2,6 +2,7 @@ package sasd97.java_blog.xyz.gallery_picker;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
@@ -94,5 +95,9 @@ public class GalleryPicker extends FrameLayout {
 
     public void update() {
         galleryAdapter.addAll(imageProvider.provide());
+    }
+
+    public void updateFromCamera(@NonNull Uri uri) {
+        galleryAdapter.add(new Tile(uri));
     }
 }

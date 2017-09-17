@@ -174,6 +174,11 @@ public class StoryActivity extends BaseActivity
         editorView.showCursor();
     }
 
+    @Override
+    public void addCameraImage(@NonNull Uri uri) {
+        galleryPicker.updateFromCamera(uri);
+    }
+
     private void setupLayout() {
         squareSet.clone(constraintLayout);
         fullscreenSet.clone(constraintLayout);
@@ -210,7 +215,7 @@ public class StoryActivity extends BaseActivity
                         fullscreenSet.applyTo(constraintLayout);
                         onStoryMode();
                         break;
-                };
+                }
             }
         });
     }
@@ -282,6 +287,8 @@ public class StoryActivity extends BaseActivity
     private void handleCameraResults(@NonNull Intent intent) {
         File file = presenter.getTempFile();
         Uri uri = Uri.fromFile(file);
+        presenter.onAddCameraImage(uri);
+
         Tile tile = new Tile(uri);
         editorView.setBackground(tile);
     }

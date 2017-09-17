@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import sasd97.java_blog.xyz.libs_common.utils.providers.CameraImageProvider;
 import sasd97.java_blog.xyz.sticker_picker.models.StickerPack;
 import sasd97.java_blog.xyz.sticker_picker.providers.StickerProvider;
 
@@ -20,5 +21,11 @@ public class ProviderModule {
     @Singleton
     StickerProvider provideStickerProvider(Context context) {
         return new StickerProvider(context.getAssets());
+    }
+
+    @Provides
+    @Singleton
+    CameraImageProvider provideCameraImageProvider(Context context) {
+        return new CameraImageProvider(context);
     }
 }

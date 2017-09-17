@@ -25,6 +25,12 @@ dependencies {
     compile libraries.supportDesign
     compile libraries.supportConstraint
 
+    //glide
     compile libraries.glide
     annotationProcessor compilers.glide
+
+    //rx
+    compile libraries.rxjava
+    compile libraries.rxandroid
+    compile libraries.rxadapter
 }
