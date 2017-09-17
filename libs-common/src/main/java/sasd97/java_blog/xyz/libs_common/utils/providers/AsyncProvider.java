@@ -6,10 +6,10 @@ import android.support.annotation.NonNull;
  * Created by alexander on 17/09/2017.
  */
 
-public interface AsyncProvider<I> {
+public interface AsyncProvider<I, O> {
     interface ProviderListener<O> {
         void onProvide(O o);
     }
 
-    void provide(@NonNull I i);
+    O provide(@NonNull I i);
 }
