@@ -2,6 +2,7 @@ package sasd97.java_blog.xyz.gallery_picker;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
@@ -19,19 +20,23 @@ import sasd97.java_blog.xyz.gallery_picker.adapters.GalleryAdapter;
 import sasd97.java_blog.xyz.gallery_picker.decorators.EndOffsetItemDecoration;
 import sasd97.java_blog.xyz.gallery_picker.decorators.StartOffsetItemDecoration;
 import sasd97.java_blog.xyz.gallery_picker.models.Tile;
+import sasd97.java_blog.xyz.gallery_picker.providers.CameraImageProvider;
 import sasd97.java_blog.xyz.gallery_picker.providers.ImageProvider;
 import sasd97.java_blog.xyz.libs_common.utils.events.OnItemClickListener;
+import sasd97.java_blog.xyz.libs_common.utils.providers.AsyncProvider;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 
 /**
  * Created by alexander on 09/09/2017.
  */
 
-public class GalleryPicker extends FrameLayout {
+public class GalleryPicker extends FrameLayout
+        implements AsyncProvider.ProviderListener<Uri> {
 
     private RecyclerView recyclerView;
     private ImageProvider imageProvider;
     private GalleryAdapter galleryAdapter;
+    private CameraImageProvider cameraImageProvider;
     private RecyclerView.LayoutManager layoutManager;
 
     public GalleryPicker(@NonNull Context context) {
@@ -58,6 +63,8 @@ public class GalleryPicker extends FrameLayout {
     }
 
     private void onInit() {
+        cameraImageProvider = new CameraImageProvider(getContext(), this);
+
         recyclerView = new RecyclerView(getContext());
         recyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         layoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.HORIZONTAL, false);
@@ -94,5 +101,14 @@ public class GalleryPicker extends FrameLayout {
 
     public void update() {
         galleryAdapter.addAll(imageProvider.provide());
+    }
+
+    public void updateFromCamera(@NonNull Uri uri) {
+        cameraImageProvider.provide(uri);
+    }
+
+    @Override
+    public void onProvide(Uri uri) {
+        galleryAdapter.add(new Tile(uri));
     }
 }

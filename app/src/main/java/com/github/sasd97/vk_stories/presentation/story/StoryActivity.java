@@ -210,7 +210,7 @@ public class StoryActivity extends BaseActivity
                         fullscreenSet.applyTo(constraintLayout);
                         onStoryMode();
                         break;
-                };
+                }
             }
         });
     }
@@ -282,6 +282,8 @@ public class StoryActivity extends BaseActivity
     private void handleCameraResults(@NonNull Intent intent) {
         File file = presenter.getTempFile();
         Uri uri = Uri.fromFile(file);
+        galleryPicker.updateFromCamera(uri);
+
         Tile tile = new Tile(uri);
         editorView.setBackground(tile);
     }

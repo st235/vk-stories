@@ -31,6 +31,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder>
     implements OnItemClickListener<View> {
 
     private final int UNSELECTED = -1;
+    private final int FIRST_POSITION = 2;
 
     private int selectedItem = UNSELECTED;
     private OnItemClickListener<Tile> listener;
@@ -38,6 +39,15 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder>
 
     public void setListener(@NonNull OnItemClickListener<Tile> listener) {
         this.listener = listener;
+    }
+
+    public void add(@NonNull Tile tile) {
+        List<Tile> newTiles = insertIntoBeginOfList(tile);
+        DiffUtil.DiffResult result = DiffUtil.calculateDiff(new TileDiffCallback(this.tiles, newTiles));
+
+        this.tiles.clear();
+        this.tiles.addAll(newTiles);
+        result.dispatchUpdatesTo(this);
     }
 
     public void addAll(@NonNull Collection<Tile> tiles) {
@@ -103,6 +113,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder>
         list.add(new Tile(Tile.CAMERA));
         list.add(new Tile(Tile.GALLERY));
         if (collection != null) list.addAll(collection);
+        return list;
+    }
+
+    private List<Tile> insertIntoBeginOfList(@Nullable Tile tile) {
+        List<Tile> list = new ArrayList<>(this.tiles);
+        list.add(FIRST_POSITION, tile);
         return list;
     }
 }
