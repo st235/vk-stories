@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="56dp"
     android:background="@color/colorWhite"
-    android:foreground="@drawable/top_highlighted_background"
     android:orientation="vertical"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="25dp">
