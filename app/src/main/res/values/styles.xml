@@ -31,4 +31,8 @@
         <item name="android:textColor">@color/colorCornflowerBlue</item>
         <item name="textAllCaps">true</item>
     </style>
+
+    <style name="PublishProgress" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
 </resources>
