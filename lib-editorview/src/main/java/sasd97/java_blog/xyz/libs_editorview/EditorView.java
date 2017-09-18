@@ -262,9 +262,9 @@ public class EditorView extends RelativeLayout {
                 .apply(new RequestOptions().centerInside().override(350))
                 .into(imageView);
 
-        final MultiTouchListener listener = new MultiTouchListener(getContext());
+        final MultiTouchListener multiTouchDetector = new MultiTouchListener(getContext());
 
-        listener.setRemoveListener(new OnRemoveListener() {
+        multiTouchDetector.setRemoveListener(new OnRemoveListener() {
             @Override
             public void onStart() {
                 bringChildToFront(recyclerBinView);
@@ -296,22 +296,22 @@ public class EditorView extends RelativeLayout {
 
         }, new RemoveRegionProvider(recyclerBinView));
 
-        listener.setOnLongClickListener(new OnLongClickListener() {
+        multiTouchDetector.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                listener.setRemoveEnabled(true);
+                multiTouchDetector.setRemoveEnabled(true);
                 return false;
             }
         });
 
-        listener.setDownListener(new OnDownListener() {
+        multiTouchDetector.setDownListener(new OnDownListener() {
             @Override
             public void onDown(View view) {
                 bringChildToFront(storyEditText);
             }
         });
 
-        listener.setTouchMoveListener(new OnTouchMoveListener() {
+        multiTouchDetector.setTouchMoveListener(new OnTouchMoveListener() {
             @Override
             public void onTouchMove(float x, float y) {
                 int stickerY = (int) y;
@@ -326,7 +326,7 @@ public class EditorView extends RelativeLayout {
             }
         });
 
-        imageView.setOnTouchListener(listener);
+        imageView.setOnTouchListener(multiTouchDetector);
 
         addView(imageView, imageView.createLayoutParams());
         return imageView;
