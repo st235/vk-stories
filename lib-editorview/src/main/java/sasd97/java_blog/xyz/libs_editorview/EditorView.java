@@ -3,18 +3,13 @@ package sasd97.java_blog.xyz.libs_editorview;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.PointF;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -46,8 +41,6 @@ import sasd97.java_blog.xyz.libs_touchlistener.RemoveRegionProvider;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnDownListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnRemoveListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnTouchMoveListener;
-import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnTranslationListener;
-import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnUpListener;
 import sasd97.java_blog.xyz.sticker_picker.models.Sticker;
 
 /**
@@ -139,7 +132,8 @@ public class EditorView extends RelativeLayout {
 
         if (item.getType() == BackgroundItem.IMAGE) {
             ScalableImage si = ((ImageItem) item).getImage();
-            for (ScalableImage.Pair pair: si.getElements()) addBackgroundViews(pair);
+            for (ScalableImage.Pair pair: si.getElements()) addPartOfComplexBackground(pair);
+            bringChildToFront(storyEditText);
         }
 
         bringStickersToFront();
@@ -181,7 +175,7 @@ public class EditorView extends RelativeLayout {
     private void onInit() {
         addBackground();
         addEditText();
-        addBinView();
+        addRecyclerBinView();
 
         getViewTreeObserver()
                 .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -196,7 +190,7 @@ public class EditorView extends RelativeLayout {
                 });
     }
 
-    private void addBackgroundViews(@NonNull ScalableImage.Pair pair) {
+    private void addPartOfComplexBackground(@NonNull ScalableImage.Pair pair) {
         ImageView iv = new ImageView(getContext());
         iv.setScaleType(pair.scaleType);
 
@@ -212,10 +206,9 @@ public class EditorView extends RelativeLayout {
         params.addRule(pair.gravityRule);
         addView(iv, params);
         complexBackground.add(iv);
-        bringChildToFront(storyEditText);
     }
 
-    private void addBinView() {
+    private void addRecyclerBinView() {
         recyclerBinView = new StoryBinView(getContext());
         recyclerBinView.setBins(R.drawable.ic_fab_trash, R.drawable.ic_fab_trash_released);
         recyclerBinView.setVisibility(INVISIBLE);
