@@ -21,6 +21,8 @@ import javax.inject.Inject;
 
 import sasd97.java_blog.xyz.libs_common.utils.providers.CameraImageProvider;
 
+import static com.github.sasd97.lib_router.commands.activities.And.and;
+import static com.github.sasd97.lib_router.commands.activities.FinishThis.finishThis;
 import static com.github.sasd97.lib_router.commands.activities.Start.start;
 import static com.github.sasd97.lib_router.commands.activities.StartForResult.startForResult;
 import static com.github.sasd97.lib_router.commands.messages.ShowToast.showToast;
@@ -65,7 +67,7 @@ public class StoryPresenter extends BasePresenter<StoryView> {
 
     void onSend(@NonNull Bitmap bitmap) {
         repository.savePreview(bitmap);
-        router.pushCommand(start(PublishActivity.class));
+        router.pushCommand(finishThis(and(start(PublishActivity.class))));
     }
 
     void onAddCameraImage(@NonNull Uri uri) {
