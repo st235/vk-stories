@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.AttrRes;
@@ -12,6 +13,8 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -40,6 +43,7 @@ import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 import sasd97.java_blog.xyz.libs_touchlistener.MultiTouchListener;
 import sasd97.java_blog.xyz.libs_touchlistener.RemoveRegionProvider;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnRemoveListener;
+import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnTranslationListener;
 import sasd97.java_blog.xyz.sticker_picker.models.Sticker;
 
 /**
@@ -277,11 +281,45 @@ public class EditorView extends RelativeLayout {
             }
         });
 
+        int[] coordinates = new int[2];
+        getLocationOnScreen(coordinates);
+
+        final int centerX = coordinates[1] + getHeight() / 2;
+
+        listener.setTranslationListener(new OnTranslationListener() {
+            @Override
+            public void onTranslate(PointF pivot, PointF position) {
+                int[] coordinates = new int[2];
+                imageView.getLocationOnScreen(coordinates);
+                Log.d("COORDINATES", coordinates[0] + ";" + coordinates[1] + "///" + centerX);
+
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+
+                if (coordinates[1] > centerX) {
+                    Log.d("COORDINATES", "BOTTOM");
+                    params.addRule(ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+                    params.addRule(ALIGN_PARENT_TOP, 0);
+                } else {
+                    Log.d("COORDINATES", "TOP");
+                    params.addRule(ALIGN_PARENT_BOTTOM, 0);
+                    params.addRule(ALIGN_PARENT_TOP,  RelativeLayout.TRUE);
+                }
+
+                imageView.setLayoutParams(params);
+            }
+        });
+
         imageView.setOnTouchListener(listener);
 
-        addView(imageView, new RelativeLayout.LayoutParams(
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-        ));
+        );
+
+        params.addRule(ALIGN_PARENT_TOP);
+
+        addView(imageView, params);
         return imageView;
     }
 
