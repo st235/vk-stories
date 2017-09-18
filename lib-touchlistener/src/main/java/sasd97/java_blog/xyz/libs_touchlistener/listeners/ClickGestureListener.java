@@ -4,7 +4,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 /**
- * Created by alexander on 26/08/2017.
+ * Created by alexander on 09/09/2017.
  */
 
 public final class ClickGestureListener extends GestureDetector.SimpleOnGestureListener {

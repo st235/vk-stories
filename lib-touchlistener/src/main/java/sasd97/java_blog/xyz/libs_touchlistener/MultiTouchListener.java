@@ -82,7 +82,6 @@ public class MultiTouchListener implements OnTouchListener {
                 previousX = event.getX();
                 previousY = event.getY();
 
-                // Save the ID of this pointer.
                 activePointerId = event.getPointerId(0);
                 if (downListener != null) {
                     downListener.onDown(view);
@@ -91,7 +90,6 @@ public class MultiTouchListener implements OnTouchListener {
             }
 
             case MotionEvent.ACTION_MOVE: {
-                // Find the index of the active pointer and fetch its position.
                 int pointerIndex = event.findPointerIndex(activePointerId);
                 if (pointerIndex != -1) {
                     if (touchMoveListener != null) {
@@ -120,12 +118,9 @@ public class MultiTouchListener implements OnTouchListener {
                 break;
 
             case MotionEvent.ACTION_POINTER_UP: {
-                // Extract the index of the pointer that left the touch sensor.
                 int pointerIndex = (action & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
                 int pointerId = event.getPointerId(pointerIndex);
                 if (pointerId == activePointerId) {
-                    // This was our active pointer going up. Choose a new
-                    // active pointer and adjust accordingly.
                     int newPointerIndex = pointerIndex == 0 ? 1 : 0;
                     previousX = event.getX(newPointerIndex);
                     previousY = event.getY(newPointerIndex);

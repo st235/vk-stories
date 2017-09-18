@@ -37,7 +37,7 @@ public class RemoveGestureDetector {
                 int pointerIndex = event.findPointerIndex(activePointerId);
 
                 if (pointerIndex != -1) {
-                    Point touchCoords = getTouchCoordsInScreen(event);
+                    Point touchCoords = getTouchCoordinatesInScreen(event);
 
                     if (removeListener != null && removeRegionProvider != null && isRemoveEnabled) {
                         Point removeRegion = removeRegionProvider.getRemoveRegion();
@@ -66,7 +66,7 @@ public class RemoveGestureDetector {
                 break;
 
             case MotionEvent.ACTION_UP:
-                Point touchCoords = getTouchCoordsInScreen(event);
+                Point touchCoords = getTouchCoordinatesInScreen(event);
 
                 if (removeListener != null && removeRegionProvider != null && isRemoveEnabled) {
                     Point removeRegion = removeRegionProvider.getRemoveRegion();
@@ -88,12 +88,9 @@ public class RemoveGestureDetector {
                 break;
 
             case MotionEvent.ACTION_POINTER_UP: {
-                // Extract the index of the pointer that left the touch sensor.
                 int pointerIndex = (action & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
                 int pointerId = event.getPointerId(pointerIndex);
                 if (pointerId == activePointerId) {
-                    // This was our active pointer going up. Choose a new
-                    // active pointer and adjust accordingly.
                     int newPointerIndex = pointerIndex == 0 ? 1 : 0;
                     activePointerId = event.getPointerId(newPointerIndex);
                 }
@@ -106,7 +103,7 @@ public class RemoveGestureDetector {
     }
 
     @NonNull
-    private Point getTouchCoordsInScreen(@NonNull MotionEvent event) {
+    private Point getTouchCoordinatesInScreen(@NonNull MotionEvent event) {
         int touchX = (int) event.getRawX();
         int touchY = (int) event.getRawY();
         return new Point(touchX, touchY);

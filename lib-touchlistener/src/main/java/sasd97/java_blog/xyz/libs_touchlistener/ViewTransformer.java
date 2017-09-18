@@ -9,9 +9,8 @@ import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnScaleListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnTranslationListener;
 import sasd97.java_blog.xyz.libs_touchlistener.models.Transform;
 
-
 /**
- * Created by alexander on 26/08/2017.
+ * Created by alexander on 09/09/2017.
  */
 
 public class ViewTransformer {
@@ -48,7 +47,6 @@ public class ViewTransformer {
         computeRenderOffset(view, info.pivotX, info.pivotY);
         adjustTranslation(view, info.deltaX, info.deltaY);
 
-        // Assume that scaling still maintains aspect ratio.
         float scale = view.getScaleX() * info.deltaScale;
         scale = Math.max(info.minimumScale, Math.min(info.maximumScale, scale));
         view.setScaleX(scale);
