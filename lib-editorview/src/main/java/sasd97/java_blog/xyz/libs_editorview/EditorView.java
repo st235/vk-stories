@@ -151,7 +151,11 @@ public class EditorView extends RelativeLayout {
         dropComplexBackgroundStack();
 
         gradientView.setGradient(null);
-        gradientView.setImageURI(tile.getUri());
+
+        Glide
+                .with(getContext())
+                .load(tile.getUri())
+                .into(gradientView);
     }
 
     public void addSticker(@NonNull Sticker sticker) {
