@@ -44,6 +44,7 @@ import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 import sasd97.java_blog.xyz.libs_touchlistener.MultiTouchListener;
 import sasd97.java_blog.xyz.libs_touchlistener.RemoveRegionProvider;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnRemoveListener;
+import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnTouchMoveListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnTranslationListener;
 import sasd97.java_blog.xyz.sticker_picker.models.Sticker;
 
@@ -297,12 +298,14 @@ public class EditorView extends RelativeLayout {
             }
         });
 
-        listener.setTranslationListener(new OnTranslationListener() {
+        listener.setTouchMoveListener(new OnTouchMoveListener() {
             @Override
-            public void onTranslate(PointF pivot, PointF position) {
+            public void onTouchMove(float x, float y) {
                 int[] coordinates = new int[2];
                 imageView.getLocationOnScreen(coordinates);
-                int stickerY = coordinates[1] + imageView.getHeight() / 2;
+//                int stickerY = coordinates[1] + imageView.getHeight() / 2;
+                int stickerY = (int) y;
+                Log.d("STICKER", stickerY + "///" + editorCenterY + "///" + imageView.getPivotY());
 
                 if (stickerY > editorCenterY && imageView.getType() != StorySticker.ALIGN_BOTTOM) {
                     imageView.setType(StorySticker.ALIGN_BOTTOM);
