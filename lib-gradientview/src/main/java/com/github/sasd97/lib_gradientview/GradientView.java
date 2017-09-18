@@ -1,6 +1,5 @@
 package com.github.sasd97.lib_gradientview;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.LinearGradient;
@@ -8,14 +7,10 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Shader;
-import android.os.Build;
 import android.support.annotation.FloatRange;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.github.sasd97.lib_gradientview.models.Gradient;
 

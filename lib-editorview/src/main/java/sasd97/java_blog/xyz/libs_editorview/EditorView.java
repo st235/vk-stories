@@ -310,7 +310,6 @@ public class EditorView extends RelativeLayout {
                     imageView.setType(StorySticker.ALIGN_TOP);
                     imageView.setLayoutParams(imageView.createLayoutParams());
                 }
-
             }
         });
 
