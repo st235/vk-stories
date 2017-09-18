@@ -62,6 +62,9 @@ public class EditorView extends RelativeLayout {
     private StoryEditText storyEditText;
     private StoryBinView recyclerBinView;
 
+    private int editorCenterY;
+    private int[] coordinates = new int[2];
+
     private List<View> stickers = new ArrayList<>();
     private ArrayDeque<View> complexBackground = new ArrayDeque<>();
     private ComplementaryColor currentColor = ComplementaryColor.BLACK;
@@ -281,45 +284,27 @@ public class EditorView extends RelativeLayout {
             }
         });
 
-        int[] coordinates = new int[2];
-        getLocationOnScreen(coordinates);
-
-        final int centerX = coordinates[1] + getHeight() / 2;
-
         listener.setTranslationListener(new OnTranslationListener() {
             @Override
             public void onTranslate(PointF pivot, PointF position) {
                 int[] coordinates = new int[2];
                 imageView.getLocationOnScreen(coordinates);
-                Log.d("COORDINATES", coordinates[0] + ";" + coordinates[1] + "///" + centerX);
+                int stickerY = coordinates[1] + imageView.getHeight() / 2;
 
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-                );
-
-                if (coordinates[1] > centerX) {
-                    Log.d("COORDINATES", "BOTTOM");
-                    params.addRule(ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-                    params.addRule(ALIGN_PARENT_TOP, 0);
-                } else {
-                    Log.d("COORDINATES", "TOP");
-                    params.addRule(ALIGN_PARENT_BOTTOM, 0);
-                    params.addRule(ALIGN_PARENT_TOP,  RelativeLayout.TRUE);
+                if (stickerY > editorCenterY && imageView.getType() != StorySticker.ALIGN_BOTTOM) {
+                    imageView.setType(StorySticker.ALIGN_BOTTOM);
+                    imageView.setLayoutParams(imageView.createLayoutParams());
+                } else if (stickerY <= editorCenterY && imageView.getType() != StorySticker.ALIGN_TOP) {
+                    imageView.setType(StorySticker.ALIGN_TOP);
+                    imageView.setLayoutParams(imageView.createLayoutParams());
                 }
 
-                imageView.setLayoutParams(params);
             }
         });
 
         imageView.setOnTouchListener(listener);
 
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-
-        params.addRule(ALIGN_PARENT_TOP);
-
-        addView(imageView, params);
+        addView(imageView, imageView.createLayoutParams());
         return imageView;
     }
 
@@ -339,5 +324,13 @@ public class EditorView extends RelativeLayout {
 
     private void bringStickersToFront() {
         for (View sticker: stickers) bringChildToFront(sticker);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        getLocationOnScreen(coordinates);
+        editorCenterY = coordinates[1] + getMeasuredHeight() / 2;
     }
 }
