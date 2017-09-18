@@ -301,11 +301,7 @@ public class EditorView extends RelativeLayout {
         listener.setTouchMoveListener(new OnTouchMoveListener() {
             @Override
             public void onTouchMove(float x, float y) {
-                int[] coordinates = new int[2];
-                imageView.getLocationOnScreen(coordinates);
-//                int stickerY = coordinates[1] + imageView.getHeight() / 2;
                 int stickerY = (int) y;
-                Log.d("STICKER", stickerY + "///" + editorCenterY + "///" + imageView.getPivotY());
 
                 if (stickerY > editorCenterY && imageView.getType() != StorySticker.ALIGN_BOTTOM) {
                     imageView.setType(StorySticker.ALIGN_BOTTOM);
