@@ -53,14 +53,12 @@ public class EditorView extends RelativeLayout {
     public static final int TRANSPARENT_BACKFIELD = 1;
     public static final int FULL_BACKFIELD = 2;
 
+    private int editorCenterY;
     private int currentTextMode = 0;
 
-    private GradientView gradientView;
-    private StoryEditText storyEditText;
+    private StoryEditText textView;
+    private GradientView backgroundView;
     private StoryBinView recyclerBinView;
-
-    private int editorCenterY;
-    private int[] coordinates = new int[2];
 
     private List<View> stickers = new ArrayList<>();
     private ArrayDeque<View> complexBackground = new ArrayDeque<>();
@@ -91,7 +89,7 @@ public class EditorView extends RelativeLayout {
 
     //region setters & getters
     public void setOnTextListener(@NonNull OnTextChangedListener listener) {
-        this.storyEditText.addTextChangedListener(listener);
+        this.textView.addTextChangedListener(listener);
     }
     //endregion
 
@@ -116,7 +114,7 @@ public class EditorView extends RelativeLayout {
                 break;
         }
 
-        storyEditText.setSpan(new RoundedBackgroundSpan(backgroundColor, textColor, 4.0f));
+        textView.setSpan(new RoundedBackgroundSpan(backgroundColor, textColor, 4.0f));
     }
 
     public void setBackground(@NonNull BackgroundItem item) {
@@ -125,15 +123,15 @@ public class EditorView extends RelativeLayout {
         dropComplexBackgroundStack();
 
         if (item.getType() == BackgroundItem.GRADIENT) {
-            gradientView.setGradient(((GradientItem) item).getGradient());
-            gradientView.setImageBitmap(null);
+            backgroundView.setGradient(((GradientItem) item).getGradient());
+            backgroundView.setImageBitmap(null);
             return;
         }
 
         if (item.getType() == BackgroundItem.IMAGE) {
             ScalableImage si = ((ImageItem) item).getImage();
             for (ScalableImage.Pair pair: si.getElements()) addPartOfComplexBackground(pair);
-            bringChildToFront(storyEditText);
+            bringChildToFront(textView);
         }
 
         bringStickersToFront();
@@ -144,12 +142,12 @@ public class EditorView extends RelativeLayout {
         setTextColor(currentTextMode);
         dropComplexBackgroundStack();
 
-        gradientView.setGradient(null);
+        backgroundView.setGradient(null);
 
         Glide
                 .with(getContext())
                 .load(tile.getUri())
-                .into(gradientView);
+                .into(backgroundView);
     }
 
     public void addSticker(@NonNull Sticker sticker) {
@@ -160,16 +158,15 @@ public class EditorView extends RelativeLayout {
 
     public void changeRecyclerBinMargin(int margin) {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) recyclerBinView.getLayoutParams();
-
         params.bottomMargin = margin + (int) Dimens.dpToPx(16.0f);
     }
 
     public void hideCursor() {
-        storyEditText.setCursorVisible(false);
+        textView.setCursorVisible(false);
     }
 
     public void showCursor() {
-        storyEditText.setCursorVisible(true);
+        textView.setCursorVisible(true);
     }
 
     private void onInit() {
@@ -181,6 +178,7 @@ public class EditorView extends RelativeLayout {
                 .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
+                        int[] coordinates = new int[2];
                         getLocationOnScreen(coordinates);
                         if (editorCenterY == 0) {
                             editorCenterY = coordinates[1] + getHeight() / 2;
@@ -188,24 +186,6 @@ public class EditorView extends RelativeLayout {
                         getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     }
                 });
-    }
-
-    private void addPartOfComplexBackground(@NonNull ScalableImage.Pair pair) {
-        ImageView iv = new ImageView(getContext());
-        iv.setScaleType(pair.scaleType);
-
-        Glide
-                .with(getContext())
-                .load(pair.resource)
-                .into(iv);
-
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                pair.width, pair.height
-        );
-
-        params.addRule(pair.gravityRule);
-        addView(iv, params);
-        complexBackground.add(iv);
     }
 
     private void addRecyclerBinView() {
@@ -222,16 +202,16 @@ public class EditorView extends RelativeLayout {
     }
 
     private void addBackground() {
-        gradientView = new GradientView(getContext());
-        gradientView.setRadius(0.0f);
-        gradientView.setGradient(new Gradient(Color.WHITE, Color.WHITE));
-        gradientView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        backgroundView = new GradientView(getContext());
+        backgroundView.setRadius(0.0f);
+        backgroundView.setGradient(new Gradient(Color.WHITE, Color.WHITE));
+        backgroundView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-        addView(gradientView, generateCenterLP(ViewGroup.LayoutParams.MATCH_PARENT));
+        addView(backgroundView, generateCenterLP(ViewGroup.LayoutParams.MATCH_PARENT));
     }
 
     private void addEditText() {
-        storyEditText = new StoryEditText(getContext());
+        textView = new StoryEditText(getContext());
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
@@ -243,20 +223,19 @@ public class EditorView extends RelativeLayout {
         params.rightMargin = margin;
         params.bottomMargin = margin;
 
-        addView(storyEditText, params);
+        addView(textView, params);
     }
 
     private ImageView addStickerView(@NonNull Uri uri) {
-        final StorySticker imageView = new StorySticker(getContext());
+        final StorySticker stickerView = new StorySticker(getContext());
 
         Glide
                 .with(getContext())
                 .load(uri)
                 .apply(new RequestOptions().centerInside().override(350))
-                .into(imageView);
+                .into(stickerView);
 
         final MultiTouchListener multiTouchDetector = new MultiTouchListener(getContext());
-
         multiTouchDetector.setRemoveListener(new OnRemoveListener() {
             @Override
             public void onStart() {
@@ -267,19 +246,19 @@ public class EditorView extends RelativeLayout {
             @Override
             public void onIntercept(View view) {
                 recyclerBinView.release();
-                imageView.prepareToDelete();
+                stickerView.prepareToDelete();
             }
 
             @Override
             public void onRemove(View view) {
-                removeView(imageView);
+                removeView(stickerView);
                 recyclerBinView.hide();
             }
 
             @Override
             public void onCanceled(View view) {
                 recyclerBinView.close();
-                imageView.release();
+                stickerView.release();
             }
 
             @Override
@@ -300,7 +279,7 @@ public class EditorView extends RelativeLayout {
         multiTouchDetector.setDownListener(new OnDownListener() {
             @Override
             public void onDown(View view) {
-                bringChildToFront(storyEditText);
+                bringChildToFront(textView);
             }
         });
 
@@ -309,25 +288,42 @@ public class EditorView extends RelativeLayout {
             public void onTouchMove(float x, float y) {
                 int stickerY = (int) y;
 
-                if (stickerY > editorCenterY && imageView.getType() != StorySticker.ALIGN_BOTTOM) {
-                    imageView.setType(StorySticker.ALIGN_BOTTOM);
-                    imageView.setLayoutParams(imageView.createLayoutParams());
-                } else if (stickerY <= editorCenterY && imageView.getType() != StorySticker.ALIGN_TOP) {
-                    imageView.setType(StorySticker.ALIGN_TOP);
-                    imageView.setLayoutParams(imageView.createLayoutParams());
+                if (stickerY > editorCenterY && stickerView.getType() != StorySticker.ALIGN_BOTTOM) {
+                    stickerView.setType(StorySticker.ALIGN_BOTTOM);
+                    stickerView.setLayoutParams(stickerView.createLayoutParams());
+                } else if (stickerY <= editorCenterY && stickerView.getType() != StorySticker.ALIGN_TOP) {
+                    stickerView.setType(StorySticker.ALIGN_TOP);
+                    stickerView.setLayoutParams(stickerView.createLayoutParams());
                 }
             }
         });
 
-        imageView.setOnTouchListener(multiTouchDetector);
+        stickerView.setOnTouchListener(multiTouchDetector);
 
-        addView(imageView, imageView.createLayoutParams());
-        return imageView;
+        addView(stickerView, stickerView.createLayoutParams());
+        return stickerView;
+    }
+
+    private void addPartOfComplexBackground(@NonNull ScalableImage.Pair pair) {
+        ImageView iv = new ImageView(getContext());
+        iv.setScaleType(pair.scaleType);
+
+        Glide
+                .with(getContext())
+                .load(pair.resource)
+                .into(iv);
+
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                pair.width, pair.height
+        );
+
+        params.addRule(pair.gravityRule);
+        addView(iv, params);
+        complexBackground.add(iv);
     }
 
     private RelativeLayout.LayoutParams generateCenterLP(int mode) {
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                mode, mode);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(mode, mode);
         params.addRule(CENTER_IN_PARENT);
         return params;
     }
