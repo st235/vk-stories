@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -174,6 +175,18 @@ public class EditorView extends RelativeLayout {
         addBackground();
         addEditText();
         addBinView();
+
+        getViewTreeObserver()
+                .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        getLocationOnScreen(coordinates);
+                        if (editorCenterY == 0) {
+                            editorCenterY = coordinates[1] + getHeight() / 2;
+                        }
+                        getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
     }
 
     private void addBackgroundViews(@NonNull ScalableImage.Pair pair) {
@@ -324,13 +337,5 @@ public class EditorView extends RelativeLayout {
 
     private void bringStickersToFront() {
         for (View sticker: stickers) bringChildToFront(sticker);
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-        getLocationOnScreen(coordinates);
-        editorCenterY = coordinates[1] + getMeasuredHeight() / 2;
     }
 }
