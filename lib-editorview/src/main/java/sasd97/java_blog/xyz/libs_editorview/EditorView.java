@@ -43,6 +43,7 @@ import sasd97.java_blog.xyz.libs_common.utils.models.ScalableImage;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 import sasd97.java_blog.xyz.libs_touchlistener.MultiTouchListener;
 import sasd97.java_blog.xyz.libs_touchlistener.RemoveRegionProvider;
+import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnDownListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnRemoveListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnTouchMoveListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnTranslationListener;
@@ -295,6 +296,13 @@ public class EditorView extends RelativeLayout {
             public boolean onLongClick(View view) {
                 listener.setRemoveEnabled(true);
                 return false;
+            }
+        });
+
+        listener.setDownListener(new OnDownListener() {
+            @Override
+            public void onDown(View view) {
+                bringChildToFront(storyEditText);
             }
         });
 
