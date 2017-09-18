@@ -27,7 +27,7 @@ public class StoryEditText extends AppCompatEditText
 
     private static final int DEFAULT_MAX_LENGTH = 100;
     private static final float DEFAULT_TEXT_SIZE = 30.0f;
-    private static final int DEFAULT_TEXT_EPS = 30;
+    private static final int DEFAULT_TEXT_EPS = 40;
 
     private int width;
     int beforeNextTypeLength = 0;
@@ -95,6 +95,7 @@ public class StoryEditText extends AppCompatEditText
 
         append(BREAK);
         append(String.valueOf(last));
+        setSelection(getText().length());
 
         addTextChangedListener(this);
     }

@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.AttrRes;
@@ -12,8 +13,11 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -39,7 +43,11 @@ import sasd97.java_blog.xyz.libs_common.utils.models.ScalableImage;
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 import sasd97.java_blog.xyz.libs_touchlistener.MultiTouchListener;
 import sasd97.java_blog.xyz.libs_touchlistener.RemoveRegionProvider;
+import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnDownListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnRemoveListener;
+import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnTouchMoveListener;
+import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnTranslationListener;
+import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnUpListener;
 import sasd97.java_blog.xyz.sticker_picker.models.Sticker;
 
 /**
@@ -57,6 +65,9 @@ public class EditorView extends RelativeLayout {
     private GradientView gradientView;
     private StoryEditText storyEditText;
     private StoryBinView recyclerBinView;
+
+    private int editorCenterY;
+    private int[] coordinates = new int[2];
 
     private List<View> stickers = new ArrayList<>();
     private ArrayDeque<View> complexBackground = new ArrayDeque<>();
@@ -140,7 +151,11 @@ public class EditorView extends RelativeLayout {
         dropComplexBackgroundStack();
 
         gradientView.setGradient(null);
-        gradientView.setImageURI(tile.getUri());
+
+        Glide
+                .with(getContext())
+                .load(tile.getUri())
+                .into(gradientView);
     }
 
     public void addSticker(@NonNull Sticker sticker) {
@@ -167,6 +182,18 @@ public class EditorView extends RelativeLayout {
         addBackground();
         addEditText();
         addBinView();
+
+        getViewTreeObserver()
+                .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        getLocationOnScreen(coordinates);
+                        if (editorCenterY == 0) {
+                            editorCenterY = coordinates[1] + getHeight() / 2;
+                        }
+                        getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
     }
 
     private void addBackgroundViews(@NonNull ScalableImage.Pair pair) {
@@ -235,9 +262,9 @@ public class EditorView extends RelativeLayout {
                 .apply(new RequestOptions().centerInside().override(350))
                 .into(imageView);
 
-        final MultiTouchListener listener = new MultiTouchListener(getContext());
+        final MultiTouchListener multiTouchDetector = new MultiTouchListener(getContext());
 
-        listener.setRemoveListener(new OnRemoveListener() {
+        multiTouchDetector.setRemoveListener(new OnRemoveListener() {
             @Override
             public void onStart() {
                 bringChildToFront(recyclerBinView);
@@ -269,19 +296,39 @@ public class EditorView extends RelativeLayout {
 
         }, new RemoveRegionProvider(recyclerBinView));
 
-        listener.setOnLongClickListener(new OnLongClickListener() {
+        multiTouchDetector.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                listener.setRemoveEnabled(true);
+                multiTouchDetector.setRemoveEnabled(true);
                 return false;
             }
         });
 
-        imageView.setOnTouchListener(listener);
+        multiTouchDetector.setDownListener(new OnDownListener() {
+            @Override
+            public void onDown(View view) {
+                bringChildToFront(storyEditText);
+            }
+        });
 
-        addView(imageView, new RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-        ));
+        multiTouchDetector.setTouchMoveListener(new OnTouchMoveListener() {
+            @Override
+            public void onTouchMove(float x, float y) {
+                int stickerY = (int) y;
+
+                if (stickerY > editorCenterY && imageView.getType() != StorySticker.ALIGN_BOTTOM) {
+                    imageView.setType(StorySticker.ALIGN_BOTTOM);
+                    imageView.setLayoutParams(imageView.createLayoutParams());
+                } else if (stickerY <= editorCenterY && imageView.getType() != StorySticker.ALIGN_TOP) {
+                    imageView.setType(StorySticker.ALIGN_TOP);
+                    imageView.setLayoutParams(imageView.createLayoutParams());
+                }
+            }
+        });
+
+        imageView.setOnTouchListener(multiTouchDetector);
+
+        addView(imageView, imageView.createLayoutParams());
         return imageView;
     }
 

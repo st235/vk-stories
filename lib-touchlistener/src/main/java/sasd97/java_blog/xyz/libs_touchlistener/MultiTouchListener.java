@@ -14,6 +14,7 @@ import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnDownListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnRemoveListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnRotateListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnScaleListener;
+import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnTouchMoveListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnTranslationListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnUpListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.ScaleGestureListener;
@@ -40,6 +41,7 @@ public class MultiTouchListener implements OnTouchListener {
     private OnUpListener upListener;
     private OnDownListener downListener;
     private View.OnClickListener clickListener;
+    private OnTouchMoveListener touchMoveListener;
 
     private LongPressGestureListener longPressGestureListener = new LongPressGestureListener();
 
@@ -92,6 +94,10 @@ public class MultiTouchListener implements OnTouchListener {
                 // Find the index of the active pointer and fetch its position.
                 int pointerIndex = event.findPointerIndex(activePointerId);
                 if (pointerIndex != -1) {
+                    if (touchMoveListener != null) {
+                        touchMoveListener.onTouchMove(event.getRawX(), event.getRawY());
+                    }
+
                     float currX = event.getX(pointerIndex);
                     float currY = event.getY(pointerIndex);
                     if (!scaleGestureDetector.isInProgress()) {
@@ -165,6 +171,10 @@ public class MultiTouchListener implements OnTouchListener {
 
     public void setTranslationListener(@NonNull OnTranslationListener translationListener) {
         this.transformer.setTranslationListener(translationListener);
+    }
+
+    public void setTouchMoveListener(OnTouchMoveListener touchMoveListener) {
+        this.touchMoveListener = touchMoveListener;
     }
 
     public boolean isRotateEnabled() {
