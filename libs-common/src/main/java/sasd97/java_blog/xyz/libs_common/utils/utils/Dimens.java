@@ -12,10 +12,6 @@ public final class Dimens {
     private Dimens() {
     }
 
-//    public static float dpToPx(float dp) {
-//        return dp * Resources.getSystem().getDisplayMetrics().density;
-//    }
-
     public static float spToPx(float sp) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, Resources.getSystem().getDisplayMetrics());
     }
