@@ -47,6 +47,7 @@ import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnDownListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnRemoveListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnTouchMoveListener;
 import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnTranslationListener;
+import sasd97.java_blog.xyz.libs_touchlistener.listeners.OnUpListener;
 import sasd97.java_blog.xyz.sticker_picker.models.Sticker;
 
 /**

@@ -39,10 +39,11 @@ public class StorySticker extends AppCompatImageView {
         super(context, attrs, defStyleAttr);
     }
 
-    public void setType(int type) {
+    public void setType(@Type int type) {
         this.type = type;
     }
 
+    @Type
     public int getType() {
         return type;
     }
@@ -61,6 +62,8 @@ public class StorySticker extends AppCompatImageView {
         previousScaleX = getScaleX();
         previousScaleY = getScaleY();
 
+        normalizePivot();
+
         animate()
                 .alpha(0.5f)
                 .scaleX(0.5f)
@@ -76,5 +79,10 @@ public class StorySticker extends AppCompatImageView {
                 .scaleY(previousScaleY)
                 .setDuration(ANIMATION_DURATION)
                 .start();
+    }
+
+    public void normalizePivot() {
+        setPivotX(getWidth() / 2);
+        setPivotY(getHeight() / 2);
     }
 }

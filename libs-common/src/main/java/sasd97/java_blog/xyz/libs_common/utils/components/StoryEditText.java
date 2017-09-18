@@ -95,6 +95,7 @@ public class StoryEditText extends AppCompatEditText
 
         append(BREAK);
         append(String.valueOf(last));
+        setSelection(getText().length());
 
         addTextChangedListener(this);
     }
