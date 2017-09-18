@@ -16,7 +16,6 @@ import com.github.sasd97.lib_gradientview.models.Gradient;
 
 import sasd97.java_blog.xyz.libs_common.utils.utils.Dimens;
 
-
 /**
  * Created by alexander on 08/09/2017.
  */
