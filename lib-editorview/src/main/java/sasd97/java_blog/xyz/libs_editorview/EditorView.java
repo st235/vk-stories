@@ -213,12 +213,9 @@ public class EditorView extends RelativeLayout {
     private void addEditText() {
         textView = new StoryEditText(getContext());
 
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
-        );
+        RelativeLayout.LayoutParams params = generateCenterLP(ViewGroup.LayoutParams.WRAP_CONTENT);
 
         int margin = (int) Dimens.dpToPx(16);
-        params.addRule(CENTER_IN_PARENT);
         params.leftMargin = margin;
         params.rightMargin = margin;
         params.bottomMargin = margin;
@@ -320,6 +317,12 @@ public class EditorView extends RelativeLayout {
         params.addRule(pair.gravityRule);
         addView(iv, params);
         complexBackground.add(iv);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        textView.setWidth(getMeasuredWidth());
     }
 
     private RelativeLayout.LayoutParams generateCenterLP(int mode) {

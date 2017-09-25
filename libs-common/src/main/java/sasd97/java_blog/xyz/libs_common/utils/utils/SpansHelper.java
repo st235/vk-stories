@@ -8,7 +8,7 @@ import android.support.annotation.IntDef;
 
 public class SpansHelper {
 
-    public static final float EQUALITY_RADIUS = 5.0f;
+    public static final float EQUALITY_RADIUS = 15;
 
     public static final int EQUALS = 0;
     public static final int BIGGER_THAN = 1;
