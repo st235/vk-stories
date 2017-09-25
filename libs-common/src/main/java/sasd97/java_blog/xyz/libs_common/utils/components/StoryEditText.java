@@ -11,6 +11,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 
@@ -27,7 +28,7 @@ public class StoryEditText extends AppCompatEditText
 
     private static final int DEFAULT_MAX_LENGTH = 100;
     private static final float DEFAULT_TEXT_SIZE = 30.0f;
-    private static final int DEFAULT_TEXT_EPS = 40;
+    private static final int DEFAULT_TEXT_EPS = 100;
 
     private int width;
     int beforeNextTypeLength = 0;
@@ -66,11 +67,8 @@ public class StoryEditText extends AppCompatEditText
         addTextChangedListener(this);
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-        width = getMeasuredWidth();
+    public void setWidth(int width) {
+        this.width = width;
     }
 
     @Override
@@ -87,14 +85,14 @@ public class StoryEditText extends AppCompatEditText
         if (split.length == 0) return;
         TextUtils.copySpansFrom(editable, 0, editable.length(), null, editable, 0);
 
-        if (width - getPaint().measureText(split[split.length - 1]) > DEFAULT_TEXT_EPS) return;
+        if (Math.abs(width - getPaint().measureText(split[split.length - 1])) > DEFAULT_TEXT_EPS) return;
         removeTextChangedListener(this);
 
         char last = editable.charAt(editable.length() - 1);
         editable.delete(editable.length() - 1, editable.length());
 
-        append(BREAK);
-        append(String.valueOf(last));
+        editable.append(BREAK);
+        editable.append(String.valueOf(last));
         setSelection(getText().length());
 
         addTextChangedListener(this);
