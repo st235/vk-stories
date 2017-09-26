@@ -3,7 +3,7 @@ package sasd97.java_blog.xyz.libs_common.utils.utils;
 import android.support.annotation.IntDef;
 
 /**
- * Created by alexander on 25/09/2017.
+ * Created by alexander on 11/09/2017.
  */
 
 public class SpansHelper {
