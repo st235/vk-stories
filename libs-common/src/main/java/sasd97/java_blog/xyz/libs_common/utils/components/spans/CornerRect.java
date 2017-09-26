@@ -3,7 +3,7 @@ package sasd97.java_blog.xyz.libs_common.utils.components.spans;
 import android.support.annotation.IntDef;
 
 /**
- * Created by alexander on 25/09/2017.
+ * Created by alexander on 11/09/2017.
  */
 
 public final class CornerRect {
